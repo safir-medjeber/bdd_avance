@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS
 	Ville, 
 	Membre, 
 	Administrateur,
-	avoir
+	avoir,
+	aujourdhui
 	
 	CASCADE ;
