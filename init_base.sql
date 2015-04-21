@@ -1,36 +1,40 @@
 -- Zone des Drop --
 \i drop_base.sql
 
-CREATE TABLE Membre (
-       id_membre 			SERIAL PRIMARY KEY,
-       nom_membre 			VARCHAR NOT NULL,
-       prenom_membre 		VARCHAR NOT NULL,
-       password_membre 		VARCHAR NOT NULL,
-       pseudo_membre 		VARCHAR NOT NULL,
-       mail_membre 			VARCHAR NOT NULL,
-       adresse_membre  		VARCHAR NOT NULL,
-       code_postal_membre	INTEGER NOT NULL,
-       estGarcon_membre		BOOLEAN NOT NULL
+CREATE TABLE Ville (
+	   id_ville				SERIAL PRIMARY KEY,
+	   code_postal_ville	INTEGER NOT NULL UNIQUE,
+	   nom_ville 			VARCHAR NOT NULL UNIQUE
 );
+
+CREATE TABLE Lieu (
+	   id_lieu				SERIAL PRIMARY KEY,
+	   nom_lieu 			VARCHAR NOT NULL UNIQUE,
+	   adresse_lieu  		VARCHAR NOT NULL,
+	   id_ville				INTEGER REFERENCES Ville
+);
+
+CREATE TABLE Membre (
+	   id_membre 			SERIAL PRIMARY KEY,
+	   nom_membre 			VARCHAR NOT NULL,
+	   prenom_membre 		VARCHAR NOT NULL,
+	   sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'G'),
+	   password_membre 		VARCHAR NOT NULL,
+	   pseudo_membre 		VARCHAR NOT NULL UNIQUE,
+	   mail_membre 			VARCHAR NOT NULL UNIQUE,
+	   adresse_membre  		VARCHAR NOT NULL,
+	   code_postal_ville	INTEGER REFERENCES Ville
+);
+
 CREATE TABLE Administrateur (
 ) INHERITS (Membre);
 
-CREATE TABLE Ville (
-       id_ville				SERIAL PRIMARY KEY,
-       code_postal_ville	INTEGER NOT NULL,
-       nom_ville 			VARCHAR NOT NULL
-);
-CREATE TABLE Lieu (
-       id_lieu				SERIAL PRIMARY KEY,
-       nom_lieu 			VARCHAR NOT NULL,
-       adress_lieu  		VARCHAR NOT NULL
-);
-
 CREATE TABLE Contenu_Message (
 	id_contenu_message		SERIAL PRIMARY KEY,
-	objet_conutenu_message	VARCHAR NOT NULL,
+	objet_message			VARCHAR NOT NULL,
 	contenu_message 		VARCHAR NOT NULL
 );
+
 CREATE TABLE Message (
 	id_message 				SERIAL PRIMARY KEY,
 	id_membre				INTEGER REFERENCES Membre,
@@ -40,10 +44,11 @@ CREATE TABLE Message (
 
 CREATE TABLE Evenement_Culturel (
 	id_evenement			SERIAL PRIMARY KEY,
-	nom_evenement			VARCHAR NOT NULL UNIQUE
+	nom_evenement			VARCHAR NOT NULL
 );
+
 CREATE TABLE Piece_Theatre (
-    genre_piece				VARCHAR NOT NULL
+	genre_piece				VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
 CREATE TABLE Exposition (
@@ -74,7 +79,12 @@ CREATE TABLE Date_Evenement (
 );
 
 CREATE TABLE Avoir (
-       id_avoir 			SERIAL PRIMARY KEY,
-       id_membre			INTEGER REFERENCES Membre (id_membre),
-       montant 				INTEGER NOT NULL
+	id_avoir 			SERIAL PRIMARY KEY,
+	id_membre			INTEGER REFERENCES Membre (id_membre),
+	montant_avoir 		INTEGER NOT NULL check (montant_avoir > 0)
 );
+
+CREATE TABLE AUJOURDHUI(
+	aujourdhui TIMESTAMP
+);
+INSERT INTO AUJOURDHUI VALUES ('2015-01-01 00:00:01');
