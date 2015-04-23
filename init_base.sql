@@ -22,7 +22,7 @@ CREATE TABLE Membre (
 	   pseudo_membre 		VARCHAR NOT NULL UNIQUE,
 	   mail_membre 			VARCHAR NOT NULL UNIQUE,
 	   adresse_membre  		VARCHAR NOT NULL,
-	   code_postal_ville		INTEGER REFERENCES Ville(id_ville)
+	   code_postal_ville		INTEGER REFERENCES Ville
 );
 
 CREATE TABLE Administrateur (
@@ -47,11 +47,11 @@ CREATE TABLE Evenement_Culturel (
 );
 
 CREATE TABLE Piece_Theatre (
-	genre_piece			VARCHAR 
+	genre_piece			VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
 CREATE TABLE Exposition (
-	type_exposition			VARCHAR
+	type_exposition			VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
 CREATE TABLE Festival (

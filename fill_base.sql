@@ -67,27 +67,7 @@ INSERT INTO Evenement_Culturel (nom_evenement) VALUES
        ('Festival International de bande dessinee'),
 
 
-       ('Le bal des Vampire'),
-       ('Aristo du Coeur'),
-       ('Entre pere et fils'),
-       ('La femme de mouss est partie'),
-       ('Tailleur pour Dame'),
-       ('La Bonne Moitié'),
-       ('La Bonne Planque'),
-       ('La Bonne Soupe'),
-       ('Britannicus (Racine)'),
-       ('La Brouette du vinaigrier'),
-       ('La Brune que voilà'),
-       ('Le Dédale'),
-       ('Délire à deux'),
-       ('Démocrite amoureux'),
-       ('Démocrite prétendu fou'),
-       ('Le Dénouement imprévu'),
-       ('Le Dépit amoureux'),
-       ('La Dernière Nuit pour Marie Stuart'),
-       ('Des boulons dans mon yaourt'),
-       ('Des journées entières dans les arbres'),
-       ('Le Déserteur (opéra)'),
+       
 
 
        ('Labo Culinaire'),
@@ -115,11 +95,28 @@ INSERT INTO Evenement_Culturel (nom_evenement) VALUES
 
 
 -- Info Piece de Theatre
--- INSERT INTO Piece_Theatre (genre_piece) VALUES
---        ('Comedie Musical'),
---        ('Vaudeville'),
---        ('Tragedie'),
---        ('Bulresque');
+INSERT INTO Piece_Theatre (nom_evenement, genre_piece) VALUES
+       ('Le bal des Vampire', 'Comedie Musical'),
+       ('Aristo du Coeur', 'Bulresque'),
+       ('Entre pere et fils', 'Comique'),
+       ('La femme de mouss est partie', 'Comique'),
+       ('Tailleur pour Dame', 'Bulresque'),
+       ('La Bonne Moitié', 'Comique'),
+       ('La Bonne Planque', 'Comique'),
+       ('La Bonne Soupe', 'Tragedie'),
+       ('Britannicus (Racine)', 'Tragedie'),
+       ('La Brouette du vinaigrier','Bulresque'),
+       ('La Brune que voilà', 'Comedie Romantique'),
+       ('Le Dédale', 'Tragedie'),
+       ('Délire à deux', 'Vaudeville'),
+       ('Démocrite amoureux', 'Vaudeville'),
+       ('Démocrite prétendu fou', 'Bulresque'),
+       ('Le Dénouement imprévu', 'Tragedie'),
+       ('Le Dépit amoureux', 'Comedie Romantique'),
+       ('La Dernière Nuit pour Marie Stuart', 'Comedie Musical'),
+       ('Des boulons dans mon yaourt', 'Comique'),
+       ('Des journées entières dans les arbres', 'Comedie'),
+       ('Le Déserteur ', 'Opéra');
 
 
 
@@ -134,29 +131,29 @@ INSERT INTO Evenement_Culturel (nom_evenement) VALUES
 
 -- Membre
 INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, password_membre, pseudo_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
-       ('Dupont', 'Xavier', 'H', '134', 'Xaxa', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 1),
-       ('Dupuis', 'Marine', 'F', '1343', 'Mama', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 2),
-       ('Charles','Sofiane', 'H', 'HKjklj', 'ChCh', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 3),
-       ('Goliate', 'David' , 'H', 'kgjg', 'GoDa', 'Hurst.David@gmail.com', '10 place de la faisandrie', 4),
-       ('Townsend','Wallace', 'H', 'gjhgjhgj', 'ToTo', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 7),
-       ('Saunders','Sabrina', 'F', 'ojolj', 'SaSa', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 6),
-       ('Lancaster','Fatima', 'F', 'hjhg', 'LaLa', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 7),
-       ('Kline','Jeanne', 'F', 'JLJJ', 'KlKl', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 6),
-       ('Valentine','Kevin', 'H', 'iyiuyiu', 'VaVa', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 8),
-       ('Morrow','Alan', 'H', 'ljlkjlkjm', 'MoMo', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 1),
-       ('Garrison','Mathilda', 'F', 'klhllhl', 'GaGa', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 4),
-       ('Underwood','John', 'H', 'ljlkjlkjlm', 'UnUn', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 1),
-       ('Stephens','Nadia', 'F', 'ghfh', 'SteSte', 'Stephens.Nadia@gmail.com', '56 rue duval', 3),
-       ('Shaffer', 'Jack', 'H', 'fhgfhj', 'ShaSha', 'Shaffer.Jack@gmail.com', '44 avenue du role', 2),
-       ('Stanley','Brandon', 'H', 'popoo', 'Stan', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 1),
-       ('Valenzuela','Jimmy', 'F' , 'pololo', 'ValVal', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 1),
-       ('Mathis','Jason', 'H', 'ljkgj', 'MaMa', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 7),
-       ('Powell','Samia', 'F', 'lujkh', 'PoPo', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 5),
-       ('Norton','Afida', 'F', 'gjg', 'NoNo', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 2),
-       ('Hurley','Farida', 'F', 'ljlj', 'FaFa', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 4),
-       ('Hunt','Daniel', 'H', 'ojljl', 'HuHu', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 6),
-       ('Charles','Camelia', 'F', 'mmme', 'ChaCha', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 6),
-       ('Gould','Rachida', 'F', 'popoikh', 'GoGo', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 5),
-       ('Mcdonald','Dominic', 'H', 'mkedo', 'McMc', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 1),
-       ('Walter','Baxter', 'H', 'mkdir', 'WaWa', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 8),
-       ('Osborne','Paula', 'F', 'kjkghj', 'OsOs', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 1);
+       ('Dupont', 'Xavier', 'H', '134', 'Xaxa', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
+       ('Dupuis', 'Marine', 'F', '1343', 'Mama', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
+       ('Charles','Sofiane', 'H', 'HKjklj', 'ChCh', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
+       ('Goliate', 'David' , 'H', 'kgjg', 'GoDa', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
+       ('Townsend','Wallace', 'H', 'gjhgjhgj', 'ToTo', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
+       ('Saunders','Sabrina', 'F', 'ojolj', 'SaSa', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
+       ('Lancaster','Fatima', 'F', 'hjhg', 'LaLa', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
+       ('Kline','Jeanne', 'F', 'JLJJ', 'KlKl', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
+       ('Valentine','Kevin', 'H', 'iyiuyiu', 'VaVa', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
+       ('Morrow','Alan', 'H', 'ljlkjlkjm', 'MoMo', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
+       ('Garrison','Mathilda', 'F', 'klhllhl', 'GaGa', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
+       ('Underwood','John', 'H', 'ljlkjlkjlm', 'UnUn', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
+       ('Stephens','Nadia', 'F', 'ghfh', 'SteSte', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
+       ('Shaffer', 'Jack', 'H', 'fhgfhj', 'ShaSha', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
+       ('Stanley','Brandon', 'H', 'popoo', 'Stan', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
+       ('Valenzuela','Jimmy', 'F' , 'pololo', 'ValVal', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
+       ('Mathis','Jason', 'H', 'ljkgj', 'MaMa', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
+       ('Powell','Samia', 'F', 'lujkh', 'PoPo', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
+       ('Norton','Afida', 'F', 'gjg', 'NoNo', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
+       ('Hurley','Farida', 'F', 'ljlj', 'FaFa', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
+       ('Hunt','Daniel', 'H', 'ojljl', 'HuHu', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
+       ('Charles','Camelia', 'F', 'mmme', 'ChaCha', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
+       ('Gould','Rachida', 'F', 'popoikh', 'GoGo', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
+       ('Mcdonald','Dominic', 'H', 'mkedo', 'McMc', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
+       ('Walter','Baxter', 'H', 'mkdir', 'WaWa', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
+       ('Osborne','Paula', 'F', 'kjkghj', 'OsOs', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
