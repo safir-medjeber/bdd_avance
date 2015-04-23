@@ -66,10 +66,6 @@ INSERT INTO Evenement_Culturel (nom_evenement) VALUES
        ('Festival Rock in Opposition'),
        ('Festival International de bande dessinee'),
 
-
-       
-
-
        ('Labo Culinaire'),
        ('Atelier des Sens'),
        ('Ecolde Ritze Escoffier'),
@@ -80,19 +76,9 @@ INSERT INTO Evenement_Culturel (nom_evenement) VALUES
        ('La Cuisine à Paris'),
        ('Les Coulisses du Chef'),
        ('Atelier Top chef'),
-       ('Atelier Master chef'),
+       ('Atelier Master chef');
      
-       ('Paris Games Week'),
-       ('Expo jean paul gaultier : de la rue aux étoiles'),
-       ('Exposition oracles du design'),
-       ('Le bord des mondes'),
-       ('Exposition Felice Varini'),
-       ('Exposition Velazquez'),
-       ('Exposition Jeff Koons'),
-       ('Exposition Les chasses nouvelles'),
-       ('Exposition De Carmen à mélisande'),
-       ('Exposition les cahiers dessinés');	
-
+       
 
 -- Info Piece de Theatre
 INSERT INTO Piece_Theatre (nom_evenement, genre_piece) VALUES
@@ -120,14 +106,25 @@ INSERT INTO Piece_Theatre (nom_evenement, genre_piece) VALUES
 
 
 
--- -- Info Exposition
--- INSERT INTO Exposition (type_exposition) VALUES
---        ('Historique'),
---        ('Commémoration'),
---        ('Litteraire'),
---        ('Japon'),
---        ('Jeu');
+-- Info Exposition
+INSERT INTO Exposition (nom_evenement,type_exposition) VALUES
+       ('Paris Games Week', 'Jeux'),
+       ('Japan Expo', 'Culture Japonaise'),
+       ('Expo jean paul gaultier : de la rue aux étoiles', 'Mode'),
+       ('Exposition oracles du design', 'Design'),
+       ('Le bord des mondes', 'Peinture'),
+       ('Exposition Felice Varini', 'Peinture'),
+       ('Exposition Velazquez', 'Peinture'),
+       ('Exposition Jeff Koons', 'Musique'),
+       ('Exposition Les chasses nouvelles', 'Nature'),
+       ('Exposition De Carmen à mélisande', 'Architecture'),
+       ('Exposition les cahiers dessinés', 'Peinture');	
 
+
+
+-- Animation
+INSERT INTO Animation(nom_animation, date_debut_animation, date_fin_animation) VALUES		
+       ('Initiation', '2015-01-08', '2015-01-18');
 
 -- Membre
 INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, password_membre, pseudo_membre, mail_membre, adresse_membre, code_postal_ville) VALUES

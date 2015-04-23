@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS
 	Ville, 
 	Membre, 
 	Administrateur,
+	Animation,
+
 	avoir,
 	aujourdhui
 --	Organise
