@@ -14,5 +14,7 @@ DROP TABLE IF EXISTS
 	Administrateur,
 	avoir,
 	aujourdhui
+--	Organise
+--	Participe
 	
 	CASCADE ;

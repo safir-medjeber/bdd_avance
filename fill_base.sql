@@ -115,6 +115,24 @@ INSERT INTO Evenement_Culturel (nom_evenement) VALUES
        ('Exposition les cahiers dessinés');	
 
 
+-- Info Piece de Theatre
+-- INSERT INTO Piece_Theatre (genre_piece) VALUES
+--        ('Comedie Musical'),
+--        ('Vaudeville'),
+--        ('Tragedie'),
+--        ('Bulresque');
+
+
+
+-- -- Info Exposition
+-- INSERT INTO Exposition (type_exposition) VALUES
+--        ('Historique'),
+--        ('Commémoration'),
+--        ('Litteraire'),
+--        ('Japon'),
+--        ('Jeu');
+
+
 -- Membre
 INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, password_membre, pseudo_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
        ('Dupont', 'Xavier', 'H', '134', 'Xaxa', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 1),
