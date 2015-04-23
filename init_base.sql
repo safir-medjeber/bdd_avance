@@ -2,12 +2,7 @@
 \i drop_base.sql
 
 CREATE TABLE Ville (
-<<<<<<< HEAD
 	   code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE,
-=======
-	   id_ville			SERIAL PRIMARY KEY,
-	   code_postal_ville		INTEGER NOT NULL UNIQUE,
->>>>>>> ca15110e454fa7741dd595300f2393d71cf59edc
 	   nom_ville 			VARCHAR NOT NULL UNIQUE
 );
 
@@ -15,11 +10,7 @@ CREATE TABLE Lieu (
 	   id_lieu			SERIAL PRIMARY KEY,
 	   nom_lieu 			VARCHAR NOT NULL UNIQUE,
 	   adresse_lieu  		VARCHAR NOT NULL,
-<<<<<<< HEAD
 	   code_postal_ville	INTEGER REFERENCES Ville
-=======
-	   id_ville			INTEGER REFERENCES Ville
->>>>>>> ca15110e454fa7741dd595300f2393d71cf59edc
 );
 
 CREATE TABLE Membre (
