@@ -23,7 +23,7 @@ CREATE TABLE Membre (
 	   mail_membre 			VARCHAR NOT NULL UNIQUE,
 	   adresse_membre  		VARCHAR NOT NULL,
 	   code_postal_ville		INTEGER REFERENCES Ville
-
+);
 
 CREATE TABLE Administrateur (
 ) INHERITS (Membre);
