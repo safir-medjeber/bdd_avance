@@ -2,8 +2,7 @@
 \i drop_base.sql
 
 CREATE TABLE Ville (
-	   id_ville				SERIAL PRIMARY KEY,
-	   code_postal_ville	INTEGER NOT NULL UNIQUE,
+	   code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE,
 	   nom_ville 			VARCHAR NOT NULL UNIQUE
 );
 
@@ -11,14 +10,14 @@ CREATE TABLE Lieu (
 	   id_lieu				SERIAL PRIMARY KEY,
 	   nom_lieu 			VARCHAR NOT NULL UNIQUE,
 	   adresse_lieu  		VARCHAR NOT NULL,
-	   id_ville				INTEGER REFERENCES Ville
+	   code_postal_ville	INTEGER REFERENCES Ville
 );
 
 CREATE TABLE Membre (
 	   id_membre 			SERIAL PRIMARY KEY,
 	   nom_membre 			VARCHAR NOT NULL,
 	   prenom_membre 		VARCHAR NOT NULL,
-	   sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'G'),
+	   sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'H'),
 	   password_membre 		VARCHAR NOT NULL,
 	   pseudo_membre 		VARCHAR NOT NULL UNIQUE,
 	   mail_membre 			VARCHAR NOT NULL UNIQUE,
