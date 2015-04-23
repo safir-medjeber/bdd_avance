@@ -16,14 +16,6 @@ INSERT INTO Ville (code_postal_ville, nom_ville) VALUES
 
 
 -- Lieu
-<<<<<<< HEAD
-INSERT INTO Lieu (nom_lieu, adresse_lieu, code_postal_ville) VALUES 
-	('Théâtre de la main d\'or', '15 Passage de la Main d\'Or', '75000'),
-	('Palais Omnisports de Paris Bercy', '8 Boulevard de Bercy', '75000'),
-	('Hippodrome de Longchamp', '2 Route des Tribunes', '75000')
-;
-=======
-
 INSERT INTO Lieu (nom_lieu, adresse_lieu) VALUES
        ('Musée Dapper', '35 bis rue Paul-Valéry'),
        ('Musée du Petit Palais', '15 avenue Winston Churchill'),
@@ -168,4 +160,3 @@ INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, password_membre, pse
        ('Mcdonald','Dominic', 'H', 'mkedo', 'McMc', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 1),
        ('Walter','Baxter', 'H', 'mkdir', 'WaWa', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 8),
        ('Osborne','Paula', 'F', 'kjkghj', 'OsOs', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 1);
->>>>>>> ca15110e454fa7741dd595300f2393d71cf59edc
