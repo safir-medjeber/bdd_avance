@@ -22,7 +22,7 @@ CREATE TABLE Membre (
 	   pseudo_membre 		VARCHAR NOT NULL UNIQUE,
 	   mail_membre 			VARCHAR NOT NULL UNIQUE,
 	   adresse_membre  		VARCHAR NOT NULL,
-	   code_postal_ville		INTEGER REFERENCES Ville(id_ville)
+	   code_postal_ville	INTEGER REFERENCES Ville
 );
 
 CREATE TABLE Administrateur (
@@ -35,19 +35,20 @@ CREATE TABLE Contenu_Message (
 );
 
 CREATE TABLE Message (
-	id_message 			SERIAL PRIMARY KEY,
-	id_membre			INTEGER REFERENCES Membre,
+	id_message 				SERIAL PRIMARY KEY,
+	id_membre				INTEGER REFERENCES Membre,
 	date_message			TIMESTAMP NOT NULL,
 	id_contenu_message 		INTEGER REFERENCES Contenu_Message
 );
 
 CREATE TABLE Evenement_Culturel (
 	id_evenement			SERIAL PRIMARY KEY,
-	nom_evenement			VARCHAR NOT NULL
+	nom_evenement			VARCHAR NOT NULL,
+	id_lieu					INTEGER REFERENCES Lieu
 );
 
 CREATE TABLE Piece_Theatre (
-	genre_piece			VARCHAR 
+	genre_piece				VARCHAR 
 ) INHERITS (Evenement_Culturel);
 
 CREATE TABLE Exposition (
@@ -59,7 +60,7 @@ CREATE TABLE Festival (
 
 CREATE TABLE Type_Place (
 	id_type_place			SERIAL PRIMARY KEY,
-	id_lieu				INTEGER REFERENCES Lieu,
+	id_lieu					INTEGER REFERENCES Lieu,
 	nom_type_place			VARCHAR NOT NULL,
 	capacite_type_place		INTEGER CHECK (capacite_type_place > 0)
 );
@@ -76,12 +77,13 @@ CREATE TABLE Date_Evenement (
 	date_debut_evenement	TIMESTAMP NOT NULL,
 	date_fin_evenement		TIMESTAMP NOT NULL,
 	id_evenement			INTEGER REFERENCES Evenement_Culturel
-);
+) 
+;
 
 CREATE TABLE Avoir (
-	id_avoir 			SERIAL PRIMARY KEY,
-	id_membre			INTEGER REFERENCES Membre (id_membre),
-	montant_avoir 		INTEGER NOT NULL check (montant_avoir > 0)
+	id_avoir 				SERIAL PRIMARY KEY,
+	id_membre				INTEGER REFERENCES Membre (id_membre),
+	montant_avoir 			INTEGER NOT NULL check (montant_avoir > 0)
 );
 
 
