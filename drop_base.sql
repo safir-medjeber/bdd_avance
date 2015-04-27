@@ -13,10 +13,9 @@ DROP TABLE IF EXISTS
 	Membre, 
 	Administrateur,
 	Animation,
-
 	avoir,
-	aujourdhui
---	Organise
---	Participe
+	aujourdhui,
+	Organise,
+	Reservation
 	
 	CASCADE ;

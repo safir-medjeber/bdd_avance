@@ -2,7 +2,7 @@
 \i drop_base.sql
 
 CREATE TABLE Ville (
-	   code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE  CHECK (codepostal between 10000 AND 99999),
+	   code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE  CHECK (code_postal_ville between 10000 AND 99999),
 	   nom_ville 			VARCHAR NOT NULL UNIQUE
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE Membre (
 	   pseudo_membre 		VARCHAR NOT NULL UNIQUE,
 	   mail_membre 			VARCHAR NOT NULL UNIQUE,
 	   adresse_membre  		VARCHAR NOT NULL,
-	   code_postal_ville		INTEGER REFERENCES Ville
+	   code_postal_ville	INTEGER REFERENCES Ville
 );
 
 CREATE TABLE Administrateur (
@@ -35,8 +35,8 @@ CREATE TABLE Contenu_Message (
 );
 
 CREATE TABLE Message (
-	id_message 			SERIAL PRIMARY KEY,
-	id_membre			INTEGER REFERENCES Membre,
+	id_message 				SERIAL PRIMARY KEY,
+	id_membre				INTEGER REFERENCES Membre,
 	date_message			TIMESTAMP NOT NULL,
 	id_contenu_message 		INTEGER REFERENCES Contenu_Message
 );
@@ -48,7 +48,8 @@ CREATE TABLE Evenement_Culturel (
 );
 
 CREATE TABLE Piece_Theatre (
-	genre_piece			VARCHAR NOT NULL
+	genre_piece				VARCHAR NOT NULL,
+	metteur_scene_piece		VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
 
@@ -76,8 +77,8 @@ CREATE TABLE Classe_Prix (
 );
 
 CREATE TABLE Date_Evenement (
-	id_date_evenemnt		SERIAL PRIMARY KEY,
-	date_debut_evenement		TIMESTAMP NOT NULL,
+	id_date_evenement		SERIAL PRIMARY KEY,
+	date_debut_evenement	TIMESTAMP NOT NULL,
 	date_fin_evenement		TIMESTAMP NOT NULL,
 	id_evenement			INTEGER REFERENCES Evenement_Culturel
 ) 
@@ -89,24 +90,22 @@ CREATE TABLE Avoir (
 	montant_avoir 			INTEGER NOT NULL check (montant_avoir > 0)
 );
 
-
-
 CREATE TABLE Animation(
-       id_animation			SERIAL PRIMARY KEY,
+       id_animation				SERIAL PRIMARY KEY,
        nom_animation			VARCHAR NOT NULL,
        date_debut_animation		TIMESTAMP NOT NULL,
        date_fin_animation		TIMESTAMP NOT NULL
 );
 
--- CREATE TABLE Participe (
--- 	id_participe 			SERIAL PRIMARY KEY
--- );
+CREATE TABLE Reservation (
+	id_reservation 			SERIAL PRIMARY KEY,
+	id_membre				INTEGER REFERENCES Membre,
+	id_date_evenement		INTEGER REFERENCES Date_Evenement
+);
 
-
-
--- CREATE TABLE Organise (
--- 	id_organise 			SERIAL PRIMARY KEY
--- );
+CREATE TABLE Organise (
+	id_organise 			SERIAL PRIMARY KEY
+);
 CREATE TABLE AUJOURDHUI(
 	aujourdhui TIMESTAMP
 );

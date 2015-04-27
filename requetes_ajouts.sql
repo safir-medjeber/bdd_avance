@@ -1,3 +1,10 @@
+-- Reservation
+-- Reserve un evenement a partir d'un nom de membre
+-- (Appel un INSERT qui appelle un trigger)
+CREATE OR REPLACE FUNCTION reserver(
+	nom
+)
+
 -- Programmer date UNIQUE d'evenement
 CREATE OR REPLACE FUNCTION
 programmer_date_evenement(
