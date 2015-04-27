@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS 
 	Message,
-	Contenu_Message,
-	Type_place,
+	Reception_Message,
 	Classe_Prix,
 	Evenement_Culturel,
 	Piece_Theatre,
@@ -17,5 +16,4 @@ DROP TABLE IF EXISTS
 	aujourdhui,
 	Organise,
 	Reservation
-	
-CASCADE ;
+;

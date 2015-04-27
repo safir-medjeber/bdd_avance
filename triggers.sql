@@ -8,20 +8,24 @@ DECLARE
 	compteur INTEGER;
 BEGIN 
 	compteur = 
-		(SELECT count(*) as c
+		c(SELECT count(*) as c
 		FROM 		 Date_Evenement
 		NATURAL JOIN Evenement_Culturel
 		NATURAL JOIN Lieu
 		WHERE 
-			-- TODO : Verifier le lieu
-			(NEW.date_debut_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
-			OR 
-			(NEW.date_fin_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
-			OR 
-			(date_debut_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)		
-			OR 
-			(date_fin_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)
-		).c;
+			id_evenement = NEW.id_evenement
+			AND
+			(
+				-- TODO : Verifier le lieu
+				(NEW.date_debut_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
+				OR 
+				(NEW.date_fin_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
+				OR 
+				(date_debut_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)		
+				OR 
+				(date_fin_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)
+			)
+		);
 
 	-- Une nouvelle date n'en chevauche pas une autre
 	IF compteur > 0 THEN

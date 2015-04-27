@@ -1,9 +1,9 @@
 -- Reserve un evenement a partir d'un nom de membre
 -- (Appelle un INSERT qui appelle un trigger puis envoie un e-mail de confirmation)
-DROP FUNCTION IF EXISTS reserver(Membre.nom_membre%type,Date_Evenement.id_date_evenement%type) ;
+DROP FUNCTION IF EXISTS reserver(Membre.pseudo_membre%type, Date_Evenement.id_date_evenement%type) ;
 
 CREATE OR REPLACE FUNCTION reserver(
-	nom_membre			Membre.nom_membre%type,
+	pseudo_membre		Membre.pseudo_membre%type,
 	id_date_evenement	Date_Evenement.id_date_evenement%type
 )
 RETURNS VOID AS $$
@@ -17,8 +17,6 @@ BEGIN
 	-- TODO
 END;
 $$ LANGUAGE plpgsql;
-
--- Programmer date UNIQUE d'evenement
 
 -- Envoi d'un mail
 
