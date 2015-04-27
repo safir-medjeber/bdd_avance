@@ -2,7 +2,7 @@
 \i drop_base.sql
 
 CREATE TABLE Ville (
-	   code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE,
+	   code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE  CHECK (codepostal between 10000 AND 99999),
 	   nom_ville 			VARCHAR NOT NULL UNIQUE
 );
 

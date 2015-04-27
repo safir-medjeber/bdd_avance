@@ -1,4 +1,3 @@
-\i drop_base.sql
 \i init_base.sql
 
 
