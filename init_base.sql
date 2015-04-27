@@ -115,3 +115,4 @@ INSERT INTO AUJOURDHUI VALUES ('2015-01-01 00:00:01');
 \i requete_acces.sql
 \i triggers.sql
 \i requetes_ajouts.sql
+\i fill_base.sql

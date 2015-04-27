@@ -1,6 +1,3 @@
-\i init_base.sql
-
-
 -- Ville
 INSERT INTO Ville (code_postal_ville, nom_ville) VALUES
 	(75000, 'Paris'),
