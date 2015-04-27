@@ -78,11 +78,10 @@ CREATE TABLE Classe_Prix (
 
 CREATE TABLE Date_Evenement (
 	id_date_evenement		SERIAL PRIMARY KEY,
+	id_evenement			INTEGER REFERENCES Evenement_Culturel,
 	date_debut_evenement	TIMESTAMP NOT NULL,
-	date_fin_evenement		TIMESTAMP NOT NULL,
-	id_evenement			INTEGER REFERENCES Evenement_Culturel
-) 
-;
+	date_fin_evenement		TIMESTAMP NOT NULL
+);
 
 CREATE TABLE Avoir (
 	id_avoir 				SERIAL PRIMARY KEY,
@@ -111,3 +110,8 @@ CREATE TABLE AUJOURDHUI(
 );
 
 INSERT INTO AUJOURDHUI VALUES ('2015-01-01 00:00:01');
+
+
+\i requete_acces.sql
+\i triggers.sql
+\i requetes_ajouts.sql

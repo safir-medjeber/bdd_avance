@@ -1,60 +1,24 @@
--- Reservation
 -- Reserve un evenement a partir d'un nom de membre
--- (Appel un INSERT qui appelle un trigger)
+-- (Appelle un INSERT qui appelle un trigger puis envoie un e-mail de confirmation)
+DROP FUNCTION IF EXISTS reserver(Membre.nom_membre%type,Date_Evenement.id_date_evenement%type) ;
+
 CREATE OR REPLACE FUNCTION reserver(
-	nom
+	nom_membre			Membre.nom_membre%type,
+	id_date_evenement	Date_Evenement.id_date_evenement%type
 )
+RETURNS VOID AS $$
+BEGIN
+	-- Insertion de la requete
+	INSERT INTO Reservation (id_membre, id_date_evenement) 
+	VALUES 
+	(nom_membre, id_date_evenement);
+	-- Envoie de l'e mail de confirmation
+	-- IF @@ROWCOUNT 
+	-- TODO
+END;
+$$ LANGUAGE plpgsql;
 
 -- Programmer date UNIQUE d'evenement
-CREATE OR REPLACE FUNCTION
-programmer_date_evenement(
-	id_evenement 	Date_Evenement.id_evenement%type, 
-	date_debut 		Date_Evenement.date_debut_evenement%type, 
-	date_fin 		Date_Evenement.date_fin_evenement%type
-)
-RETURNS VOID
-AS $$
-
-DECLARE
-	compteur INTEGER;
-
-BEGIN
-	compteur = 
-		(SELECT count(*) as c
-		FROM 		 Date_Evenement
-		NATURAL JOIN Evenement_Culturel
-		NATURAL JOIN Lieu
-		WHERE 
-			($1 BETWEEN date_debut_evenement AND date_fin_evenement)
-			AND 
-			($2 BETWEEN date_debut_evenement AND date_fin_evenement)
-		).c;
-
-	IF
-		-- Une nouvelle date n'en chevauche pas une autre
-		compteur > 0
-
-		OR
-		-- Une date de fin doit être après la date de début
-		date_fin <= date_debut
-
-		OR
-		-- Une nouvelle date doit être dans le futur
-		date_debut <= (SELECT aujourdhui FROM AUJOURDHUI AS c).c
-		
-	THEN
-		RAISE NOTICE 'Un evenement a deja lieu a cette date ou la date est déjà passée.';
-	ELSE
-		INSERT INTO Date_Evenement 
-		(date_debut_evenement, date_fin_evenement, id_evenement)
-		VALUES
-		(date_debut, date_fin);
-	END IF;
-END;
-$$ language plpgsql;
-
--- Programmer date RECURRENT d'evenement
--- TODO
 
 -- Envoi d'un mail
 
