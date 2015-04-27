@@ -35,8 +35,8 @@ CREATE TABLE Contenu_Message (
 );
 
 CREATE TABLE Message (
-	id_message 				SERIAL PRIMARY KEY,
-	id_membre				INTEGER REFERENCES Membre,
+	id_message 			SERIAL PRIMARY KEY,
+	id_membre			INTEGER REFERENCES Membre,
 	date_message			TIMESTAMP NOT NULL,
 	id_contenu_message 		INTEGER REFERENCES Contenu_Message
 );
@@ -51,12 +51,15 @@ CREATE TABLE Piece_Theatre (
 	genre_piece			VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
+
 CREATE TABLE Exposition (
 	type_exposition			VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
+
 CREATE TABLE Festival (
 ) INHERITS (Evenement_Culturel);
+
 
 CREATE TABLE Type_Place (
 	id_type_place			SERIAL PRIMARY KEY,
@@ -74,7 +77,7 @@ CREATE TABLE Classe_Prix (
 
 CREATE TABLE Date_Evenement (
 	id_date_evenemnt		SERIAL PRIMARY KEY,
-	date_debut_evenement	TIMESTAMP NOT NULL,
+	date_debut_evenement		TIMESTAMP NOT NULL,
 	date_fin_evenement		TIMESTAMP NOT NULL,
 	id_evenement			INTEGER REFERENCES Evenement_Culturel
 ) 
@@ -86,6 +89,14 @@ CREATE TABLE Avoir (
 	montant_avoir 			INTEGER NOT NULL check (montant_avoir > 0)
 );
 
+
+
+CREATE TABLE Animation(
+       id_animation			SERIAL PRIMARY KEY,
+       nom_animation			VARCHAR NOT NULL,
+       date_debut_animation		TIMESTAMP NOT NULL,
+       date_fin_animation		TIMESTAMP NOT NULL
+);
 
 -- CREATE TABLE Participe (
 -- 	id_participe 			SERIAL PRIMARY KEY
