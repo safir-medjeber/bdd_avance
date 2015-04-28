@@ -113,6 +113,7 @@ CREATE TABLE Organise (
 	id_membre				INTEGER REFERENCES Membre,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel
 );
+
 CREATE TABLE AUJOURDHUI(
 	aujourdhui TIMESTAMP
 );
