@@ -1,41 +1,38 @@
--- Trigger lié à la table une date d'evenement
+-----------------
+-- DATE EVENEMENT
+-----------------
+
+-- INSERT OR UPDATE
+
 DROP FUNCTION IF EXISTS trigger_date_evenement();
 
 CREATE OR REPLACE FUNCTION trigger_date_evenement()
 RETURNS TRIGGER
 AS $$
 DECLARE
-	compteur INTEGER;
+	compteur_chevauchement BIGINT;
 BEGIN 
-	compteur = 
-		c(SELECT count(*) as c
-		FROM 		 Date_Evenement
-		NATURAL JOIN Evenement_Culturel
-		WHERE 
-			id_evenement = NEW.id_evenement
-			AND
-			(
-				-- TODO : Verifier les capacités de l'evenement
-				(NEW.date_evenement BETWEEN date_evenement AND date_evenement)
-				OR 
-				(NEW.date_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
-				OR 
-				(date_debut_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)		
-				OR 
-				(date_fin_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)
-			)
-		);
-
 	-- Une nouvelle date n'en chevauche pas une autre
-	IF compteur > 0 THEN
+	SELECT count(*) INTO compteur_chevauchement
+	FROM 		 Date_Evenement
+	NATURAL JOIN Evenement_Culturel
+	WHERE 
+		id_evenement = NEW.id_evenement
+		AND
+		(
+			-- La nouvelle programmation ne doit pas en chevaucher une autre
+			(NEW.date_evenement BETWEEN date_evenement AND date_evenement + duree_evenement)
+			OR 
+			(NEW.date_evenement + duree_evenement BETWEEN date_evenement AND date_evenement + duree_evenement)
+		)
+	;
+	IF compteur_chevauchement > 0 THEN
 		RAISE 'Erreur : Les date de l evenement chevauche une autre programmation';
 		RETURN NULL;
-	-- Une date de fin doit être après la date de début
-	ELSIF date_fin < date_debut THEN
-		RAISE 'Erreur : date_fin inférieure a date_debut';
-		RETURN NULL;
+	END IF;
+
 	-- Une nouvelle date doit être dans le futur
-	ELSIF date_debut <= TODAY() THEN
+	IF NEW.date_evenement < TODAY() THEN
 		RAISE 'Erreur : date_debut avant aujourd hui';
 		RETURN NULL;
 	END IF;
@@ -47,5 +44,14 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_date_evenement
 BEFORE INSERT OR UPDATE 
+ON Date_Evenement FOR EACH ROW
+   EXECUTE PROCEDURE trigger_date_evenement();
+
+-- DELETE
+-- Si on supprimer une date, alors il faut notifier tous les acheteurs
+-- et leur donner un avoir
+
+CREATE TRIGGER trigger_date_evenement
+BEFORE DELETE
 ON Date_Evenement FOR EACH ROW
    EXECUTE PROCEDURE trigger_date_evenement();
