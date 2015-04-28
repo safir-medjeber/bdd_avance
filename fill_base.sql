@@ -62,6 +62,7 @@ select create_festival('Festival Rock en Scène', 'musique', 'yes');
 select create_festival('Festival Rock in Opposition','musique', 'yes');
 select create_festival('Festival International de bande dessinee', 'musique', 'yes');
 
+
  
 -- Piece de Theatre
 select create_piece_theatre('Le bal des Vampire', 'Comedie Musical', 'Fabien Pascal');
@@ -102,52 +103,112 @@ select create_exposition('Exposition De Carmen à mélisande', 'Architecture');
 select create_exposition('Exposition les cahiers dessinés', 'Peinture');
 
 
--- Animation
--- INSERT INTO Animation(id_evenement, nom_animation, date_debut_animation, duree_evenement) VALUES		
---        (33, 'Initiation aux art martiaux', '2015-01-08', '00:40:00'),
---        (41, 'Labo Culinaire', '2015-01-08', '00:40:00'),
---        (46, 'Atelier des Sens', '2015-01-08', '00:40:00'),
---        (46, 'Initiation à la Couture', '2015-01-08', '00:40:00'),		
---        (39, 'Atelier Peinture PopArt', '2015-01-08', '00:40:00'),	
---        (34, 'Conférence mangaka', '2015-01-08', '01:00:00'),
---        (41, 'Initiation Cuisine Africaine', '2015-01-08', '00:40:00'),
---        (41, 'Atelier Les Coulisses du Chef', '2015-01-08', '00:40:00'),
---        (33,'Demonstration nouveaux jeux', '2015-01-08', '00:40:00'),		
---        (43, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
---        (34, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
---        (40,'Buffet à Volonté', '2015-01-08', '00:40:00'),
---        (38,'Buffet à Volonté', '2015-01-08', '00:40:00'),
---        (43,'Buffet à Volonté', '2015-01-08', '00:40:00'),
---        (43,'Buffet à Volonté', '2015-01-08', '00:40:00');
 
 
-    
+
+
+--Date Evenement
+
+
+
+INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VALUES
+
+       (12, '2015-01-12 20:30:00', 20),
+       (13, '2015-01-12 20:30:00', 22),
+       (14, '2015-01-12 20:30:00', 32),
+       (15, '2015-01-12 20:30:00', 34),
+       (16, '2015-01-12 20:30:00', 50),
+       (17, '2015-01-12 20:30:00', 70),
+       (18, '2015-01-12 20:30:00', 200),
+       (19, '2015-01-12 20:30:00', 160),
+       (20, '2015-01-12 20:30:00', 80),
+       (21, '2015-01-12 20:30:00', 60),
+       (22, '2015-01-12 20:30:00', 55),
+       (23, '2015-01-12 20:30:00', 60),
+       (24, '2015-01-12 20:30:00', 55),
+       (25, '2015-01-12 20:30:00', 50),
+       (26, '2015-01-12 20:30:00', 45),
+       (27, '2015-01-12 20:30:00', 45),
+       (28, '2015-01-12 20:30:00', 40),
+       (29, '2015-01-12 20:30:00', 25),
+       (30, '2015-01-12 20:30:00', 40),
+       (31, '2015-01-12 20:30:00', 30),
+       (32, '2015-01-12 20:30:00', 35),
+
+
+       (1, '2015-01-12 10:30:00', 60),
+       (2, '2015-01-12 10:30:00', 60),
+       (3, '2015-01-12 10:30:00', 60),
+       (4, '2015-01-12 10:30:00', 160),
+       (5, '2015-01-12 10:30:00', 6),
+       (6, '2015-01-12 10:30:00', 30),
+       (7, '2015-02-14 10:30:00', 70),
+       (8, '2015-03-15 10:30:00', 80),
+       (9, '2015-04-17 10:30:00', 10),
+       (10, '2016-06-22 10:30:00', 9),
+       (11, '2016-01-02 10:30:00', 20),
+
+       
+       (33, '2015-01-12 10:30:00', 22),
+       (34, '2015-03-16 10:30:00', 27),
+       (35, '2015-06-15 10:30:00', 18),
+       (36, '2015-03-23 10:30:00', 12),
+       (37, '2015-05-12 10:30:00', 23),
+       (38, '2015-01-12 10:30:00', 14),
+       (39, '2015-07-30 10:30:00', 15),
+       (40, '2015-09-11 10:30:00', 10),
+       (41, '2015-10-09 10:30:00', 30),
+       (42, '2015-01-03 10:30:00', 20),
+       (43, '2015-02-01 10:30:00', 21);
+
+
+
+--Animation
+INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_evenement) VALUES		
+       (33, '10:30:00', 'Initiation aux art martiaux', '00:40:00'),
+       (33, '10:30:00', 'Demonstration nouveaux jeux', '00:40:00'),		
+       (34, '10:30:00', 'Conférence mangaka', '01:00:00'),
+       (34, '12:30:00', 'Atelier Lecture ', '00:40:00'),
+       (35, '10:30:00', 'Initiation à la Couture', '00:40:00'),		
+       (35, '10:30:00', 'Nouvelles tendances', '00:40:00'),
+       (36, '10:30:00', 'Nouvelles tendances du design', '00:55:00'),
+       (37, '10:30:00', 'Atelier Lecture ', '00:40:00'),
+       (37, '20:30:00', 'Buffet à Volonté', '03:00:00'),
+       (38, '20:30:00', 'Buffet à Volonté', '03:00:00'),
+       (38, '14:30:00', 'Conference Art Abstrait', '00:40:00'),
+       (39, '10:30:00', 'Atelier Peinture PopArt', '00:40:00'),	
+       (41, '10:30:00', 'Labo Culinaire', '00:40:00'),
+       (41, '13:30:00', 'Initiation Cuisine Africaine', '00:40:00'),
+       (41, '20:30:00', 'Atelier Les Coulisses du Chef', '00:40:00'),
+       (43, '12:30:00', 'Buffet à Volonté', '02:00:00'),
+       (43, '12:30:00', 'Atelier Lecture', '00:40:00');
+
 -- Membre
-INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, pseudo_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
-       ('Dupont', 'Xavier', 'H', '134', 'Xaxa', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
-       ('Dupuis', 'Marine', 'F', '1343', 'Mama', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
-       ('Charles','Sofiane', 'H', 'HKjklj', 'ChCh', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
-       ('Goliate', 'David' , 'H', 'kgjg', 'GoDa', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
-       ('Townsend','Wallace', 'H', 'gjhgjhgj', 'ToTo', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
-       ('Saunders','Sabrina', 'F', 'ojolj', 'SaSa', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
-       ('Lancaster','Fatima', 'F', 'hjhg', 'LaLa', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
-       ('Kline','Jeanne', 'F', 'JLJJ', 'KlKl', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
-       ('Valentine','Kevin', 'H', 'iyiuyiu', 'VaVa', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
-       ('Morrow','Alan', 'H', 'ljlkjlkjm', 'MoMo', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
-       ('Garrison','Mathilda', 'F', 'klhllhl', 'GaGa', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
-       ('Underwood','John', 'H', 'ljlkjlkjlm', 'UnUn', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
-       ('Stephens','Nadia', 'F', 'ghfh', 'SteSte', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
-       ('Shaffer', 'Jack', 'H', 'fhgfhj', 'ShaSha', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
-       ('Stanley','Brandon', 'H', 'popoo', 'Stan', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
-       ('Valenzuela','Jimmy', 'F' , 'pololo', 'ValVal', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
-       ('Mathis','Jason', 'H', 'ljkgj', 'MaMa', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
-       ('Powell','Samia', 'F', 'lujkh', 'PoPo', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
-       ('Norton','Afida', 'F', 'gjg', 'NoNo', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
-       ('Hurley','Farida', 'F', 'ljlj', 'FaFa', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
-       ('Hunt','Daniel', 'H', 'ojljl', 'HuHu', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
-       ('Charles','Camelia', 'F', 'mmme', 'ChaCha', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
-       ('Gould','Rachida', 'F', 'popoikh', 'GoGo', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
-       ('Mcdonald','Dominic', 'H', 'mkedo', 'McMc', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
-       ('Walter','Baxter', 'H', 'mkdir', 'WaWa', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
-       ('Osborne','Paula', 'F', 'kjkghj', 'OsOs', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
+INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
+       ('Dupont', 'Xavier', 'H', '134', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
+       ('Dupuis', 'Marine', 'F', '1343', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
+       ('Charles','Sofiane', 'H', 'HKjklj', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
+       ('Goliate', 'David' , 'H', 'kgjg', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
+       ('Townsend','Wallace', 'H', 'gjhgjhgj', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
+       ('Saunders','Sabrina', 'F', 'ojolj', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
+       ('Lancaster','Fatima', 'F', 'hjhg', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
+       ('Kline','Jeanne', 'F', 'JLJJ', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
+       ('Valentine','Kevin', 'H', 'iyiuyiu', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
+       ('Morrow','Alan', 'H', 'ljlkjlkjm', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
+       ('Garrison','Mathilda', 'F', 'klhllhl', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
+       ('Underwood','John', 'H', 'ljlkjlkjlm', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
+       ('Stephens','Nadia', 'F', 'ghfh', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
+       ('Shaffer', 'Jack', 'H', 'fhgfhj', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
+       ('Stanley','Brandon', 'H', 'popoo', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
+       ('Valenzuela','Jimmy', 'F' , 'pololo', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
+       ('Mathis','Jason', 'H', 'ljkgj', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
+       ('Powell','Samia', 'F', 'lujkh', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
+       ('Norton','Afida', 'F', 'gjg', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
+       ('Hurley','Farida', 'F', 'ljlj', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
+       ('Hunt','Daniel', 'H', 'ojljl', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
+       ('Charles','Camelia', 'F', 'mmme', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
+       ('Gould','Rachida', 'F', 'popoikh', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
+       ('Mcdonald','Dominic', 'H', 'mkedo', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
+       ('Walter','Baxter', 'H', 'mkdir', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
+       ('Osborne','Paula', 'F', 'kjkghj', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
 
