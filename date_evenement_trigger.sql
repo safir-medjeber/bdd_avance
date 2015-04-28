@@ -49,10 +49,16 @@ ON Date_Evenement FOR EACH ROW
 -- On supprimer aussi la classe de prix associée
 -------------------------------------------------------
 CREATE OR REPLACE FUNCTION trigger_date_evenement_delete()
-RETURNS TRIGGER
-AS $$
+RETURNS TRIGGER AS $$
+DECLARE
+	it RECORD;
 BEGIN
-	--TODO
+	FOR it IN
+		--SELECT id_membre 
+		--FROM 
+	LOOP
+
+	END LOOP;
 END
 $$ LANGUAGE plpgsql;
 
