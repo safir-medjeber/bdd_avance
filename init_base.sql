@@ -31,7 +31,7 @@ CREATE TABLE Administrateur (
 );
 
 CREATE TABLE Message (
-	id_contenu_message	SERIAL PRIMARY KEY,
+	id_message			SERIAL PRIMARY KEY,
 	objet_message		VARCHAR NOT NULL,
 	date_message		TIMESTAMP, -- Si NULL on utilise TODAY
 	contenu_message 	VARCHAR NOT NULL
@@ -119,8 +119,10 @@ CREATE TABLE AUJOURDHUI(
 
 INSERT INTO AUJOURDHUI VALUES ('2015-01-01 00:00:01');
 
---\i requete_acces.sql
---\i triggers.sql
---\i requetes_ajouts.sql
+\i requete_acces.sql
+\i triggers.sql
+\i requetes_ajouts.sql
+\i message.sql
+\i message_trigger.sql
 \i fill_base.sql
 

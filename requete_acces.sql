@@ -6,15 +6,18 @@
 DROP FUNCTION IF EXISTS membre_getID(VARCHAR);
 CREATE OR REPLACE FUNCTION membre_getID(login VARCHAR)
 RETURNS INTEGER AS $$
+DECLARE 
+	idMembre INTEGER;
 BEGIN
-	SELECT id_membre FROM Membre WHERE login_membre = $1;
+	SELECT id_membre INTO idMembre FROM Membre WHERE login_membre = $1;
+	RETURN idMembre;
 END;
 $$ LANGUAGE plpgsql;
 
 
 -- Retourne true si le login existe
-DROP FUNCTION IF EXISTS est_membre(Membre.pseudo_membre%type);
-CREATE OR REPLACE FUNCTION est_membre(pseudo_membre Membre.pseudo_membre%type)
+DROP FUNCTION IF EXISTS est_membre(VARCHAR);
+CREATE OR REPLACE FUNCTION est_membre(pseudo_membre VARCHAR)
 RETURNS BOOLEAN AS $$
 BEGIN
 	RETURN ($1 IN (SELECT pseudo_membre FROM Membre));
@@ -22,8 +25,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Retourne true si le login existe
-DROP FUNCTION IF EXISTS est_administrateur(Membre.pseudo_membre%type);
-CREATE OR REPLACE FUNCTION est_administrateur(pseudo_membre Membre.pseudo_membre%type)
+DROP FUNCTION IF EXISTS est_administrateur(VARCHAR);
+CREATE OR REPLACE FUNCTION est_administrateur(VARCHAR)
 RETURNS BOOLEAN AS $$
 BEGIN
 	RETURN ($1 IN (SELECT pseudo_membre FROM Membre NATURAL JOIN Administrateur));
