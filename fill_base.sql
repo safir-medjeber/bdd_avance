@@ -46,59 +46,45 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu) VALUES
        ('Prairie des Filtres', '34 rue Toulouse centre');
 
 
---Evenement
+-- Festival
+INSERT INTO Festival (nom_evenement, type_festival, en_plein_air) VALUES
+       ('Festival cinémarges', 'cinema', 'no'),     
+       ('Festival des outremers', 'culturel', 'no'),
+       ('Festival Du Nouveau Cinéma Italien', 'cinema' , 'no'),
+       ('Festival Paris Tout Court', 'culturel','yes'),
+       ('Festival des Chemins de Traverse', 'culturel', 'no'),
+       ('Festival de la Rue', 'culturel', 'yes'),
+       ('Festival de Cannes', 'cinema' ,'no'),
+       ('Festival Solidays', 'musique', 'yes'),
+       ('Festival Rock en Scène', 'musique', 'yes'),
+       ('Festival Rock in Opposition','musique', 'yes'),
+       ('Festival International de bande dessinee', 'musique', 'yes');
 
-INSERT INTO Evenement_Culturel (nom_evenement) VALUES
+ 
 
-       ('Festival cinémarges'),     
-       ('Festival des outremers'),
-       ('Festival Du Nouveau Cinéma Italien'),
-       ('Festival Paris Tout Court'),
-       ('Festival des Chemins de Traverse'),
-       ('Festival de la Rue'),
-       ('Festival de Cannes'),
-       ('Festival Solidays'),
-       ('Festival Rock en Scène'),
-       ('Festival Rock in Opposition'),
-       ('Festival International de bande dessinee'),
-
-       ('Labo Culinaire'),
-       ('Atelier des Sens'),
-       ('Ecolde Ritze Escoffier'),
-       ('CookSurfing'),
-       ('Cook & Go'),
-       ('Atelier Couture'),		
-       ('Atelier Peinture PopArt'),	
-       ('La Cuisine à Paris'),
-       ('Les Coulisses du Chef'),
-       ('Atelier Top chef'),
-       ('Atelier Master chef');
-     
-       
-
--- Info Piece de Theatre
-INSERT INTO Piece_Theatre (nom_evenement, genre_piece) VALUES
-       ('Le bal des Vampire', 'Comedie Musical'),
-       ('Aristo du Coeur', 'Bulresque'),
-       ('Entre pere et fils', 'Comique'),
-       ('La femme de mouss est partie', 'Comique'),
-       ('Tailleur pour Dame', 'Bulresque'),
-       ('La Bonne Moitié', 'Comique'),
-       ('La Bonne Planque', 'Comique'),
-       ('La Bonne Soupe', 'Tragedie'),
-       ('Britannicus (Racine)', 'Tragedie'),
-       ('La Brouette du vinaigrier','Bulresque'),
-       ('La Brune que voilà', 'Comedie Romantique'),
-       ('Le Dédale', 'Tragedie'),
-       ('Délire à deux', 'Vaudeville'),
-       ('Démocrite amoureux', 'Vaudeville'),
-       ('Démocrite prétendu fou', 'Bulresque'),
-       ('Le Dénouement imprévu', 'Tragedie'),
-       ('Le Dépit amoureux', 'Comedie Romantique'),
-       ('La Dernière Nuit pour Marie Stuart', 'Comedie Musical'),
-       ('Des boulons dans mon yaourt', 'Comique'),
-       ('Des journées entières dans les arbres', 'Comedie'),
-       ('Le Déserteur ', 'Opéra');
+-- Piece de Theatre
+INSERT INTO Piece_Theatre (nom_evenement, genre_piece, metteur_scene_piece) VALUES
+       ('Le bal des Vampire', 'Comedie Musical', 'Fabien Pascal'),
+       ('Aristo du Coeur', 'Bulresque', 'Facco Charlotte'),
+       ('Entre pere et fils', 'Comique', 'Sabourin François'),
+       ('La femme de mouss est partie', 'Comique', 'Segui Elodie'),
+       ('Tailleur pour Dame', 'Bulresque', 'Calvo Ernesto'),
+       ('La Bonne Moitié', 'Comique', 'Pepi Guillaume'),
+       ('La Bonne Planque', 'Comique', 'Cacheux Fred'),
+       ('La Bonne Soupe', 'Tragedie', 'Lecono Pierre'),
+       ('Britannicus (Racine)', 'Tragedie', 'Rians Johan'),
+       ('La Brouette du vinaigrier','Bulresque', 'Pellerin Gille'),
+       ('La Brune que voilà', 'Comedie Romantique', 'Lannister Anne'),
+       ('Le Dédale', 'Tragedie', 'Stark Daniel'),
+       ('Délire à deux', 'Vaudeville', 'Salvador Gabriel'),
+       ('Démocrite amoureux', 'Vaudeville', 'Hanouno Camille'),
+       ('Démocrite prétendu fou', 'Bulresque', 'Camus Emmanuel'),
+       ('Le Dénouement imprévu', 'Tragedie', 'Bourdieu Paul'),
+       ('Le Dépit amoureux', 'Comedie Romantique', 'Callier Lydie'),
+       ('La Dernière Nuit pour Marie Stuart', 'Comedie Musical', 'Dove attia'),
+       ('Des boulons dans mon yaourt', 'Comique', 'Gilbert Damien'),
+       ('Des journées entières dans les arbres', 'Comedie', 'Lecomte  Lucille'),
+       ('Le Déserteur ', 'Opéra', 'Moya Carlos');
 
 
 
@@ -112,18 +98,33 @@ INSERT INTO Exposition (nom_evenement,type_exposition) VALUES
        ('Exposition Felice Varini', 'Peinture'),
        ('Exposition Velazquez', 'Peinture'),
        ('Exposition Jeff Koons', 'Musique'),
-       ('Exposition Les chasses nouvelles', 'Nature'),
+       ('Exposition Cuisine du monde ', 'Cuisine'),
        ('Exposition De Carmen à mélisande', 'Architecture'),
        ('Exposition les cahiers dessinés', 'Peinture');	
 
 
-
 -- Animation
-INSERT INTO Animation(nom_animation, date_debut_animation, date_fin_animation) VALUES		
-       ('Initiation', '2015-01-08', '2015-01-18');
+INSERT INTO Animation(id_evenement, nom_animation, date_debut_animation, duree_evenement) VALUES		
+       (33, 'Initiation aux art martiaux', '2015-01-08', '00:40:00'),
+       (41, 'Labo Culinaire', '2015-01-08', '00:40:00'),
+       (46, 'Atelier des Sens', '2015-01-08', '00:40:00'),
+       (46, 'Initiation à la Couture', '2015-01-08', '00:40:00'),		
+       (39, 'Atelier Peinture PopArt', '2015-01-08', '00:40:00'),	
+       (34, 'Conférence mangaka', '2015-01-08', '01:00:00'),
+       (41, 'Initiation Cuisine Africaine', '2015-01-08', '00:40:00'),
+       (41, 'Atelier Les Coulisses du Chef', '2015-01-08', '00:40:00'),
+       (33,'Demonstration nouveaux jeux', '2015-01-08', '00:40:00'),		
+       (43, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
+       (34, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
+       (40,'Buffet à Volonté', '2015-01-08', '00:40:00'),
+       (38,'Buffet à Volonté', '2015-01-08', '00:40:00'),
+       (43,'Buffet à Volonté', '2015-01-08', '00:40:00'),
+       (43,'Buffet à Volonté', '2015-01-08', '00:40:00');
 
+
+    
 -- Membre
-INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, password_membre, pseudo_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
+INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, pseudo_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
        ('Dupont', 'Xavier', 'H', '134', 'Xaxa', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
        ('Dupuis', 'Marine', 'F', '1343', 'Mama', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
        ('Charles','Sofiane', 'H', 'HKjklj', 'ChCh', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
