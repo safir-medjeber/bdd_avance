@@ -119,8 +119,18 @@ CREATE TABLE AUJOURDHUI(
 );
 
 INSERT INTO AUJOURDHUI VALUES ('2015-01-01 00:00:01');
+-- Retourne le jour courant
+DROP FUNCTION IF EXISTS TODAY();
+CREATE OR REPLACE FUNCTION today()
+RETURNS TIMESTAMP AS $$
+BEGIN
+	RETURN (SELECT aujourdhui FROM aujourdhui);
+END;
+$$ LANGUAGE plpgsql;
 
 \i requete_acces.sql
+\i membre_fonctions.sql
+\i administrateur_fonctions.sql
 \i triggers.sql
 \i requetes_ajouts.sql
 \i message.sql
