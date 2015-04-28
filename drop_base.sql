@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS 
 	Message,
 	Reception_Message,
-	Classe_Prix,
 	Evenement_Culturel,
 	Piece_Theatre,
 	Exposition,

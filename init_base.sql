@@ -20,7 +20,7 @@ CREATE TABLE Membre (
 	prenom_membre 		VARCHAR NOT NULL,
 	sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'H'),
 	login_membre 		VARCHAR NOT NULL,
-	pseudo_membre 		VARCHAR NOT NULL UNIQUE,
+	-- pseudo_membre 		VARCHAR NOT NULL UNIQUE, -- TODO : A enlever
 	mail_membre 		VARCHAR NOT NULL UNIQUE,
 	adresse_membre  	VARCHAR NOT NULL,
 	code_postal_ville	INTEGER REFERENCES Ville
@@ -71,13 +71,8 @@ CREATE TABLE Festival (
 CREATE TABLE Date_Evenement (
 	id_date_evenement		SERIAL PRIMARY KEY,
 	id_evenement			INTEGER  REFERENCES Evenement_Culturel,
-	date_evenement 			TIMESTAMP NOT NULL
-);
-
-CREATE TABLE Classe_Prix (
-	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
-	id_date_evenement		INTEGER REFERENCES Date_Evenement,
-	prix_classe_prix		INTEGER CHECK (prix_classe_prix >= 0)
+	date_evenement 			TIMESTAMP NOT NULL,
+	prix_date_evenement		INTEGER CHECK (prix_date_evenement >= 0)
 );
 
 CREATE TABLE Avoir (
@@ -103,13 +98,11 @@ CREATE TABLE Concert(
 );
 
 CREATE TABLE Reservation (
-	id_reservation 			SERIAL PRIMARY KEY,
 	id_membre				INTEGER REFERENCES Membre,
 	id_date_evenement		INTEGER REFERENCES Date_Evenement
 );
 
 CREATE TABLE Organise (
-	id_organise 			SERIAL PRIMARY KEY,
 	id_membre				INTEGER REFERENCES Membre,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel
 );
@@ -135,6 +128,7 @@ $$ LANGUAGE plpgsql;
 \i membre_fonctions.sql
 \i administrateur_fonctions.sql
 \i date_evenement_trigger.sql
+\i avoir_fonctions.sql
 \i requetes_ajouts.sql
 \i message.sql
 \i message_trigger.sql
