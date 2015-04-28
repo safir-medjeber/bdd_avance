@@ -1,3 +1,6 @@
+-- import des fonctions de creation d'evenement
+\i create_event.sql
+
 -- Ville
 INSERT INTO Ville (code_postal_ville, nom_ville) VALUES
 	(75000, 'Paris'),
@@ -47,79 +50,75 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu) VALUES
 
 
 -- Festival
-INSERT INTO Festival (nom_evenement, type_festival, en_plein_air) VALUES
-       ('Festival cinémarges', 'cinema', 'no'),     
-       ('Festival des outremers', 'culturel', 'no'),
-       ('Festival Du Nouveau Cinéma Italien', 'cinema' , 'no'),
-       ('Festival Paris Tout Court', 'culturel','yes'),
-       ('Festival des Chemins de Traverse', 'culturel', 'no'),
-       ('Festival de la Rue', 'culturel', 'yes'),
-       ('Festival de Cannes', 'cinema' ,'no'),
-       ('Festival Solidays', 'musique', 'yes'),
-       ('Festival Rock en Scène', 'musique', 'yes'),
-       ('Festival Rock in Opposition','musique', 'yes'),
-       ('Festival International de bande dessinee', 'musique', 'yes');
+select create_festival('Festival cinémarges', 'cinema', 'no');
+select create_festival('Festival des outremers', 'culturel', 'no');
+select create_festival('Festival Du Nouveau Cinéma Italien', 'cinema' , 'no');
+select create_festival('Festival Paris Tout Court', 'culturel','yes');
+select create_festival('Festival des Chemins de Traverse', 'culturel', 'no');
+select create_festival('Festival de la Rue', 'culturel', 'yes');
+select create_festival('Festival de Cannes', 'cinema' ,'no');
+select create_festival('Festival Solidays', 'musique', 'yes');
+select create_festival('Festival Rock en Scène', 'musique', 'yes');
+select create_festival('Festival Rock in Opposition','musique', 'yes');
+select create_festival('Festival International de bande dessinee', 'musique', 'yes');
 
  
-
 -- Piece de Theatre
-INSERT INTO Piece_Theatre (nom_evenement, genre_piece, metteur_scene_piece) VALUES
-       ('Le bal des Vampire', 'Comedie Musical', 'Fabien Pascal'),
-       ('Aristo du Coeur', 'Bulresque', 'Facco Charlotte'),
-       ('Entre pere et fils', 'Comique', 'Sabourin François'),
-       ('La femme de mouss est partie', 'Comique', 'Segui Elodie'),
-       ('Tailleur pour Dame', 'Bulresque', 'Calvo Ernesto'),
-       ('La Bonne Moitié', 'Comique', 'Pepi Guillaume'),
-       ('La Bonne Planque', 'Comique', 'Cacheux Fred'),
-       ('La Bonne Soupe', 'Tragedie', 'Lecono Pierre'),
-       ('Britannicus (Racine)', 'Tragedie', 'Rians Johan'),
-       ('La Brouette du vinaigrier','Bulresque', 'Pellerin Gille'),
-       ('La Brune que voilà', 'Comedie Romantique', 'Lannister Anne'),
-       ('Le Dédale', 'Tragedie', 'Stark Daniel'),
-       ('Délire à deux', 'Vaudeville', 'Salvador Gabriel'),
-       ('Démocrite amoureux', 'Vaudeville', 'Hanouno Camille'),
-       ('Démocrite prétendu fou', 'Bulresque', 'Camus Emmanuel'),
-       ('Le Dénouement imprévu', 'Tragedie', 'Bourdieu Paul'),
-       ('Le Dépit amoureux', 'Comedie Romantique', 'Callier Lydie'),
-       ('La Dernière Nuit pour Marie Stuart', 'Comedie Musical', 'Dove attia'),
-       ('Des boulons dans mon yaourt', 'Comique', 'Gilbert Damien'),
-       ('Des journées entières dans les arbres', 'Comedie', 'Lecomte  Lucille'),
-       ('Le Déserteur ', 'Opéra', 'Moya Carlos');
+select create_piece_theatre('Le bal des Vampire', 'Comedie Musical', 'Fabien Pascal');
+select create_piece_theatre('Aristo du Coeur', 'Bulresque', 'Facco Charlotte');
+select create_piece_theatre('Entre pere et fils', 'Comique', 'Sabourin François');
+select create_piece_theatre('La femme de mouss est partie', 'Comique', 'Segui Elodie');
+select create_piece_theatre('Tailleur pour Dame', 'Bulresque', 'Calvo Ernesto');
+select create_piece_theatre('La Bonne Moitié', 'Comique', 'Pepi Guillaume');
+select create_piece_theatre('La Bonne Planque', 'Comique', 'Cacheux Fred');
+select create_piece_theatre('La Bonne Soupe', 'Tragedie', 'Lecono Pierre');
+select create_piece_theatre('Britannicus (Racine)', 'Tragedie', 'Rians Johan');
+select create_piece_theatre('La Brouette du vinaigrier','Bulresque', 'Pellerin Gille');
+select create_piece_theatre('La Brune que voilà', 'Comedie Romantique', 'Lannister Anne');
+select create_piece_theatre('Le Dédale', 'Tragedie', 'Stark Daniel');
+select create_piece_theatre('Délire à deux', 'Vaudeville', 'Salvador Gabriel');
+select create_piece_theatre('Démocrite amoureux', 'Vaudeville', 'Hanouno Camille');
+select create_piece_theatre('Démocrite prétendu fou', 'Bulresque', 'Camus Emmanuel');
+select create_piece_theatre('Le Dénouement imprévu', 'Tragedie', 'Bourdieu Paul');
+select create_piece_theatre('Le Dépit amoureux', 'Comedie Romantique', 'Callier Lydie');
+select create_piece_theatre('La Dernière Nuit pour Marie Stuart', 'Comedie Musical', 'Dove attia');
+select create_piece_theatre('Des boulons dans mon yaourt', 'Comique', 'Gilbert Damien');
+select create_piece_theatre('Des journées entières dans les arbres', 'Comedie', 'Lecomte  Lucille');
+select create_piece_theatre('Le Déserteur ', 'Opéra', 'Moya Carlos');
 
 
 
 -- Info Exposition
-INSERT INTO Exposition (nom_evenement,type_exposition) VALUES
-       ('Paris Games Week', 'Jeux'),
-       ('Japan Expo', 'Culture Japonaise'),
-       ('Expo jean paul gaultier : de la rue aux étoiles', 'Mode'),
-       ('Exposition oracles du design', 'Design'),
-       ('Le bord des mondes', 'Peinture'),
-       ('Exposition Felice Varini', 'Peinture'),
-       ('Exposition Velazquez', 'Peinture'),
-       ('Exposition Jeff Koons', 'Musique'),
-       ('Exposition Cuisine du monde ', 'Cuisine'),
-       ('Exposition De Carmen à mélisande', 'Architecture'),
-       ('Exposition les cahiers dessinés', 'Peinture');	
+select create_exposition('Paris Games Week', 'Jeux');
+select create_exposition('Japan Expo', 'Culture Japonaise');
+select create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 'Mode');
+select create_exposition('Exposition oracles du design', 'Design');
+select create_exposition('Le bord des mondes', 'Peinture');
+select create_exposition('Exposition Felice Varini', 'Peinture');
+select create_exposition('Exposition Velazquez', 'Peinture');
+select create_exposition('Exposition Jeff Koons', 'Musique');
+select create_exposition('Exposition Cuisine du monde ', 'Cuisine');
+select create_exposition('Exposition De Carmen à mélisande', 'Architecture');
+select create_exposition('Exposition les cahiers dessinés', 'Peinture');
 
 
 -- Animation
-INSERT INTO Animation(id_evenement, nom_animation, date_debut_animation, duree_evenement) VALUES		
-       (33, 'Initiation aux art martiaux', '2015-01-08', '00:40:00'),
-       (41, 'Labo Culinaire', '2015-01-08', '00:40:00'),
-       (46, 'Atelier des Sens', '2015-01-08', '00:40:00'),
-       (46, 'Initiation à la Couture', '2015-01-08', '00:40:00'),		
-       (39, 'Atelier Peinture PopArt', '2015-01-08', '00:40:00'),	
-       (34, 'Conférence mangaka', '2015-01-08', '01:00:00'),
-       (41, 'Initiation Cuisine Africaine', '2015-01-08', '00:40:00'),
-       (41, 'Atelier Les Coulisses du Chef', '2015-01-08', '00:40:00'),
-       (33,'Demonstration nouveaux jeux', '2015-01-08', '00:40:00'),		
-       (43, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
-       (34, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
-       (40,'Buffet à Volonté', '2015-01-08', '00:40:00'),
-       (38,'Buffet à Volonté', '2015-01-08', '00:40:00'),
-       (43,'Buffet à Volonté', '2015-01-08', '00:40:00'),
-       (43,'Buffet à Volonté', '2015-01-08', '00:40:00');
+-- INSERT INTO Animation(id_evenement, nom_animation, date_debut_animation, duree_evenement) VALUES		
+--        (33, 'Initiation aux art martiaux', '2015-01-08', '00:40:00'),
+--        (41, 'Labo Culinaire', '2015-01-08', '00:40:00'),
+--        (46, 'Atelier des Sens', '2015-01-08', '00:40:00'),
+--        (46, 'Initiation à la Couture', '2015-01-08', '00:40:00'),		
+--        (39, 'Atelier Peinture PopArt', '2015-01-08', '00:40:00'),	
+--        (34, 'Conférence mangaka', '2015-01-08', '01:00:00'),
+--        (41, 'Initiation Cuisine Africaine', '2015-01-08', '00:40:00'),
+--        (41, 'Atelier Les Coulisses du Chef', '2015-01-08', '00:40:00'),
+--        (33,'Demonstration nouveaux jeux', '2015-01-08', '00:40:00'),		
+--        (43, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
+--        (34, 'Atelier Lecture ', '2015-01-08', '00:40:00'),
+--        (40,'Buffet à Volonté', '2015-01-08', '00:40:00'),
+--        (38,'Buffet à Volonté', '2015-01-08', '00:40:00'),
+--        (43,'Buffet à Volonté', '2015-01-08', '00:40:00'),
+--        (43,'Buffet à Volonté', '2015-01-08', '00:40:00');
 
 
     
