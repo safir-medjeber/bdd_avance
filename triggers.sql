@@ -1,4 +1,9 @@
--- Trigger lié à la table une date d'evenement
+-----------------
+-- DATE EVENEMENT
+-----------------
+
+-- INSERT OR UPDATE
+
 DROP FUNCTION IF EXISTS trigger_date_evenement();
 
 CREATE OR REPLACE FUNCTION trigger_date_evenement()
@@ -39,5 +44,14 @@ $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_date_evenement
 BEFORE INSERT OR UPDATE 
+ON Date_Evenement FOR EACH ROW
+   EXECUTE PROCEDURE trigger_date_evenement();
+
+-- DELETE
+-- Si on supprimer une date, alors il faut notifier tous les acheteurs
+-- et leur donner un avoir
+
+CREATE TRIGGER trigger_date_evenement
+BEFORE DELETE
 ON Date_Evenement FOR EACH ROW
    EXECUTE PROCEDURE trigger_date_evenement();
