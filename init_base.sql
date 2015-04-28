@@ -88,17 +88,17 @@ CREATE TABLE Avoir (
 
 CREATE TABLE Animation(
 	id_animation			SERIAL PRIMARY KEY,
-	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
+	id_date_evenement		INTEGER REFERENCES Date_Evenement,
+	heure_animation			TIME,
 	nom_animation			VARCHAR NOT NULL,
-	date_debut_animation	TIMESTAMP NOT NULL,
 	duree_evenement			TIME
 );
 
 CREATE TABLE Concert(
 	id_concert				SERIAL PRIMARY KEY,
-	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
+	id_date_evenement		INTEGER REFERENCES Date_Evenement,
+	heure_animation			TIME,
 	artiste_concert			VARCHAR NOT NULL,
-	date_debut_concert		TIMESTAMP NOT NULL,
 	duree_evenement			TIME
 );
 
