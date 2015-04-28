@@ -48,16 +48,25 @@ ON Date_Evenement FOR EACH ROW
 -- et leur donner un avoir
 -- On supprimer aussi la classe de prix associée
 -------------------------------------------------------
+-- TODO : Tester ce trigger
 CREATE OR REPLACE FUNCTION trigger_date_evenement_delete()
 RETURNS TRIGGER AS $$
 DECLARE
 	it RECORD;
 BEGIN
+	-- On envoie un avoir et on notifie par mp tous les acheteurs
 	FOR it IN
-		--SELECT id_membre 
-		--FROM 
+		SELECT id_membre 
+		FROM Reservation NATURAL JOIN Date_Evenement NATURAL JOIN Evenement_Culturel 
+		WHERE id_date_evenement = OLD.id_date_evenement
 	LOOP
-
+		PERFORM envoyer_message(it.id_membre, 
+			'Annulation d un evenement',
+			'Nous avons le regret de vous informer que l evenement '||it.nom_evenement
+			||' prevu le '||it.date_evenement::VARCHAR||' a ete annulé, un avoir vous 
+			a été attribué.'
+		);
+		PERFORM avoir_creer(it.id_membre, OLD.id_date_evenement);
 	END LOOP;
 END
 $$ LANGUAGE plpgsql;

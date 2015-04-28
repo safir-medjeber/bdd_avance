@@ -46,7 +46,6 @@ END $$ LANGUAGE plpgsql;
 -------------------------------------------------------
 CREATE OR REPLACE FUNCTION envoyer_message(login_membre VARCHAR, objet_message VARCHAR, contenu_message VARCHAR)
 RETURNS VOID AS $$
-
 DECLARE
 	idMembre INTEGER;
 	idMessage INTEGER;
@@ -65,10 +64,25 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+
+CREATE OR REPLACE FUNCTION envoyer_message(idMembre INTEGER, objet_message VARCHAR, contenu_message VARCHAR)
+RETURNS VOID AS $$
+DECLARE
+	idMessage INTEGER;
+BEGIN
+	-- Creation du message
+	idMessage := creation_message(objet_message, contenu_message);
+
+	-- Liaison du message
+	INSERT INTO Reception_message (id_membre, id_message) VALUES (idMembre, idMessage);
+END
+$$ LANGUAGE plpgsql;
+
+
 -------------------------------------------------------
 -- Envoi d'un mail au membre inscrit à un evenement
 -------------------------------------------------------
-CREATE OR REPLACE FUNCTION envoyer_message(idEvenement INTEGER, objet_message VARCHAR, contenu_message VARCHAR)
+CREATE OR REPLACE FUNCTION envoyer_message_groupe(idEvenement INTEGER, objet_message VARCHAR, contenu_message VARCHAR)
 RETURNS VOID AS $$
 
 DECLARE

@@ -98,13 +98,11 @@ CREATE TABLE Concert(
 );
 
 CREATE TABLE Reservation (
-	id_reservation 			SERIAL PRIMARY KEY,
 	id_membre				INTEGER REFERENCES Membre,
 	id_date_evenement		INTEGER REFERENCES Date_Evenement
 );
 
 CREATE TABLE Organise (
-	id_organise 			SERIAL PRIMARY KEY,
 	id_membre				INTEGER REFERENCES Membre,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel
 );
