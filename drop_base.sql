@@ -15,5 +15,6 @@ DROP TABLE IF EXISTS
 	avoir,
 	aujourdhui,
 	Organise,
-	Reservation
+	Reservation,
+	Concert
 ;

@@ -82,10 +82,19 @@ CREATE TABLE Avoir (
 );
 
 CREATE TABLE Animation(
-       id_animation				SERIAL PRIMARY KEY,
-       nom_animation			VARCHAR NOT NULL,
-       date_debut_animation		TIMESTAMP NOT NULL,
-       date_fin_animation		TIMESTAMP NOT NULL
+	id_animation			SERIAL PRIMARY KEY,
+	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
+	nom_animation			VARCHAR NOT NULL,
+	date_debut_animation	TIMESTAMP NOT NULL,
+	duree_evenement			TIME
+);
+
+CREATE TABLE Concert(
+	id_concert				SERIAL PRIMARY KEY,
+	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
+	artiste_concert			VARCHAR NOT NULL,
+	date_debut_concert		TIMESTAMP NOT NULL,
+	duree_evenement			TIME
 );
 
 CREATE TABLE Reservation (

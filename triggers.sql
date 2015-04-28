@@ -11,15 +11,14 @@ BEGIN
 		c(SELECT count(*) as c
 		FROM 		 Date_Evenement
 		NATURAL JOIN Evenement_Culturel
-		NATURAL JOIN Lieu
 		WHERE 
 			id_evenement = NEW.id_evenement
 			AND
 			(
-				-- TODO : Verifier le lieu
-				(NEW.date_debut_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
+				-- TODO : Verifier les capacités de l'evenement
+				(NEW.date_evenement BETWEEN date_evenement AND date_evenement)
 				OR 
-				(NEW.date_fin_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
+				(NEW.date_evenement BETWEEN date_debut_evenement AND date_fin_evenement)
 				OR 
 				(date_debut_evenement BETWEEN NEW.date_debut_evenement AND NEW.date_fin_evenement)		
 				OR 
