@@ -44,12 +44,12 @@ CREATE TABLE Reception_Message (
 CREATE TABLE Evenement_Culturel (
 	id_evenement			SERIAL PRIMARY KEY,
 	nom_evenement			VARCHAR NOT NULL,
-	id_lieu					INTEGER REFERENCES Lieu,
+	id_lieu				INTEGER REFERENCES Lieu,
 	duree_evenement			TIME
 );
 
 CREATE TABLE Piece_Theatre (
-	genre_piece				VARCHAR NOT NULL,
+	genre_piece			VARCHAR NOT NULL,
 	metteur_scene_piece		VARCHAR NOT NULL
 ) INHERITS (Evenement_Culturel);
 
@@ -60,12 +60,15 @@ CREATE TABLE Exposition (
 
 
 CREATE TABLE Festival (
+       type_festival			VARCHAR NOT NULL,
+       en_plein_air			BOOLEAN NOT NULL
 ) INHERITS (Evenement_Culturel);
 
 CREATE TABLE Date_Evenement (
 	id_date_evenement		SERIAL PRIMARY KEY,
-	id_evenement			INTEGER REFERENCES Evenement_Culturel,
-	date_evenement 			TIMESTAMP NOT NULL
+	id_evenement			INTEGER  NOT NULL,
+	date_evenement 			TIMESTAMP NOT NULL,
+	foreign key (id_evenement)	REFERENCES Evenement_Culturel(id_evenement)
 );
 
 CREATE TABLE Classe_Prix (
@@ -85,7 +88,7 @@ CREATE TABLE Animation(
 	id_animation			SERIAL PRIMARY KEY,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
 	nom_animation			VARCHAR NOT NULL,
-	date_debut_animation	TIMESTAMP NOT NULL,
+	date_debut_animation		TIMESTAMP NOT NULL,
 	duree_evenement			TIME
 );
 
@@ -99,13 +102,13 @@ CREATE TABLE Concert(
 
 CREATE TABLE Reservation (
 	id_reservation 			SERIAL PRIMARY KEY,
-	id_membre				INTEGER REFERENCES Membre,
+	id_membre			INTEGER REFERENCES Membre,
 	id_date_evenement		INTEGER REFERENCES Date_Evenement
 );
 
 CREATE TABLE Organise (
 	id_organise 			SERIAL PRIMARY KEY,
-	id_membre				INTEGER REFERENCES Membre,
+	id_membre			INTEGER REFERENCES Membre,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel
 );
 CREATE TABLE AUJOURDHUI(
@@ -115,7 +118,7 @@ CREATE TABLE AUJOURDHUI(
 INSERT INTO AUJOURDHUI VALUES ('2015-01-01 00:00:01');
 
 
-\i requete_acces.sql
-\i triggers.sql
-\i requetes_ajouts.sql
+--\i requete_acces.sql
+--\i triggers.sql
+--\i requetes_ajouts.sql
 \i fill_base.sql
