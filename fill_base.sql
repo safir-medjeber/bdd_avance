@@ -30,15 +30,6 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu) VALUES
        ('Théâtre National de Odéon', '2 rue Corneille'),	
        ('Théâtre National de Strasbourg', '1 Avenue de la Marseillaise'),
 
-       ('Atelier renault café', '53, avenue des champs-elysées '),
-       ('Le balm', '6, rue valois'),
-       ('Bon', '25, rue de la pompe'),
-       ('Café de la jatte', '60, boulevard vital-bouhot'),
-       ('Café marly', '93, rue de rivoli - paris 1er'),
-       ('Le ciel de paris', '33, avenue du maine'),
-       ('Ma cocotte', '106, rue des rosiers'),
-       ('Cristal room baccarat', '11, place des Etats-Unis'),
-
        ('Le palais des Festivals', 'Boulevard de la Croisette'),
        ('Le palais des Congres', 'Boulevard de Bercy'),
        ('Hippodrome de Longchamp', '5 avenue de la Republic'),
@@ -50,57 +41,57 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu) VALUES
 
 
 -- Festival
-select create_festival('Festival cinémarges', 'cinema', 'no');
-select create_festival('Festival des outremers', 'culturel', 'no');
-select create_festival('Festival Du Nouveau Cinéma Italien', 'cinema' , 'no');
-select create_festival('Festival Paris Tout Court', 'culturel','yes');
-select create_festival('Festival des Chemins de Traverse', 'culturel', 'no');
+select create_festival('Festival cinémarges', 13,  'cinema', 'no');
+select create_festival('Festival des outremers', 14, 'culturel', 'no');
+select create_festival('Festival Du Nouveau Cinéma Italien', 13, 'cinema' , 'no');
+select create_festival('Festival Paris Tout Court', 16, 'culturel','yes');
+select create_festival('Festival des Chemins de Traverse', 13, 'culturel', 'no');
 select create_festival('Festival de la Rue', 'culturel', 'yes');
-select create_festival('Festival de Cannes', 'cinema' ,'no');
-select create_festival('Festival Solidays', 'musique', 'yes');
-select create_festival('Festival Rock en Scène', 'musique', 'yes');
-select create_festival('Festival Rock in Opposition','musique', 'yes');
-select create_festival('Festival International de bande dessinee', 'musique', 'yes');
+select create_festival('Festival de Cannes',14, 'cinema' ,'no');
+select create_festival('Festival Solidays', 15, 'musique', 'yes');
+select create_festival('Festival Rock en Scène',17, 'musique', 'yes');
+select create_festival('Festival Rock in Opposition', 18, 'musique', 'yes');
+select create_festival('Festival International de bande dessinee', 16, 'musique', 'yes');
 
 
  
 -- Piece de Theatre
-select create_piece_theatre('Le bal des Vampire', 'Comedie Musical', 'Fabien Pascal');
-select create_piece_theatre('Aristo du Coeur', 'Bulresque', 'Facco Charlotte');
-select create_piece_theatre('Entre pere et fils', 'Comique', 'Sabourin François');
-select create_piece_theatre('La femme de mouss est partie', 'Comique', 'Segui Elodie');
-select create_piece_theatre('Tailleur pour Dame', 'Bulresque', 'Calvo Ernesto');
-select create_piece_theatre('La Bonne Moitié', 'Comique', 'Pepi Guillaume');
-select create_piece_theatre('La Bonne Planque', 'Comique', 'Cacheux Fred');
-select create_piece_theatre('La Bonne Soupe', 'Tragedie', 'Lecono Pierre');
-select create_piece_theatre('Britannicus (Racine)', 'Tragedie', 'Rians Johan');
-select create_piece_theatre('La Brouette du vinaigrier','Bulresque', 'Pellerin Gille');
-select create_piece_theatre('La Brune que voilà', 'Comedie Romantique', 'Lannister Anne');
-select create_piece_theatre('Le Dédale', 'Tragedie', 'Stark Daniel');
-select create_piece_theatre('Délire à deux', 'Vaudeville', 'Salvador Gabriel');
-select create_piece_theatre('Démocrite amoureux', 'Vaudeville', 'Hanouno Camille');
-select create_piece_theatre('Démocrite prétendu fou', 'Bulresque', 'Camus Emmanuel');
+select create_piece_theatre('Le bal des Vampire', 7,'Comedie Musical', 'Fabien Pascal');
+select create_piece_theatre('Aristo du Coeur', 12, 'Bulresque', 'Facco Charlotte');
+select create_piece_theatre('Entre pere et fils', 11, 'Comique', 'Sabourin François');
+select create_piece_theatre('La femme de mouss est partie', 9, 'Comique', 'Segui Elodie');
+select create_piece_theatre('Tailleur pour Dame', 8, 'Bulresque', 'Calvo Ernesto');
+select create_piece_theatre('La Bonne Moitié', 10, 'Comique', 'Pepi Guillaume');
+select create_piece_theatre('La Bonne Planque', 11, 'Comique', 'Cacheux Fred');
+select create_piece_theatre('La Bonne Soupe', 9, 'Tragedie', 'Lecono Pierre');
+select create_piece_theatre('Britannicus (Racine)', 12, 'Tragedie', 'Rians Johan');
+select create_piece_theatre('La Brouette du vinaigrier', 8, 'Bulresque', 'Pellerin Gille');
+select create_piece_theatre('La Brune que voilà', 10, 'Comedie Romantique', 'Lannister Anne');
+select create_piece_theatre('Le Dédale', 11, 'Tragedie', 'Stark Daniel');
+select create_piece_theatre('Délire à deux', 12, 'Vaudeville', 'Salvador Gabriel');
+select create_piece_theatre('Démocrite amoureux', 9, 'Vaudeville', 'Hanouno Camille');
+select create_piece_theatre('Démocrite prétendu fou', 7, 'Bulresque', 'Camus Emmanuel');
 select create_piece_theatre('Le Dénouement imprévu', 'Tragedie', 'Bourdieu Paul');
-select create_piece_theatre('Le Dépit amoureux', 'Comedie Romantique', 'Callier Lydie');
-select create_piece_theatre('La Dernière Nuit pour Marie Stuart', 'Comedie Musical', 'Dove attia');
-select create_piece_theatre('Des boulons dans mon yaourt', 'Comique', 'Gilbert Damien');
-select create_piece_theatre('Des journées entières dans les arbres', 'Comedie', 'Lecomte  Lucille');
-select create_piece_theatre('Le Déserteur ', 'Opéra', 'Moya Carlos');
+select create_piece_theatre('Le Dépit amoureux', 10, 'Comedie Romantique', 'Callier Lydie');
+select create_piece_theatre('La Dernière Nuit pour Marie Stuart', 11, 'Comedie Musical', 'Dove attia');
+select create_piece_theatre('Des boulons dans mon yaourt',8, 'Comique', 'Gilbert Damien');
+select create_piece_theatre('Des journées entières dans les arbres', 10, 'Comedie', 'Lecomte  Lucille');
+select create_piece_theatre('Le Déserteur ', 9, 'Opéra', 'Moya Carlos');
 
 
 
 -- Info Exposition
-select create_exposition('Paris Games Week', 'Jeux');
-select create_exposition('Japan Expo', 'Culture Japonaise');
-select create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 'Mode');
-select create_exposition('Exposition oracles du design', 'Design');
-select create_exposition('Le bord des mondes', 'Peinture');
-select create_exposition('Exposition Felice Varini', 'Peinture');
-select create_exposition('Exposition Velazquez', 'Peinture');
-select create_exposition('Exposition Jeff Koons', 'Musique');
-select create_exposition('Exposition Cuisine du monde ', 'Cuisine');
-select create_exposition('Exposition De Carmen à mélisande', 'Architecture');
-select create_exposition('Exposition les cahiers dessinés', 'Peinture');
+select create_exposition('Paris Games Week', 6, 'Jeux');
+select create_exposition('Japan Expo', 6, 'Culture Japonaise');
+select create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 1, 'Mode');
+select create_exposition('Exposition oracles du design', 2, 'Design');
+select create_exposition('Le bord des mondes', 3, 'Peinture');
+select create_exposition('Exposition Felice Varini', 4,'Peinture');
+select create_exposition('Exposition Velazquez', 2,'Peinture');
+select create_exposition('Exposition Jeff Koons', 3, 'Musique');
+select create_exposition('Exposition Cuisine du monde ', 1, 'Cuisine');
+select create_exposition('Exposition De Carmen à mélisande', 5,'Architecture');
+select create_exposition('Exposition les cahiers dessinés', 1, 'Peinture');
 
 
 
