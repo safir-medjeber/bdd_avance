@@ -1,7 +1,7 @@
 -------------------------------------------------------
 -- Liste les messages d'un membre a partir de son login
 -------------------------------------------------------
-CREATE OR REPLACE FUNCTION boite_message(login_membre VARCHAR)
+CREATE OR REPLACE FUNCTION boite_reception(login_membre VARCHAR)
 RETURNS TABLE (date_message TIMESTAMP, objet_message VARCHAR, contenu_message VARCHAR)
 AS $$
 DECLARE
@@ -16,6 +16,18 @@ BEGIN
 	;
 END;
 $$ LANGUAGE plpgsql;
+
+-------------------------------------------------------
+-- VIDER BOITE RECEPTION
+-------------------------------------------------------
+CREATE OR REPLACE FUNCTION vider_boite_reception(login VARCHAR)
+RETURNS VOID AS $$ 
+DECLARE
+	idMembre integer;
+BEGIN
+	idMembre := membre_getID(login);
+	DELETE FROM Reception_Message WHERE id_membre = idMembre;
+END $$ LANGUAGE plpgsql;
 
 -------------------------------------------------------
 -- Creation du mail

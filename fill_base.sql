@@ -151,3 +151,4 @@ INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, pseudo
        ('Mcdonald','Dominic', 'H', 'mkedo', 'McMc', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
        ('Walter','Baxter', 'H', 'mkdir', 'WaWa', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
        ('Osborne','Paula', 'F', 'kjkghj', 'OsOs', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
+
