@@ -69,7 +69,6 @@ CREATE TABLE Date_Evenement (
 );
 
 CREATE TABLE Classe_Prix (
-	id_classe_prix 			SERIAL PRIMARY KEY,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
 	id_date_evenement		INTEGER REFERENCES Date_Evenement,
 	prix_classe_prix		INTEGER CHECK (prix_classe_prix >= 0)

@@ -11,7 +11,7 @@ BEGIN
 	RETURN QUERY
 	SELECT date_message, objet_message, contenu_message
 	FROM 
-	(SELECT id_membre FROM Membre WHERE login_membre = $1) as s
+	membre_getID($1) as s
 	NATURAL JOIN Reception_message 
 	NATURAL JOIN Message
 	;

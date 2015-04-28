@@ -30,7 +30,4 @@ DECLARE
 
 $$ LANGUAGE plpgsql;
 
--- Envoie d'un mail groupé lié à un evenement
-
-
--- 
+-- Envoie d'un mail groupé via une liste de id_membre

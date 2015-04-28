@@ -1,3 +1,17 @@
+---------
+-- MEMBRE
+---------
+
+-- Retourne l'id d'un membre a partir de son login
+DROP FUNCTION IF EXISTS membre_getID(VARCHAR);
+CREATE OR REPLACE FUNCTION membre_getID(login VARCHAR)
+RETURNS INTEGER AS $$
+BEGIN
+	SELECT id_membre FROM Membre WHERE login_membre = $1;
+END;
+$$ LANGUAGE plpgsql;
+
+
 -- Retourne true si le login existe
 DROP FUNCTION IF EXISTS est_membre(Membre.pseudo_membre%type);
 CREATE OR REPLACE FUNCTION est_membre(pseudo_membre Membre.pseudo_membre%type)
