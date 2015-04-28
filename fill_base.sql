@@ -104,15 +104,8 @@ select create_exposition('Exposition les cahiers dessinés', 'Peinture');
 
 
 
-
-
-
 --Date Evenement
-
-
-
 INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VALUES
-
        (12, '2015-01-12 20:30:00', 20),
        (13, '2015-01-12 20:30:00', 22),
        (14, '2015-01-12 20:30:00', 32),
@@ -129,7 +122,7 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
        (25, '2015-01-12 20:30:00', 50),
        (26, '2015-01-12 20:30:00', 45),
        (27, '2015-01-12 20:30:00', 45),
-       (28, '2015-01-12 20:30:00', 40),
+       (28, '2015-01-12 20:30:00', 140),
        (29, '2015-01-12 20:30:00', 25),
        (30, '2015-01-12 20:30:00', 40),
        (31, '2015-01-12 20:30:00', 30),
@@ -143,7 +136,9 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
        (5, '2015-01-12 10:30:00', 6),
        (6, '2015-01-12 10:30:00', 30),
        (7, '2015-02-14 10:30:00', 70),
-       (8, '2015-03-15 10:30:00', 80),
+       (8, '2015-06-26 10:30:00', 41),
+       (8, '2015-06-27 10:30:00', 51),
+       (8, '2015-06-28 10:30:00', 61),
        (9, '2015-04-17 10:30:00', 10),
        (10, '2016-06-22 10:30:00', 9),
        (11, '2016-01-02 10:30:00', 20),
@@ -160,6 +155,9 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
        (41, '2015-10-09 10:30:00', 30),
        (42, '2015-01-03 10:30:00', 20),
        (43, '2015-02-01 10:30:00', 21);
+
+
+
 
 
 
@@ -183,32 +181,54 @@ INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_e
        (43, '12:30:00', 'Buffet à Volonté', '02:00:00'),
        (43, '12:30:00', 'Atelier Lecture', '00:40:00');
 
+
+
+
+INSERT INTO Concert(id_date_evenement, heure_animation, artiste_concert, duree_evenement) VALUES		
+       (22, '10:30:00', 'Initiation à la Couture', '00:40:00'),		
+       (24, '10:30:00', 'Maroon Five', '00:40:00'),
+       (28, '18:30:00', 'Mika', '00:40:00'),
+       (29, '18:30:00', 'The Avener', '00:40:00'),
+       (29, '19:30:00', 'Madeon', '00:40:00'),		
+       (29, '21:30:00', 'Clean Bandit', '00:40:00'),
+       (30, '18:30:00', 'Xavier Rudd', '00:40:00'),
+       (30, '20:30:00', 'Tairo', '00:40:00'),
+       (31, '18:30:00', 'Mademoiselle K', '00:55:00'),
+       (31, '19:30:00', 'Moriarty', '00:55:00'),
+       (31, '20:30:00', 'Lilly Wood And The Prick', '00:55:00');
+
+     
+       
+
+
+
+
 -- Membre
 INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
-       ('Dupont', 'Xavier', 'H', '134', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
-       ('Dupuis', 'Marine', 'F', '1343', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
-       ('Charles','Sofiane', 'H', 'HKjklj', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
-       ('Goliate', 'David' , 'H', 'kgjg', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
-       ('Townsend','Wallace', 'H', 'gjhgjhgj', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
-       ('Saunders','Sabrina', 'F', 'ojolj', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
-       ('Lancaster','Fatima', 'F', 'hjhg', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
-       ('Kline','Jeanne', 'F', 'JLJJ', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
-       ('Valentine','Kevin', 'H', 'iyiuyiu', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
-       ('Morrow','Alan', 'H', 'ljlkjlkjm', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
-       ('Garrison','Mathilda', 'F', 'klhllhl', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
-       ('Underwood','John', 'H', 'ljlkjlkjlm', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
-       ('Stephens','Nadia', 'F', 'ghfh', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
-       ('Shaffer', 'Jack', 'H', 'fhgfhj', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
-       ('Stanley','Brandon', 'H', 'popoo', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
-       ('Valenzuela','Jimmy', 'F' , 'pololo', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
-       ('Mathis','Jason', 'H', 'ljkgj', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
-       ('Powell','Samia', 'F', 'lujkh', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
-       ('Norton','Afida', 'F', 'gjg', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
-       ('Hurley','Farida', 'F', 'ljlj', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
-       ('Hunt','Daniel', 'H', 'ojljl', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
-       ('Charles','Camelia', 'F', 'mmme', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
-       ('Gould','Rachida', 'F', 'popoikh', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
-       ('Mcdonald','Dominic', 'H', 'mkedo', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
-       ('Walter','Baxter', 'H', 'mkdir', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
-       ('Osborne','Paula', 'F', 'kjkghj', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
+       ('Dupont', 'Xavier', 'H', 'Dupont_Xavier', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
+       ('Dupuis', 'Marine', 'F', 'Dupuis_Marine', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
+       ('Charles','Sofiane', 'H', 'Charle_Sofiane', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
+       ('Goliate', 'David' , 'H', 'Goliate_David', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
+       ('Townsend','Wallace', 'H', 'Townsen_Wallace', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
+       ('Saunders','Sabrina', 'F', 'Saunder_Sabrina', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
+       ('Lancaster','Fatima', 'F', 'Lancaste_Fatima', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
+       ('Kline','Jeanne', 'F', 'Klin_Jeanne', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
+       ('Valentine','Kevin', 'H', 'Valentin_Kevin', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
+       ('Morrow','Alan', 'H', 'Morro_Alan', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
+       ('Garrison','Mathilda', 'F', 'Garriso_Mathilda', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
+       ('Underwood','John', 'H', 'Underwoo_John', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
+       ('Stephens','Nadia', 'F', 'Stephen_Nadia', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
+       ('Shaffer', 'Jack', 'H', 'Shaffer_Jack', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
+       ('Stanley','Brandon', 'H', 'Stanle_Brandon', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
+       ('Valenzuela','Jimmy', 'F' , 'Valenzuel_Jimmy', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
+       ('Mathis','Jason', 'H', 'Mathi_Jason', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
+       ('Powell','Samia', 'F', 'Powel_Samia', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
+       ('Norton','Afida', 'F', 'Norto_Afida', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
+       ('Hurley','Farida', 'F', 'Hurle_Farida', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
+       ('Hunt','Daniel', 'H', 'Hun_Daniel', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
+       ('Charles','Camelia', 'F', 'Charle_Camelia', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
+       ('Gould','Rachida', 'F', 'Goul_Rachida', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
+       ('Mcdonald','Dominic', 'H', 'Mcdonal_Dominic', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
+       ('Walter','Baxter', 'H', 'Walte_Baxter', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
+       ('Osborne','Paula', 'F', 'Osborn_Paula', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
 
