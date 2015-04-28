@@ -7,50 +7,51 @@ CREATE TABLE Ville (
 );
 
 CREATE TABLE Lieu (
-	   id_lieu				SERIAL PRIMARY KEY,
-	   nom_lieu 			VARCHAR NOT NULL UNIQUE,
-	   adresse_lieu  		VARCHAR NOT NULL,
-	   code_postal_ville	INTEGER REFERENCES Ville,
-	   capacite_lieu		INTEGER CHECK (capacite_lieu > 0)
+	id_lieu				SERIAL PRIMARY KEY,
+	nom_lieu 			VARCHAR NOT NULL UNIQUE,
+	adresse_lieu  		VARCHAR NOT NULL,
+	code_postal_ville	INTEGER REFERENCES Ville,
+	capacite_lieu		INTEGER CHECK (capacite_lieu > 0)
 );
 
 CREATE TABLE Membre (
-	   id_membre 			SERIAL PRIMARY KEY,
-	   nom_membre 			VARCHAR NOT NULL,
-	   prenom_membre 		VARCHAR NOT NULL,
-	   sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'H'),
-	   login_membre 		VARCHAR NOT NULL,
-	   pseudo_membre 		VARCHAR NOT NULL UNIQUE,
-	   mail_membre 			VARCHAR NOT NULL UNIQUE,
-	   adresse_membre  		VARCHAR NOT NULL,
-	   code_postal_ville	INTEGER REFERENCES Ville
+	id_membre 			SERIAL PRIMARY KEY,
+	nom_membre 			VARCHAR NOT NULL,
+	prenom_membre 		VARCHAR NOT NULL,
+	sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'H'),
+	login_membre 		VARCHAR NOT NULL,
+	pseudo_membre 		VARCHAR NOT NULL UNIQUE,
+	mail_membre 		VARCHAR NOT NULL UNIQUE,
+	adresse_membre  	VARCHAR NOT NULL,
+	code_postal_ville	INTEGER REFERENCES Ville
 );
 
 CREATE TABLE Administrateur (
-) INHERITS (Membre);
+	id_membre 			INTEGER PRIMARY KEY REFERENCES Membre
+);
 
 CREATE TABLE Message (
-	id_contenu_message		SERIAL PRIMARY KEY,
-	objet_message			VARCHAR NOT NULL,
-	date_message			TIMESTAMP, -- Si NULL on utilise TODAY
-	contenu_message 		VARCHAR NOT NULL
+	id_contenu_message	SERIAL PRIMARY KEY,
+	objet_message		VARCHAR NOT NULL,
+	date_message		TIMESTAMP, -- Si NULL on utilise TODAY
+	contenu_message 	VARCHAR NOT NULL
 );
 
 CREATE TABLE Reception_Message (
-	id_membre				INTEGER REFERENCES Membre,
-	id_message 				INTEGER REFERENCES Message
+	id_membre			INTEGER REFERENCES Membre,
+	id_message 			INTEGER REFERENCES Message
 );
 
 CREATE TABLE Evenement_Culturel (
-	id_evenement			SERIAL PRIMARY KEY,
-	nom_evenement			VARCHAR NOT NULL,
-	id_lieu					INTEGER REFERENCES Lieu,
-	duree_evenement			TIME
+	id_evenement		SERIAL PRIMARY KEY,
+	nom_evenement		VARCHAR NOT NULL,
+	id_lieu				INTEGER REFERENCES Lieu,
+	duree_evenement		TIME
 );
 
 CREATE TABLE Piece_Theatre (
-	id_evenement 		INTEGER PRIMARY KEY REFERENCES Evenement_Culturel,
-	genre_piece			VARCHAR NOT NULL,
+	id_evenement 			INTEGER PRIMARY KEY REFERENCES Evenement_Culturel,
+	genre_piece				VARCHAR NOT NULL,
 	metteur_scene_piece		VARCHAR NOT NULL
 );
 
@@ -89,7 +90,7 @@ CREATE TABLE Animation(
 	id_animation			SERIAL PRIMARY KEY,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel,
 	nom_animation			VARCHAR NOT NULL,
-	date_debut_animation		TIMESTAMP NOT NULL,
+	date_debut_animation	TIMESTAMP NOT NULL,
 	duree_evenement			TIME
 );
 
@@ -103,13 +104,13 @@ CREATE TABLE Concert(
 
 CREATE TABLE Reservation (
 	id_reservation 			SERIAL PRIMARY KEY,
-	id_membre			INTEGER REFERENCES Membre,
+	id_membre				INTEGER REFERENCES Membre,
 	id_date_evenement		INTEGER REFERENCES Date_Evenement
 );
 
 CREATE TABLE Organise (
 	id_organise 			SERIAL PRIMARY KEY,
-	id_membre			INTEGER REFERENCES Membre,
+	id_membre				INTEGER REFERENCES Membre,
 	id_evenement 			INTEGER REFERENCES Evenement_Culturel
 );
 CREATE TABLE AUJOURDHUI(
