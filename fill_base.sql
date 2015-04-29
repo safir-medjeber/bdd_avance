@@ -160,7 +160,7 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
 
 
 --Animation
-INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_evenement) VALUES		
+INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_animation) VALUES		
        (33, '10:30:00', 'Initiation aux art martiaux', '00:40:00'),
        (33, '10:30:00', 'Demonstration nouveaux jeux', '00:40:00'),		
        (34, '10:30:00', 'Conférence mangaka', '01:00:00'),
@@ -182,7 +182,7 @@ INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_e
 
 
 
-INSERT INTO Concert(id_date_evenement, heure_animation, artiste_concert, duree_evenement) VALUES		
+INSERT INTO Concert(id_date_evenement, heure_concert, artiste_concert, duree_concert) VALUES		
        (22, '10:30:00', 'Initiation à la Couture', '00:40:00'),		
        (24, '10:30:00', 'Maroon Five', '00:40:00'),
        (28, '18:30:00', 'Mika', '00:40:00'),

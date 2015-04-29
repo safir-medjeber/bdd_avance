@@ -85,15 +85,15 @@ CREATE TABLE Animation(
 	id_date_evenement	INTEGER REFERENCES Date_Evenement,
 	heure_animation		TIME,
 	nom_animation		VARCHAR NOT NULL,
-	duree_evenement		TIME
+	duree_animation		TIME
 );
 
 CREATE TABLE Concert(
 	id_concert		SERIAL PRIMARY KEY,
 	id_date_evenement	INTEGER REFERENCES Date_Evenement,
-	heure_animation		TIME,
+	heure_concert		TIME,
 	artiste_concert		VARCHAR NOT NULL,
-	duree_evenement		TIME
+	duree_concert		TIME
 );
 
 CREATE TABLE Reservation (
