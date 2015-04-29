@@ -1,6 +1,8 @@
 -- import des fonctions de creation d'evenement
 \i create_event.sql
 
+
+
 -- Ville
 INSERT INTO Ville (code_postal_ville, nom_ville) VALUES
 	(75000, 'Paris'),
@@ -40,6 +42,7 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu, code_postal_ville, capacite_lieu) VALU
        ('Prairie des Filtres', '34 rue Toulouse centre', 31000, 25000);
 
 
+
 -- Festival
 select create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no');
 select create_festival('Festival des outremers', 14, '10:00:00','culturel', 'no');
@@ -54,7 +57,8 @@ select create_festival('Festival Rock in Opposition', 18, '10:00:00', 'musique',
 select create_festival('Festival International de bande dessinee', 16, '10:00:00', 'musique', 'yes');
 
 
- 
+
+
 -- Piece de Theatre
 select create_piece_theatre('Le bal des Vampire', 7, '00:40:00', 'Comedie Musical', 'Fabien Pascal');
 select create_piece_theatre('Aristo du Coeur', 12, '00:40:00', 'Bulresque', 'Facco Charlotte');
@@ -92,6 +96,8 @@ select create_exposition('Exposition Jeff Koons', 3, '10:00:00', 'Musique');
 select create_exposition('Exposition Cuisine du monde ', 1, '10:00:00', 'Cuisine');
 select create_exposition('Exposition De Carmen à mélisande', 5, '10:00:00', 'Architecture');
 select create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Peinture');
+
+
 
 
 
@@ -146,7 +152,6 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
        (41, '2015-10-09 10:30:00', 30),
        (42, '2015-01-03 10:30:00', 20),
        (43, '2015-02-01 10:30:00', 21);
-
 
 
 
@@ -292,3 +297,8 @@ INSERT INTO Reservation(id_membre, id_date_evenement) VALUES
        (18,7),(22,27),(20,31),(15,26),(7,39),(17,41),(26,22),(6,27),(3,11),(9,4),
        (7,20),(24,31),(9,16),(13,4),(4,37),(19,3),(6,10),(18,40),(1,21),(11,34),
        (20,14),(24,6),(17,42),(7,9),(2,4),(5,35),(16,8),(14,13),(11,32),(16,37);
+
+
+	
+
+
