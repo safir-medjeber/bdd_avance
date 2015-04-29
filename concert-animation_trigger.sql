@@ -34,7 +34,7 @@ BEGIN
 	FROM Exposition NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
-		RAISE 'Trigger sur Animation : L evenement indiqué n est pas une exposition', idEvent;
+		RAISE 'Trigger sur Animation : L evenement % indiqué n est pas une exposition', idEvent;
 		RETURN NULL;
 	END IF;
 
