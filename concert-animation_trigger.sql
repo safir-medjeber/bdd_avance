@@ -7,7 +7,7 @@ RETURNS TRIGGER AS $$
 DECLARE
 	idEvent INTEGER;
 BEGIN
-	PERFORM id_evenement INTO idEvent
+	SELECT id_evenement INTO idEvent
 	FROM Festival NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
@@ -30,7 +30,7 @@ RETURNS TRIGGER AS $$
 DECLARE
 	idEvent INTEGER;
 BEGIN
-	PERFORM id_evenement INTO idEvent
+	SELECT id_evenement INTO idEvent
 	FROM Exposition NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
