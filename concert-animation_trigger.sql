@@ -8,10 +8,11 @@ DECLARE
 	idEvent INTEGER;
 BEGIN
 	SELECT id_evenement INTO idEvent
-	FROM Festival NATURAL JOIN Date_evenement
+	FROM Date_evenement 
 	WHERE id_date_evenement = NEW.id_date_evenement;
-	IF NOT FOUND THEN
-		RAISE 'Trigger sur Concert : L evenement % indiqué n est pas un festival', NEW.id_evenement;
+
+	IF idEvent NOT IN (SELECT id_evenement FROM Festival) THEN
+		RAISE 'Trigger sur Concert : L evenement % de la date % indiqué n est pas un festival', idEvent, NEW.id_date_evenement;
 		RETURN NULL;
 	END IF;
 
@@ -31,10 +32,11 @@ DECLARE
 	idEvent INTEGER;
 BEGIN
 	SELECT id_evenement INTO idEvent
-	FROM Exposition NATURAL JOIN Date_evenement
+	FROM Date_evenement 
 	WHERE id_date_evenement = NEW.id_date_evenement;
-	IF NOT FOUND THEN
-		RAISE 'Trigger sur Animation : L evenement % indiqué n est pas une exposition', NEW.id_evenement;
+
+	IF idEvent NOT IN (SELECT id_evenement FROM Exposition) THEN
+		RAISE 'Trigger sur Animation : L evenement %  de la date % indiqué n est pas une exposition', idEvent, NEW.id_date_evenement;
 		RETURN NULL;
 	END IF;
 
