@@ -1,6 +1,10 @@
 -- import des fonctions de creation d'evenement
 \i create_event.sql
 
+
+CREATE OR REPLACE FUNCTION fill_base()
+RETURNS VOID AS $$
+BEGIN
 -- Ville
 INSERT INTO Ville (code_postal_ville, nom_ville) VALUES
 	(75000, 'Paris'),
@@ -292,3 +296,7 @@ INSERT INTO Reservation(id_membre, id_date_evenement) VALUES
        (18,7),(22,27),(20,31),(15,26),(7,39),(17,41),(26,22),(6,27),(3,11),(9,4),
        (7,20),(24,31),(9,16),(13,4),(4,37),(19,3),(6,10),(18,40),(1,21),(11,34),
        (20,14),(24,6),(17,42),(7,9),(2,4),(5,35),(16,8),(14,13),(11,32),(16,37);
+
+END $$ LANGUAGE plpgsql;
+
+select * from fill_base();
