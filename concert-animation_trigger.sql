@@ -4,12 +4,14 @@
 -------------------------------------------------------------
 CREATE OR REPLACE FUNCTION concert_trigger_insert_update()
 RETURNS TRIGGER AS $$
+DECLARE
+	idEvent INTEGER;
 BEGIN
-	PERFORM id_evenement 
+	PERFORM id_evenement INTO idEvent
 	FROM Festival NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
-		RAISE 'Trigger sur Concert : L evenement indiqué n est pas un festival';
+		RAISE 'Trigger sur Concert : L evenement % indiqué n est pas un festival', idEvent;
 		RETURN NULL;
 	END IF;
 
@@ -25,12 +27,14 @@ BEFORE INSERT OR UPDATE on Concert FOR EACH ROW
 -------------------------------------------------------------
 CREATE OR REPLACE FUNCTION animation_trigger_insert_update()
 RETURNS TRIGGER AS $$
+DECLARE
+	idEvent INTEGER;
 BEGIN
-	PERFORM id_evenement 
+	PERFORM id_evenement INTO idEvent
 	FROM Exposition NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
-		RAISE 'Trigger sur Animation : L evenement indiqué n est pas une exposition';
+		RAISE 'Trigger sur Animation : L evenement indiqué n est pas une exposition', idEvent;
 		RETURN NULL;
 	END IF;
 
