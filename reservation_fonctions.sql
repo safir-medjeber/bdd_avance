@@ -15,11 +15,12 @@ $$ LANGUAGE plpgsql;
 
 -------------------------------------------------------
 -- Annuler une reservation, prend en compte l'appellant
--- (Les conditions sont respectées par les triggers automatiquement appellés)
+-- (Les conditions sont respectées par les triggers automatiquement appellés,
+-- notament l'envoie de l'e mail d avoir.
 -------------------------------------------------------
 CREATE OR REPLACE FUNCTION reservation_annuler
 (id_appelant INTEGER, loginAAnnuler VARCHAR, id_dateEvent INTEGER)
-RETURNS VOID AS $$
+RETURNS BOOLEAN AS $$
 DECLARE
 	idMembre INTEGER := membre_getID(loginAAnnuler);
 	estLeMembre BOOLEAN;
@@ -35,10 +36,12 @@ BEGIN
 	-- membre concerné
 	IF NOT (est_administrateur(id_appelant) OR estLeMembre) THEN
 		Raise 'L appelant de l annulation de reservation n est ni un administrateur ni le membre concerné';
-		RETURN NULL;
+		RETURN FALSE;
 	END IF;
 
 	DELETE FROM Reservation 
 	WHERE id_membre = idMembre AND id_date_evenement = id_dateEvent;
+
+	RETURN TRUE;
 END $$ LANGUAGE plpgsql;
 
