@@ -23,3 +23,13 @@ DECLARE
 BEGIN
 	PERFORM avoir_creer(idMembre, $2);
 END $$ LANGUAGE plpgsql;
+
+-------------------------------------------------------------
+-- Liste les avoirs d'un membre
+-------------------------------------------------------------
+-- TODO : A tester
+CREATE OR REPLACE FUNCTION avoir_lister(idMembre INTEGER)
+RETURNS TABLE (id_avoir INTEGER, montant_avoir INTEGER) AS $$
+BEGIN
+	RETURN QUERY SELECT Avoir.id_avoir, Avoir.montant_avoir FROM Avoir WHERE id_membre = idMembre;
+END $$ LANGUAGE plpgsql;
