@@ -11,7 +11,7 @@ BEGIN
 	FROM Festival NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
-		RAISE 'Trigger sur Concert : L evenement % indiqué n est pas un festival', idEvent;
+		RAISE 'Trigger sur Concert : L evenement % indiqué n est pas un festival', NEW.id_evenement;
 		RETURN NULL;
 	END IF;
 
@@ -34,7 +34,7 @@ BEGIN
 	FROM Exposition NATURAL JOIN Date_evenement
 	WHERE id_date_evenement = NEW.id_date_evenement;
 	IF NOT FOUND THEN
-		RAISE 'Trigger sur Animation : L evenement % indiqué n est pas une exposition', idEvent;
+		RAISE 'Trigger sur Animation : L evenement % indiqué n est pas une exposition', NEW.id_evenement;
 		RETURN NULL;
 	END IF;
 
