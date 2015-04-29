@@ -16,4 +16,5 @@ DROP TABLE IF EXISTS
 	Organise,
 	Reservation,
 	Concert
+	cascade
 ;
