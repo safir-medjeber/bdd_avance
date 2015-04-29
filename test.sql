@@ -32,24 +32,37 @@ DECLARE
 BEGIN
 	CASE
 		WHEN event_theatre THEN
-		     requete := requete ||' NATURAL JOIN piece_theatre';
+		     requete := requete ||' NATURAL JOIN piece_theatre ';
 		WHEN event_theatre THEN
 		     requete := requete ||' NATURAL JOIN exposition ';
 		WHEN event_festival THEN	     
 		     requete := requete ||' NATURAL JOIN festival ';
 	END CASE;
-	requete :=  requete || 'NATURAL JOIN date_evenement WHERE date_evenement BETWEEN '''|| date_debut ||''' AND '''|| date_fin ||''' ';
-	requete :=  requete || 'AND prix_date_evenement BETWEEN '|| prix_min || ' AND ' || prix_max || ' ';
-	requete :=  requete || 'AND type_festival like ''%'|| type_evenement ||'%''';
+
+
+	IF date_debut IS NOT NULL and date_fin IS NOT NULL THEN
+	   requete :=  requete || 'NATURAL JOIN date_evenement WHERE date_evenement BETWEEN '''|| date_debut ||''' AND '''|| date_fin ||''' ';
+	END IF;
+
+
+	IF  type_evenement IS NOT NULL  and event_theatre THEN
+	    requete :=  requete || 'AND genre_piece like ''%'|| type_evenement ||'%''';
+	END IF;
+
+
+	IF  type_evenement IS NOT NULL  and event_festival THEN
+	    requete :=  requete || 'AND type_festival like ''%'|| type_evenement ||'%''';
+	END IF;
+	
 
 	RETURN QUERY EXECUTE requete ;
 END
 
 $$ language plpgsql;
 
-SELECT searchEvent(false, false, true, '2015-01-12', '2015-04-17', 60, 80, 'cinema');
+---SELECT searchEvent(false, false, true, null, null, 0, 80, 'cin');
 
 
-
+SELECT searchEvent(true, false, false, '2015-01-02', '2016-12-02', 0, 80, 'Comique');
 
 
