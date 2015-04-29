@@ -128,8 +128,9 @@ $$ LANGUAGE plpgsql;
 \i administrateur_fonctions.sql
 \i date_evenement_trigger.sql
 \i concert-animation_trigger.sql
+\i reservation_trigger.sql
+\i reservation_fonctions.sql
 \i avoir_fonctions.sql
-\i requetes_ajouts.sql
 \i message.sql
 \i message_trigger.sql
 \i fill_base.sql
