@@ -1,6 +1,7 @@
--- Zone des Drop --
-\i drop_base.sql
+-- Drop des tables
+\i base/drop_base.sql
 
+-- Creation des tables
 CREATE TABLE Ville (
 	code_postal_ville	INTEGER PRIMARY KEY NOT NULL UNIQUE  CHECK (code_postal_ville between 00000 AND 99999),
 	nom_ville 			VARCHAR NOT NULL UNIQUE
@@ -140,14 +141,25 @@ END;
 $$ LANGUAGE plpgsql;
 -------------------------------------------------------
 
-\i membre_fonctions.sql
-\i administrateur_fonctions.sql
-\i date_evenement_trigger.sql
---\i concert-animation_trigger.sql
--- \i reservation_trigger.sql
-\i reservation_fonctions.sql
-\i avoir_fonctions.sql
-\i message.sql
-\i message_trigger.sql
-\i fill_base.sql
+-- Fonctions
+\i fonctions/membre_fonctions.sql
+\i fonctions/administrateur_fonctions.sql
+\i fonctions/reservation_fonctions.sql
+\i fonctions/date_evenement_fonctions.sql
+\i fonctions/evenement_fonctions.sql
+\i fonctions/avoir_fonctions.sql
+\i fonctions/message_fonctions.sql
+\i fonctions/recherche.sql
+\i fonctions/reservation_fonctions.sql
+
+-- Trigger
+\i triggers/concert-animation_trigger.sql
+\i triggers/date_evenement_trigger.sql
+\i triggers/evenement_trigger.sql
+\i triggers/membre_trigger.sql
+\i triggers/message_trigger.sql
+\i triggers/reservation_trigger.sql
+
+-- Remplissage de la base
+\i base/fill_base.sql
 

@@ -1,7 +1,3 @@
--- import des fonctions de creation d'evenement
-\i create_event.sql
-
-
 CREATE OR REPLACE FUNCTION fill_base()
 RETURNS VOID AS $$
 BEGIN
