@@ -13,7 +13,9 @@ BEGIN
 	return nb;
 END $$ LANGUAGE plpgsql;
 
+---------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type festival
+---------------------------------------------------------
 CREATE OR REPLACE  FUNCTION create_festival(nom_evenement TEXT, id_lieu INTEGER, duree_evenement TIME, type_festival TEXT,  en_plein_air BOOLEAN)
 RETURNS void as $$
 DECLARE
@@ -26,10 +28,9 @@ RETURN;
 END;
 $$ LANGUAGE plpgsql;
 
-
-
-
+---------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type exposition
+---------------------------------------------------------
 CREATE OR REPLACE  FUNCTION create_exposition(nom_evenement text, id_lieu integer, duree_evenement TIME, type_exposition text) RETURNS void as $$
 DECLARE
 	identifiant INTEGER;
@@ -41,8 +42,9 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-
+---------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type piece de theatre
+---------------------------------------------------------
 CREATE OR REPLACE  FUNCTION create_piece_theatre(nom_evenement text, id_lieu integer, duree_evenement TIME, genre_piece text, metteur_scene_piece text)
 RETURNS void as $$
 DECLARE
