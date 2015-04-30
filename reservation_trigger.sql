@@ -7,6 +7,7 @@ RETURNS TRIGGER AS $$
 DECLARE
 	nbReservation INTEGER;
 	capacite INTEGER;
+	dateEvent TIMESTAMP;
 BEGIN
 	-- On calcule le nombre de reservation sur cet date d'evenement
 	SELECT count(*) INTO nbReservation
@@ -14,7 +15,7 @@ BEGIN
 	WHERE id_date_evenement = NEW.id_date_evenement;
 
 	-- On recupere la capacité de l'evenement
-	SELECT capacite_lieu INTO capacite
+	SELECT capacite_lieu, date_evenement INTO capacite, dateEvent
 	FROM date_evenement NATURAL JOIN Evenement_Culturel NATURAL JOIN Lieu
 	WHERE id_date_evenement = NEW.id_date_evenement;
 
@@ -23,6 +24,14 @@ BEGIN
 		Raise 'L evenement est complet !';
 		RETURN NULL;
 	END IF;
+
+	-- On refuse si l'evenement est déjà passé
+	IF dateEvent < TODAY() THEN
+		Raise 'L evenement est déjà passé';
+		RETURN NULL;
+	END IF;
+
+	RETURN NEW;
 END $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER reservartion_trigger_before_insert_update

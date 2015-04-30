@@ -22,3 +22,19 @@ BEGIN
 	RETURN ($1 IN (SELECT pseudo_membre FROM Membre));
 END;
 $$ LANGUAGE plpgsql;
+
+-------------------------------------------------------
+-- Supprime un membre
+-- Le ON UPDATE CASCADE ON DELETE CASCADE de la modelisation assure
+-- le declenchement de la plupart des supression utiles
+-- Il nous reste :
+-- Supprimer un evenement si il n'a plus aucun organisateur
+-------------------------------------------------------
+CREATE OR REPLACE FUNCTION membre_supprimer(login VARCHAR, idAppelant INTEGER)
+RETURNS VOID AS $$
+DECLARE
+	idMembre INTEGER := membre_getID(login);
+BEGIN
+	-- TODO
+END
+$$ LANGUAGE plpgsql;
