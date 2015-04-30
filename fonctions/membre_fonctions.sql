@@ -28,13 +28,20 @@ $$ LANGUAGE plpgsql;
 -- Le ON UPDATE CASCADE ON DELETE CASCADE de la modelisation assure
 -- le declenchement de la plupart des supression utiles
 -- Il nous reste :
--- Supprimer un evenement si il n'a plus aucun organisateur
+-- - Verifier les droits via idAppelant
+-- - Supprimer un evenement si il n'a plus aucun organisateur (via le trigger)
 -------------------------------------------------------
+DROP FUNCTION IF EXISTS membre_supprimer(VARCHAR, INTEGER);
 CREATE OR REPLACE FUNCTION membre_supprimer(login VARCHAR, idAppelant INTEGER)
 RETURNS VOID AS $$
 DECLARE
 	idMembre INTEGER := membre_getID(login);
 BEGIN
-	-- TODO
+	IF NOT (idMembre = idAppelant OR est_administrateur(idAppelant)) THEN
+		RAISE 'Le membre % appelant cette fonction n est ni un administrateur ni le membre à supprimer', login;
+		RETURN;
+	END IF;
+
+	DELETE FROM Membre WHERE id_membre = idMembre;
 END
 $$ LANGUAGE plpgsql;
