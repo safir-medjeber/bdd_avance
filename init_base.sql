@@ -155,7 +155,6 @@ $$ LANGUAGE plpgsql;
 -- Trigger
 --\i triggers/concert-animation_trigger.sql
 \i triggers/date_evenement_trigger.sql
-\i triggers/evenement_trigger.sql
 \i triggers/membre_trigger.sql
 \i triggers/message_trigger.sql
 --\i triggers/reservation_trigger.sql
