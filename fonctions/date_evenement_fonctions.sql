@@ -7,7 +7,7 @@ DECLARE
 	nb INTEGER;
 BEGIN
 	SELECT capacite_lieu INTO nb
-	FROM Date_Evenement NATURAL JOIN Evenement NATURAL JOIN Lieu
+	FROM Date_Evenement NATURAL JOIN Evenement_culturel NATURAL JOIN Lieu
 	WHERE id_date_evenement = idDateEvent;
 
 	return nb;
