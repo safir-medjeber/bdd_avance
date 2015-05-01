@@ -13,6 +13,6 @@ DROP FUNCTION IF EXISTS est_administrateur(INTEGER);
 CREATE OR REPLACE FUNCTION est_administrateur(INTEGER)
 RETURNS BOOLEAN AS $$
 BEGIN
-	RETURN ($1 IN (SELECT id_membre FROM Membre NATURAL JOIN Administrateur));
+	RETURN ($1 IN (SELECT id_membre FROM Administrateur));
 END;
 $$ LANGUAGE plpgsql;
