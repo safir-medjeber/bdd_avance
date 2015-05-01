@@ -41,19 +41,48 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu, code_postal_ville, capacite_lieu) VALU
 
 
 
+INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
+       ('Dupont', 'Xavier', 'H', 'Dupont_Xavier', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
+       ('Dupuis', 'Marine', 'F', 'Dupuis_Marine', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
+       ('Charles','Sofiane', 'H', 'Charle_Sofiane', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
+       ('Goliate', 'David' , 'H', 'Goliate_David', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
+       ('Townsend','Wallace', 'H', 'Townsen_Wallace', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
+       ('Saunders','Sabrina', 'F', 'Saunder_Sabrina', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
+       ('Lancaster','Fatima', 'F', 'Lancaste_Fatima', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
+       ('Kline','Jeanne', 'F', 'Klin_Jeanne', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
+       ('Valentine','Kevin', 'H', 'Valentin_Kevin', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
+       ('Morrow','Alan', 'H', 'Morro_Alan', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
+       ('Garrison','Mathilda', 'F', 'Garriso_Mathilda', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
+       ('Underwood','John', 'H', 'Underwoo_John', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
+       ('Stephens','Nadia', 'F', 'Stephen_Nadia', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
+       ('Shaffer', 'Jack', 'H', 'Shaffer_Jack', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
+       ('Stanley','Brandon', 'H', 'Stanle_Brandon', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
+       ('Valenzuela','Jimmy', 'F' , 'Valenzuel_Jimmy', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
+       ('Mathis','Jason', 'H', 'Mathi_Jason', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
+       ('Powell','Samia', 'F', 'Powel_Samia', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
+       ('Norton','Afida', 'F', 'Norto_Afida', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
+       ('Hurley','Farida', 'F', 'Hurle_Farida', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
+       ('Hunt','Daniel', 'H', 'Hun_Daniel', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
+       ('Charles','Camelia', 'F', 'Charle_Camelia', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
+       ('Gould','Rachida', 'F', 'Goul_Rachida', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
+       ('Mcdonald','Dominic', 'H', 'Mcdonal_Dominic', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
+       ('Walter','Baxter', 'H', 'Walte_Baxter', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
+       ('Osborne','Paula', 'F', 'Osborn_Paula', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
+
+
 
 -- Festival
-perform create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no');
-perform create_festival('Festival des outremers', 14, '10:00:00','culturel', 'no');
-perform create_festival('Festival Du Nouveau Cinéma Italien', 13, '10:00:00','cinema' , 'no');
-perform create_festival('Festival Paris Tout Court', 16, '10:00:00', 'culturel','yes');
-perform create_festival('Festival des Chemins de Traverse', 13, '10:00:00', 'culturel', 'no');
-perform create_festival('Festival de la Rue', 18, '10:00:00', 'culturel', 'yes');
-perform create_festival('Festival de Cannes', 14, '10:00:00', 'cinema' ,'no');
-perform create_festival('Festival Solidays', 15, '10:00:00', 'musique', 'yes');
-perform create_festival('Festival Rock en Scène', 17, '10:00:00', 'musique', 'yes');
-perform create_festival('Festival Rock in Opposition', 18, '10:00:00', 'musique', 'yes');
-perform create_festival('Festival International de bande dessinee', 16, '10:00:00', 'musique', 'yes');
+perform create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no', 1);
+perform create_festival('Festival des outremers', 14, '10:00:00','culturel', 'no', 1);
+perform create_festival('Festival Du Nouveau Cinéma Italien', 13, '10:00:00','cinema' , 'no', 2);
+perform create_festival('Festival Paris Tout Court', 16, '10:00:00', 'culturel','yes',2);
+perform create_festival('Festival des Chemins de Traverse', 13, '10:00:00', 'culturel', 'no', 2);
+perform create_festival('Festival de la Rue', 18, '10:00:00', 'culturel', 'yes', 2);
+perform create_festival('Festival de Cannes', 14, '10:00:00', 'cinema' ,'no', 3);
+perform create_festival('Festival Solidays', 15, '10:00:00', 'musique', 'yes', 3);
+perform create_festival('Festival Rock en Scène', 17, '10:00:00', 'musique', 'yes', 3);
+perform create_festival('Festival Rock in Opposition', 18, '10:00:00', 'musique', 'yes', 3);
+perform create_festival('Festival International de bande dessinee', 16, '10:00:00', 'musique', 'yes', 3);
 
 
 
@@ -63,27 +92,27 @@ perform create_festival('Festival International de bande dessinee', 16, '10:00:0
 
 
 -- Piece de Theatre
-perform create_piece_theatre('Le bal des Vampire', 7, '00:40:00', 'Comedie Musical', 'Fabien Pascal');
-perform create_piece_theatre('Aristo du Coeur', 12, '00:40:00', 'Bulresque', 'Facco Charlotte');
-perform create_piece_theatre('Entre pere et fils', 11, '00:40:00', 'Comique', 'Sabourin François');
-perform create_piece_theatre('La femme de mouss est partie', 9, '00:40:00', 'Comique', 'Segui Elodie');
-perform create_piece_theatre('Tailleur pour Dame', 8, '00:40:00', 'Bulresque', 'Calvo Ernesto');
-perform create_piece_theatre('La Bonne Moitié', 10, '00:40:00', 'Comique', 'Pepi Guillaume');
-perform create_piece_theatre('La Bonne Planque', 11, '00:40:00', 'Comique', 'Cacheux Fred');
-perform create_piece_theatre('La Bonne Soupe', 9, '00:40:00', 'Tragedie', 'Lecono Pierre');
-perform create_piece_theatre('Britannicus (Racine)', 12, '00:40:00', 'Tragedie', 'Rians Johan');
-perform create_piece_theatre('La Brouette du vinaigrier', 8, '00:40:00', 'Bulresque', 'Pellerin Gille');
-perform create_piece_theatre('La Brune que voilà', 10, '00:40:00', 'Comedie Romantique', 'Lannister Anne');
-perform create_piece_theatre('Le Dédale', 11, '00:40:00', 'Tragedie', 'Stark Daniel');
-perform create_piece_theatre('Délire à deux', 12, '00:40:00', 'Vaudeville', 'Salvador Gabriel');
-perform create_piece_theatre('Démocrite amoureux', 9, '00:40:00', 'Vaudeville', 'Hanouno Camille');
-perform create_piece_theatre('Démocrite prétendu fou', 7, '00:40:00', 'Bulresque', 'Camus Emmanuel');
-perform create_piece_theatre('Le Dénouement imprévu', 8, '00:40:00', 'Tragedie', 'Bourdieu Paul');
-perform create_piece_theatre('Le Dépit amoureux', 10, '00:40:00', 'Comedie Romantique', 'Callier Lydie');
-perform create_piece_theatre('La Dernière Nuit pour Marie Stuart', 11, '00:40:00', 'Comedie Musical', 'Dove attia');
-perform create_piece_theatre('Des boulons dans mon yaourt', 8, '00:40:00', 'Comique', 'Gilbert Damien');
-perform create_piece_theatre('Des journées entières dans les arbres', 10, '00:40:00', 'Comedie', 'Lecomte  Lucille');
-perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Carlos');
+perform create_piece_theatre('Le bal des Vampire', 7, '00:40:00', 'Comedie Musical', 'Fabien Pascal', 5);
+perform create_piece_theatre('Aristo du Coeur', 12, '00:40:00', 'Bulresque', 'Facco Charlotte', 5);
+perform create_piece_theatre('Entre pere et fils', 11, '00:40:00', 'Comique', 'Sabourin François', 5);
+perform create_piece_theatre('La femme de mouss est partie', 9, '00:40:00', 'Comique', 'Segui Elodie', 5);
+perform create_piece_theatre('Tailleur pour Dame', 8, '00:40:00', 'Bulresque', 'Calvo Ernesto', 5);
+perform create_piece_theatre('La Bonne Moitié', 10, '00:40:00', 'Comique', 'Pepi Guillaume', 6);
+perform create_piece_theatre('La Bonne Planque', 11, '00:40:00', 'Comique', 'Cacheux Fred',6);
+perform create_piece_theatre('La Bonne Soupe', 9, '00:40:00', 'Tragedie', 'Lecono Pierre', 6);
+perform create_piece_theatre('Britannicus (Racine)', 12, '00:40:00', 'Tragedie', 'Rians Johan', 1);
+perform create_piece_theatre('La Brouette du vinaigrier', 8, '00:40:00', 'Bulresque', 'Pellerin Gille', 1);
+perform create_piece_theatre('La Brune que voilà', 10, '00:40:00', 'Comedie Romantique', 'Lannister Anne', 1);
+perform create_piece_theatre('Le Dédale', 11, '00:40:00', 'Tragedie', 'Stark Daniel', 1);
+perform create_piece_theatre('Délire à deux', 12, '00:40:00', 'Vaudeville', 'Salvador Gabriel', 1);
+perform create_piece_theatre('Démocrite amoureux', 9, '00:40:00', 'Vaudeville', 'Hanouno Camille', 1);
+perform create_piece_theatre('Démocrite prétendu fou', 7, '00:40:00', 'Bulresque', 'Camus Emmanuel', 1);
+perform create_piece_theatre('Le Dénouement imprévu', 8, '00:40:00', 'Tragedie', 'Bourdieu Paul', 1);
+perform create_piece_theatre('Le Dépit amoureux', 10, '00:40:00', 'Comedie Romantique', 'Callier Lydie', 4);
+perform create_piece_theatre('La Dernière Nuit pour Marie Stuart', 11, '00:40:00', 'Comedie Musical', 'Dove attia', 4);
+perform create_piece_theatre('Des boulons dans mon yaourt', 8, '00:40:00', 'Comique', 'Gilbert Damien', 4);
+perform create_piece_theatre('Des journées entières dans les arbres', 10, '00:40:00', 'Comedie', 'Lecomte  Lucille', 4);
+perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Carlos', 5);
 
 
 
@@ -92,17 +121,17 @@ perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Ca
 
 
 -- Info Exposition
-perform create_exposition('Paris Games Week', 6, '24:00:00', 'Jeux');
-perform create_exposition('Japan Expo', 6, '10:00:00', 'Culture Japonaise');
-perform create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 1, '10:00:00', 'Mode');
-perform create_exposition('Exposition oracles du design', 2, '10:00:00', 'Design');
-perform create_exposition('Le bord des mondes', 3, '10:00:00', 'Peinture');
-perform create_exposition('Exposition Felice Varini', 4, '10:00:00', 'Peinture');
-perform create_exposition('Exposition Velazquez', 2, '10:00:00', 'Peinture');
-perform create_exposition('Exposition Jeff Koons', 3, '10:00:00', 'Musique');
-perform create_exposition('Exposition Cuisine du monde ', 1, '10:00:00', 'Cuisine');
-perform create_exposition('Exposition De Carmen à mélisande', 5, '10:00:00', 'Architecture');
-perform create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Peinture');
+perform create_exposition('Paris Games Week', 6, '24:00:00', 'Jeux', 5);
+perform create_exposition('Japan Expo', 6, '10:00:00', 'Culture Japonaise', 5);
+perform create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 1, '10:00:00', 'Mode',5);
+perform create_exposition('Exposition oracles du design', 2, '10:00:00', 'Design', 6);
+perform create_exposition('Le bord des mondes', 3, '10:00:00', 'Peinture', 6);
+perform create_exposition('Exposition Felice Varini', 4, '10:00:00', 'Peinture', 6);
+perform create_exposition('Exposition Velazquez', 2, '10:00:00', 'Peinture', 6);
+perform create_exposition('Exposition Jeff Koons', 3, '10:00:00', 'Musique', 6);
+perform create_exposition('Exposition Cuisine du monde ', 1, '10:00:00', 'Cuisine', 6);
+perform create_exposition('Exposition De Carmen à mélisande', 5, '10:00:00', 'Architecture', 6);
+perform create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Peinture', 6);
 
 
 
@@ -198,33 +227,6 @@ INSERT INTO Concert(id_date_evenement, heure_concert, artiste_concert, duree_con
 
 
 -- Membre
-INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
-       ('Dupont', 'Xavier', 'H', 'Dupont_Xavier', 'dupont.xavier@gmail.com', '3 rue de la sabliere', 75000),
-       ('Dupuis', 'Marine', 'F', 'Dupuis_Marine', 'dupuis.marine@gmail.com', '3 rue raymond point carree', 31000),
-       ('Charles','Sofiane', 'H', 'Charle_Sofiane', 'Charles.Sofiane@gmail.com', '5 rue Charlemagne', 69000),
-       ('Goliate', 'David' , 'H', 'Goliate_David', 'Hurst.David@gmail.com', '10 place de la faisandrie', 13000),
-       ('Townsend','Wallace', 'H', 'Townsen_Wallace', 'Townsend.Wallace@gmail.com', '23 bis paul vaillant couturier', 33000),
-       ('Saunders','Sabrina', 'F', 'Saunder_Sabrina', 'Saunders.Sabrina@gmail.com', '65 avenue de France' , 59000),
-       ('Lancaster','Fatima', 'F', 'Lancaste_Fatima', 'Lancaster.Fatima@gmail.com', '456 boulevard hausseman', 33000),
-       ('Kline','Jeanne', 'F', 'Klin_Jeanne', 'Kline.Jeanne@gmail.com', '455 rue du louvres', 59000),
-       ('Valentine','Kevin', 'H', 'Valentin_Kevin', 'Valentine.Kevin@gmail.com', '432 rue James Watt', 06000),
-       ('Morrow','Alan', 'H', 'Morro_Alan', 'Morrow.Alan@gmail.com', '34 avenue General leclerc', 75000),
-       ('Garrison','Mathilda', 'F', 'Garriso_Mathilda', 'Garrison.Mathilda@gmail.com', '99 rue du merle', 13000),
-       ('Underwood','John', 'H', 'Underwoo_John', 'Underwood.John@gmail.com', '5 avenue raymond Hemell', 75000),
-       ('Stephens','Nadia', 'F', 'Stephen_Nadia', 'Stephens.Nadia@gmail.com', '56 rue duval', 31000),
-       ('Shaffer', 'Jack', 'H', 'Shaffer_Jack', 'Shaffer.Jack@gmail.com', '44 avenue du role', 31000),
-       ('Stanley','Brandon', 'H', 'Stanle_Brandon', 'Stanley.Brandon@gmail.com', '56 boulevard Duval', 75000),
-       ('Valenzuela','Jimmy', 'F' , 'Valenzuel_Jimmy', 'Valenzuela.Jimmy@gmail.com', '17 rue Victor Hugo', 75000),
-       ('Mathis','Jason', 'H', 'Mathi_Jason', 'Mathis.Jason@gmail.com', '1 avenue de la republique', 33000),
-       ('Powell','Samia', 'F', 'Powel_Samia', 'Powell.Samia@gmail.com', '12 avenue Paul Doumere', 67000),
-       ('Norton','Afida', 'F', 'Norto_Afida', 'Norton.Afida@gmail.com', '21 rue Saint Germain', 31000),
-       ('Hurley','Farida', 'F', 'Hurle_Farida', 'Hurley.Farida@gmail.com', '87 boulevard Jean Monnet', 13000),
-       ('Hunt','Daniel', 'H', 'Hun_Daniel', 'Hunt.Daniel@gmail.com', '442 avenue le Foll', 59000),
-       ('Charles','Camelia', 'F', 'Charle_Camelia', 'Charles.Camelia@gmail.com', '676 rue du Lievre', 59000),
-       ('Gould','Rachida', 'F', 'Goul_Rachida', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
-       ('Mcdonald','Dominic', 'H', 'Mcdonal_Dominic', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
-       ('Walter','Baxter', 'H', 'Walte_Baxter', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
-       ('Osborne','Paula', 'F', 'Osborn_Paula', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
 
 
 

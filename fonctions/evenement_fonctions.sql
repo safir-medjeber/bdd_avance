@@ -1,6 +1,6 @@
----------------------------------------------------------
+---------------------------------------------------------------------------------
 -- Renvoie le nombre d'organisateur de l'evenement
----------------------------------------------------------
+---------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION evenement_nbOrganisateur(idEvent INTEGER)
 RETURNS INTEGER AS $$
 DECLARE
@@ -13,70 +13,86 @@ BEGIN
 	return nb;
 END $$ LANGUAGE plpgsql;
 
----------------------------------------------------------
+
+---------------------------------------------------------------------------------
+-- Fonction permettant la creation d'un evenement culturel en le liant a son organisateur
+---------------------------------------------------------------------------------
+CREATE OR REPLACE  FUNCTION create_event(nom_evenement text, id_lieu integer, duree_evenement TIME, id_membre integer ) RETURNS INTEGER as $$
+DECLARE
+	identifiant INTEGER;
+BEGIN
+	INSERT INTO Evenement_culturel(nom_evenement, id_lieu, duree_evenement) VALUES (nom_evenement, id_lieu,  duree_evenement) returning id_evenement into identifiant;
+	INSERT INTO Organise(id_membre, id_evenement) VALUES (id_membre, identifiant);
+RETURN identifiant;	
+END;
+$$ LANGUAGE plpgsql;
+
+
+---------------------------------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type festival
----------------------------------------------------------
-CREATE OR REPLACE  FUNCTION create_festival(nom_evenement TEXT, id_lieu INTEGER, duree_evenement TIME, type_festival TEXT,  en_plein_air BOOLEAN)
+---------------------------------------------------------------------------------
+CREATE OR REPLACE  FUNCTION create_festival(nom_evenement TEXT, id_lieu INTEGER, duree_evenement TIME, type_festival TEXT, en_plein_air BOOLEAN, id_membre INTEGER)
 RETURNS void as $$
 DECLARE
 	identifiant INTEGER;
 BEGIN
-	INSERT INTO Evenement_culturel(nom_evenement, id_lieu, duree_evenement) VALUES (nom_evenement, id_lieu,  duree_evenement)
-	returning id_evenement into identifiant;
+	identifiant := create_event(nom_evenement, id_lieu, duree_evenement, id_membre);
 	INSERT INTO Festival(id_evenement, type_festival, en_plein_air) VALUES (identifiant, type_festival, en_plein_air);
 RETURN;	
 END;
 $$ LANGUAGE plpgsql;
 
----------------------------------------------------------
+
+
+---------------------------------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type exposition
----------------------------------------------------------
-CREATE OR REPLACE  FUNCTION create_exposition(nom_evenement text, id_lieu integer, duree_evenement TIME, type_exposition text) RETURNS void as $$
+---------------------------------------------------------------------------------
+CREATE OR REPLACE  FUNCTION create_exposition(nom_evenement text, id_lieu integer, duree_evenement TIME, type_exposition text, id_membre INTEGER) RETURNS void as $$
 DECLARE
 	identifiant INTEGER;
 BEGIN
-	INSERT INTO Evenement_culturel(nom_evenement, id_lieu, duree_evenement) VALUES (nom_evenement, id_lieu,  duree_evenement) returning id_evenement into identifiant;
+	identifiant := create_event(nom_evenement, id_lieu, duree_evenement, id_membre);
 	INSERT INTO Exposition(id_evenement, type_exposition) VALUES (identifiant, type_exposition);
 RETURN;	
 END;
 $$ LANGUAGE plpgsql;
 
 
----------------------------------------------------------
+---------------------------------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type piece de theatre
----------------------------------------------------------
-CREATE OR REPLACE  FUNCTION create_piece_theatre(nom_evenement text, id_lieu integer, duree_evenement TIME, genre_piece text, metteur_scene_piece text)
+---------------------------------------------------------------------------------
+CREATE OR REPLACE  FUNCTION create_piece_theatre(nom_evenement text, id_lieu integer, duree_evenement TIME, genre_piece text, metteur_scene_piece text, id_membre INTEGER)
 RETURNS void as $$
 DECLARE
 	identifiant INTEGER;
 BEGIN
-	INSERT INTO Evenement_culturel(nom_evenement, id_lieu, duree_evenement) VALUES (nom_evenement, id_lieu,  duree_evenement)
-	returning id_evenement into identifiant;
+	identifiant := create_event(nom_evenement, id_lieu, duree_evenement, id_membre);
 	INSERT INTO Piece_Theatre(id_evenement,  genre_piece, metteur_scene_piece) VALUES (identifiant, genre_piece, metteur_scene_piece);
 RETURN;	
 END;
 $$ LANGUAGE plpgsql;
 
----------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Fonction permettant la creation d'un evenement culturel de type piece de theatre
----------------------------------------------------------
-CREATE OR REPLACE  FUNCTION create_piece_theatre(nom_evenement text, id_lieu integer, duree_evenement TIME, genre_piece text, metteur_scene_piece text)
+--------------------------------------------------------------------------------
+CREATE OR REPLACE  FUNCTION create_piece_theatre(nom_evenement text, id_lieu integer, duree_evenement TIME, genre_piece text, metteur_scene_piece text, id_membre INTEGER)
 RETURNS void as $$
 DECLARE
 	identifiant INTEGER;
 BEGIN
-	INSERT INTO Evenement_culturel(nom_evenement, id_lieu, duree_evenement) VALUES (nom_evenement, id_lieu,  duree_evenement)
-	returning id_evenement into identifiant;
+	identifiant := create_event(nom_evenement, id_lieu, duree_evenement, id_membre);
 	INSERT INTO Piece_Theatre(id_evenement,  genre_piece, metteur_scene_piece) VALUES (identifiant, genre_piece, metteur_scene_piece);
 RETURN;	
 END;
 $$ LANGUAGE plpgsql;
+
+
 
 ---------------------------------------------------------
 -- Suppression d'un evenement
 -- Appelle automatique des triggers
 -- Verifie les droits de l'appelant via "id_appelant"
----------------------------------------------------------
+---------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION evenement_supprimer(idEvent INTEGER, id_appelant INTEGER)
 RETURNS void AS $$
 BEGIN
