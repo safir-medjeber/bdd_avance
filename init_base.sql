@@ -19,7 +19,7 @@ CREATE TABLE Membre (
 	id_membre 			SERIAL PRIMARY KEY,
 	nom_membre 			VARCHAR NOT NULL,
 	prenom_membre 		VARCHAR NOT NULL,
-	sexe_membre			VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'H') NOT NULL,
+	sexe_membre		VARCHAR(1) CHECK(sexe_membre = 'F' or sexe_membre = 'H') NOT NULL,
 	login_membre 		VARCHAR NOT NULL,
 	mail_membre 		VARCHAR NOT NULL UNIQUE,
 	adresse_membre  	VARCHAR NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE Administrateur (
 CREATE TABLE Message (
 	id_message		SERIAL PRIMARY KEY,
 	objet_message		VARCHAR NOT NULL,
-	date_message		TIMESTAMP, -- Si NULL on utilise TODAY
+	abidate_message		TIMESTAMP, -- Si NULL on utilise TODAY
 	contenu_message 	VARCHAR NOT NULL
 );
 
@@ -87,15 +87,15 @@ CREATE TABLE Date_Evenement (
 CREATE TABLE Avoir (
 	id_avoir 		SERIAL PRIMARY KEY,
 	id_membre		INTEGER REFERENCES Membre (id_membre)
-		ON DELETE CASCADE ON UPDATE CASCADE,
+				ON DELETE CASCADE ON UPDATE CASCADE,
 	montant_avoir 		INTEGER NOT NULL check (montant_avoir > 0)
 );
 
 CREATE TABLE Animation(
 	id_animation		SERIAL PRIMARY KEY,
 	id_date_evenement	INTEGER REFERENCES Date_Evenement
-		ON DELETE CASCADE ON UPDATE CASCADE,
-	heure_animation		TIME,
+				ON DELETE CASCADE ON UPDATE CASCADE,
+	heure_animation		TIMESTAMP,
 	nom_animation		VARCHAR NOT NULL,
 	duree_animation		TIME
 );
@@ -153,7 +153,7 @@ $$ LANGUAGE plpgsql;
 \i fonctions/reservation_fonctions.sql
 
 -- Trigger
---\i triggers/concert-animation_trigger.sql
+\i triggers/concert-animation_trigger.sql
 \i triggers/date_evenement_trigger.sql
 \i triggers/membre_trigger.sql
 \i triggers/message_trigger.sql

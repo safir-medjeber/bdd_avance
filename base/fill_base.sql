@@ -128,7 +128,7 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
        (29, '2015-01-12 20:30:00', 25),
        (30, '2015-01-12 20:30:00', 40),
        (31, '2015-01-12 20:30:00', 30),
-       (32, '2015-01-12 20:30:00', 35),
+       (32, '2015-01-12 20:30:00', 35), --21
 
 
        (1, '2015-01-12 10:30:00', 60),
@@ -143,8 +143,7 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
        (8, '2015-06-28 10:30:00', 61),
        (9, '2015-04-17 10:30:00', 10),
        (10, '2016-06-22 10:30:00', 9),
-       (11, '2016-01-02 10:30:00', 20),
-
+       (11, '2016-01-02 10:30:00', 20), --34
        
        (33, '2015-01-12 10:30:00', 22),
        (34, '2015-03-16 10:30:00', 27),
@@ -164,39 +163,39 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
 
 --Animation
 INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_animation) VALUES		
-       (35, '10:30:00', 'Initiation aux art martiaux', '00:40:00');
-       -- (35, '10:30:00', 'Demonstration nouveaux jeux', '00:40:00'),		
-       -- (36, '10:30:00', 'Conférence mangaka', '01:00:00'),
-       -- (36, '12:30:00', 'Atelier Lecture ', '00:40:00'),
-       -- (37, '2015-01-12 10:30:00', 'Initiation à la Couture', '00:40:00'),		
-       -- (37, '10:30:00', 'Nouvelles tendances', '00:40:00'),
-       -- (38, '10:30:00', 'Nouvelles tendances du design', '00:55:00'),
-       -- (39, '10:30:00', 'Atelier Lecture ', '00:40:00'),
-       -- (39, '20:30:00', 'Buffet à Volonté', '03:00:00'),
-       -- (40, '20:30:00', 'Buffet à Volonté', '03:00:00'),
-       -- (40, '14:30:00', 'Conference Art Abstrait', '00:40:00'),
-       -- (41, '10:30:00', 'Atelier Peinture PopArt', '00:40:00'),	
-       -- (43, '10:30:00', 'Labo Culinaire', '00:40:00'),
-       -- (43, '13:30:00', 'Initiation Cuisine Africaine', '00:40:00'),
-       -- (43, '20:30:00', 'Atelier Les Coulisses du Chef', '00:40:00'),
-       -- (45, '12:30:00', 'Buffet à Volonté', '02:00:00'),
-       -- (45, '12:30:00', 'Atelier Lecture', '00:40:00');
+       (35, '2015-01-12 10:30:00', 'Initiation aux art martiaux', '00:40:00'),
+       (35, '2015-01-12 10:30:00', 'Demonstration nouveaux jeux', '00:40:00'),		
+       (36, '2015-03-16 10:30:00', 'Conférence mangaka', '01:00:00'),
+       (36, '2015-03-16 10:30:00', 'Atelier Lecture ', '00:40:00'),
+       (37, '2015-06-15 10:30:00', 'Initiation à la Couture', '00:40:00'),		
+       (37, '2015-06-15 10:30:00', 'Nouvelles tendances', '00:40:00'),
+       (38, '2015-03-23 10:30:00', 'Nouvelles tendances du design', '00:55:00'),
+       (39, '2015-05-12 10:30:00', 'Atelier Lecture ', '00:40:00'),
+       (39, '2015-05-12 10:30:00', 'Buffet à Volonté', '03:00:00'),
+       (40, '2015-01-12 10:30:00', 'Buffet à Volonté', '03:00:00'),
+       (40, '2015-01-12 10:30:00', 'Conference Art Abstrait', '00:40:00'),
+       (41, '2015-07-30 10:30:00', 'Atelier Peinture PopArt', '00:40:00'),	
+       (43, '2015-10-09 10:30:00', 'Labo Culinaire', '00:40:00'),
+       (43, '2015-10-09 10:30:00', 'Initiation Cuisine Africaine', '00:40:00'),
+       (43, '2015-10-09 10:30:00', 'Atelier Les Coulisses du Chef', '00:40:00'),
+       (45, '2015-02-01 10:30:00', 'Buffet à Volonté', '02:00:00'),
+       (45, '2015-02-01 10:30:00', 'Atelier Lecture', '00:40:00');
 
 
 
 INSERT INTO Concert(id_date_evenement, heure_concert, artiste_concert, duree_concert) VALUES		
-       (24, '2015-01-12 10:30:00', 'Maroon Five', '00:40:00');
-       -- (28, '18:30:00', 'Mika', '00:40:00'),
-       -- (29, '18:30:00', 'The Avener', '00:40:00'),
-       -- (29, '19:30:00', 'Madeon', '00:40:00'),		
-       -- (29, '21:30:00', 'Clean Bandit', '00:40:00'),
-       -- (30, '18:30:00', 'Xavier Rudd', '00:40:00'),
-       -- (30, '20:30:00', 'Tairo', '00:40:00'),
-       -- (31, '18:30:00', 'Mademoiselle K', '00:55:00'),
-       -- (31, '19:30:00', 'Moriarty', '00:55:00'),
-       -- (31, '20:30:00', 'Lilly Wood And The Prick', '00:55:00');
+       (24, '2015-01-12 10:30:00', 'Maroon Five', '00:40:00'),
+       (28, '2015-02-14 10:30:00', 'Mika', '00:40:00'),
+       (29, '2015-06-26 10:30:00', 'The Avener', '00:40:00'),
+       (29, '2015-06-26 10:30:00', 'Madeon', '00:40:00'),		
+       (29, '2015-06-26 10:30:00', 'Clean Bandit', '00:40:00'),
+       (30, '2015-06-27 10:30:00', 'Xavier Rudd', '00:40:00'),
+       (30, '2015-06-27 10:30:00', 'Tairo', '00:40:00'),
+       (31, '2015-06-28 10:30:00', 'Mademoiselle K', '00:55:00'),
+       (31, '2015-06-28 10:30:00', 'Moriarty', '00:55:00'),
+       (31, '2015-06-28 10:30:00', 'Lilly Wood And The Prick', '00:55:00');
 
-     
+
 
 -- Membre
 INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_membre, adresse_membre, code_postal_ville) VALUES
