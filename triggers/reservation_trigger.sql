@@ -56,6 +56,8 @@ BEGIN
 		'Confirmation de reservation',
 		'Bonjour, nous vous confirmons bien la reservation a l evenement '||nomEvent||' le '||dateEvent||'.'
 	);
+
+	RETURN NEW;
 END $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER reservartion_trigger_insert_update
@@ -84,8 +86,10 @@ BEGIN
 		'Bonjour, nous vous confirmons bien l annulation reservation a l evenement '||nomEvent||' le '||dateEvent||'.'
 	);
 	PERFORM avoir_creer(OLD.id_membre, OLD.id_date_evenement);
+
+	RETURN NEW;
 END $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER reservartion_trigger_after_delete
-AFTER INSERT OR UPDATE ON Reservation FOR EACH ROW
+AFTER DELETE ON Reservation FOR EACH ROW
 	EXECUTE PROCEDURE reservartion_trigger_after_delete();

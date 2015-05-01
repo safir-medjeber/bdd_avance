@@ -34,7 +34,7 @@ CREATE TABLE Administrateur (
 CREATE TABLE Message (
 	id_message		SERIAL PRIMARY KEY,
 	objet_message		VARCHAR NOT NULL,
-	abidate_message		TIMESTAMP, -- Si NULL on utilise TODAY
+	date_message		TIMESTAMP, -- Si NULL on utilise TODAY
 	contenu_message 	VARCHAR NOT NULL
 );
 
@@ -157,7 +157,7 @@ $$ LANGUAGE plpgsql;
 \i triggers/date_evenement_trigger.sql
 \i triggers/membre_trigger.sql
 \i triggers/message_trigger.sql
---\i triggers/reservation_trigger.sql
+\i triggers/reservation_trigger.sql
 
 -- Remplissage de la base
 \i base/fill_base.sql
