@@ -1,7 +1,7 @@
 ---------------------------------------------------------
--- Renvoie la capacite totale de reservation la date d evenement
+-- Renvoie la capacite totale d'une date d'evenement
 ---------------------------------------------------------
-CREATE OR REPLACE FUNCTION date_evenement_capaciteResa(idDateEvent INTEGER)
+CREATE OR REPLACE FUNCTION date_evenement_capaciteTotale(idDateEvent INTEGER)
 RETURNS INTEGER AS $$
 DECLARE
 	nb INTEGER;
@@ -15,18 +15,18 @@ END $$ LANGUAGE plpgsql;
 
 
 ---------------------------------------------------------
--- Renvoie le nombre de place restantes de la date
+-- Renvoie le nombre de places restantes de la date
 ---------------------------------------------------------
 CREATE OR REPLACE FUNCTION date_evenement_nbPlacesRestantes(idDateEvent INTEGER)
 RETURNS INTEGER AS $$
 DECLARE
-	capacite INTEGER = date_evenement_capaciteResa(idDateEvent);
+	capacite INTEGER = date_evenement_capaciteTotale(idDateEvent);
 	nb_resa INTEGER;
 BEGIN
 	-- Nombre de reservation
 	SELECT count(*) INTO nb_resa
 	FROM Reservation
-	WHERE id_evenement = idEvent;
+	WHERE id_date_evenement = idDateEvent;
 
 	-- Capacite de la date d'evenement
 	IF (capacite - nb_resa) <= 0 THEN

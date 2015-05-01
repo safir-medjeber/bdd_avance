@@ -8,6 +8,11 @@ DECLARE
 	idMembre INTEGER;
 BEGIN
 	SELECT id_membre INTO idMembre FROM Membre WHERE login_membre = $1;
+	IF NOT FOUND THEN
+		Raise 'Le login % n existe pas ', $1;
+		Return NULL;
+	END IF;
+
 	RETURN idMembre;
 END;
 $$ LANGUAGE plpgsql;
@@ -26,7 +31,7 @@ $$ LANGUAGE plpgsql;
 -------------------------------------------------------
 -- Supprime un membre
 -- Le ON UPDATE CASCADE ON DELETE CASCADE de la modelisation assure
--- le declenchement de la plupart des supression utiles
+-- le declenchement de la plupart des supressions utiles
 -- Il nous reste :
 -- - Verifier les droits via idAppelant
 -- - Supprimer un evenement si il n'a plus aucun organisateur (via le trigger)

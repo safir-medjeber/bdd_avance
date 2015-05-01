@@ -1,20 +1,21 @@
--- TODO : Tester de fausses insertions sur ces triggers
 -------------------------------------------------------------
--- CONCERT : On verifie que l'id_evenement est un festival
+-- CONCERT : On vérifie que
+--	- L'id_evenement est un festival
+--	- La date est cohérente par rapport à celle du festival
 -------------------------------------------------------------
 CREATE OR REPLACE FUNCTION concert_trigger_insert_update()
 RETURNS TRIGGER AS $$
 DECLARE
-	idEvent INTEGER;
-	dateEvent TIMESTAMP;
-	dureeEvent TIME;
+	idEvent 	INTEGER;
+	dateEvent 	TIMESTAMP;
+	dureeEvent 	TIME;
 BEGIN
 	SELECT id_evenement, date_evenement, duree_evenement INTO idEvent, dateEvent, dureeEvent
 	FROM Date_evenement NATURAL JOIN Evenement_Culturel
 	WHERE id_date_evenement = NEW.id_date_evenement;
 
 	IF idEvent NOT IN (SELECT id_evenement FROM Festival) THEN
-		RAISE 'Trigger sur Concert : L evenement % de la date % indiqué n est pas un festival', idEvent, NEW.id_date_evenement;
+		RAISE 'Trigger sur Concert : L evenement n° % de la date % indiquée n est pas un festival', idEvent, NEW.id_date_evenement;
 		RETURN NULL;
 	END IF;
 

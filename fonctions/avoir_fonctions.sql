@@ -8,7 +8,7 @@ DECLARE
 	prixEvent INTEGER;
 BEGIN
 	-- On recupere le prix de l'event
-	PERFORM prix_classe_prix INTO prixEvent 
+	SELECT prix_classe_prix INTO prixEvent 
 	FROM Date_Evenement WHERE id_date_evenement = $2;
 
 	-- On crée l'avoir
