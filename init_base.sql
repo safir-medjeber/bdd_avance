@@ -104,7 +104,7 @@ CREATE TABLE Concert(
 	id_concert		SERIAL PRIMARY KEY,
 	id_date_evenement	INTEGER REFERENCES Date_Evenement
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	heure_concert		TIME,
+	heure_concert		TIMESTAMP,
 	artiste_concert		VARCHAR NOT NULL,
 	duree_concert		TIME
 );
@@ -158,7 +158,7 @@ $$ LANGUAGE plpgsql;
 \i triggers/evenement_trigger.sql
 \i triggers/membre_trigger.sql
 \i triggers/message_trigger.sql
-\i triggers/reservation_trigger.sql
+--\i triggers/reservation_trigger.sql
 
 -- Remplissage de la base
 \i base/fill_base.sql

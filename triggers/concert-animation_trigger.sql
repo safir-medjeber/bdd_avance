@@ -18,8 +18,9 @@ BEGIN
 		RETURN NULL;
 	END IF;
 
+
 	-- L'heure doit être comprise entre le debut et la fin de l'evenement
-	IF (NEW.heure_concert NOT BETWEEN dateEvent AND dateEvent + dureeEvent)
+	IF (NEW.heure_concert NOT BETWEEN dateEvent AND dateEvent + dureeEvent )
 	OR (NEW.heure_concert + NEW.duree_concert NOT BETWEEN dateEvent AND dateEvent + dureeEvent)
 	THEN 
 		RAISE 'Trigger sur Concert : L evenement % de la date % indiqué ne rentre pas dans le creneaux horaire de l evenement', idEvent, NEW.id_date_evenement;
@@ -49,15 +50,15 @@ BEGIN
 	-- L'evenement doit être une exposition
 	IF idEvent NOT IN (SELECT id_evenement FROM Exposition) THEN
 		RAISE 'Trigger sur Animation : L evenement %  de la date % indiqué n est pas une exposition', idEvent, NEW.id_date_evenement;
-		RETURN NULL;
+	RETURN NULL;
 	END IF;
 
 	-- L'heure doit être comprise entre le debut et la fin de l'evenement
-	IF (NEW.heure_animation NOT BETWEEN dateEvent AND dateEvent + dureeEvent)
-	OR (NEW.heure_animation + NEW.duree_animation NOT BETWEEN dateEvent AND dateEvent + dureeEvent)
-	THEN 
-		RAISE 'Trigger sur Animation : L evenement % de la date % indiqué ne rentre pas dans le creneaux horaire de l evenement', idEvent, NEW.id_date_evenement;
-	END IF;
+--	IF (NEW.heure_animation NOT BETWEEN dateEvent AND dateEvent )
+--	OR (NEW.heure_animation + NEW.duree_animation NOT BETWEEN dateEvent AND dateEvent + dureeEvent)
+--	THEN 
+--		RAISE 'Trigger sur Animation : L evenement % de la date % indiqué ne rentre pas dans le creneaux horaire de l evenement', idEvent, NEW.id_date_evenement;
+--	END IF;
 
 	RETURN NEW;
 END $$ LANGUAGE plpgsql;

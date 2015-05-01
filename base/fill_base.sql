@@ -41,6 +41,7 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu, code_postal_ville, capacite_lieu) VALU
 
 
 
+
 -- Festival
 perform create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no');
 perform create_festival('Festival des outremers', 14, '10:00:00','culturel', 'no');
@@ -53,6 +54,10 @@ perform create_festival('Festival Solidays', 15, '10:00:00', 'musique', 'yes');
 perform create_festival('Festival Rock en Scène', 17, '10:00:00', 'musique', 'yes');
 perform create_festival('Festival Rock in Opposition', 18, '10:00:00', 'musique', 'yes');
 perform create_festival('Festival International de bande dessinee', 16, '10:00:00', 'musique', 'yes');
+
+
+
+
 
 
 
@@ -82,6 +87,10 @@ perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Ca
 
 
 
+
+
+
+
 -- Info Exposition
 perform create_exposition('Paris Games Week', 6, '24:00:00', 'Jeux');
 perform create_exposition('Japan Expo', 6, '10:00:00', 'Culture Japonaise');
@@ -94,8 +103,6 @@ perform create_exposition('Exposition Jeff Koons', 3, '10:00:00', 'Musique');
 perform create_exposition('Exposition Cuisine du monde ', 1, '10:00:00', 'Cuisine');
 perform create_exposition('Exposition De Carmen à mélisande', 5, '10:00:00', 'Architecture');
 perform create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Peinture');
-
-
 
 
 
@@ -157,39 +164,37 @@ INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VA
 
 --Animation
 INSERT INTO Animation(id_date_evenement, heure_animation, nom_animation, duree_animation) VALUES		
-       (33, '10:30:00', 'Initiation aux art martiaux', '00:40:00'),
-       (33, '10:30:00', 'Demonstration nouveaux jeux', '00:40:00'),		
-       (34, '10:30:00', 'Conférence mangaka', '01:00:00'),
-       (34, '12:30:00', 'Atelier Lecture ', '00:40:00'),
-       (35, '10:30:00', 'Initiation à la Couture', '00:40:00'),		
-       (35, '10:30:00', 'Nouvelles tendances', '00:40:00'),
-       (36, '10:30:00', 'Nouvelles tendances du design', '00:55:00'),
-       (37, '10:30:00', 'Atelier Lecture ', '00:40:00'),
-       (37, '20:30:00', 'Buffet à Volonté', '03:00:00'),
-       (38, '20:30:00', 'Buffet à Volonté', '03:00:00'),
-       (38, '14:30:00', 'Conference Art Abstrait', '00:40:00'),
-       (39, '10:30:00', 'Atelier Peinture PopArt', '00:40:00'),	
-       (41, '10:30:00', 'Labo Culinaire', '00:40:00'),
-       (41, '13:30:00', 'Initiation Cuisine Africaine', '00:40:00'),
-       (41, '20:30:00', 'Atelier Les Coulisses du Chef', '00:40:00'),
-       (43, '12:30:00', 'Buffet à Volonté', '02:00:00'),
-       (43, '12:30:00', 'Atelier Lecture', '00:40:00');
-
+       (35, '10:30:00', 'Initiation aux art martiaux', '00:40:00');
+       -- (35, '10:30:00', 'Demonstration nouveaux jeux', '00:40:00'),		
+       -- (36, '10:30:00', 'Conférence mangaka', '01:00:00'),
+       -- (36, '12:30:00', 'Atelier Lecture ', '00:40:00'),
+       -- (37, '2015-01-12 10:30:00', 'Initiation à la Couture', '00:40:00'),		
+       -- (37, '10:30:00', 'Nouvelles tendances', '00:40:00'),
+       -- (38, '10:30:00', 'Nouvelles tendances du design', '00:55:00'),
+       -- (39, '10:30:00', 'Atelier Lecture ', '00:40:00'),
+       -- (39, '20:30:00', 'Buffet à Volonté', '03:00:00'),
+       -- (40, '20:30:00', 'Buffet à Volonté', '03:00:00'),
+       -- (40, '14:30:00', 'Conference Art Abstrait', '00:40:00'),
+       -- (41, '10:30:00', 'Atelier Peinture PopArt', '00:40:00'),	
+       -- (43, '10:30:00', 'Labo Culinaire', '00:40:00'),
+       -- (43, '13:30:00', 'Initiation Cuisine Africaine', '00:40:00'),
+       -- (43, '20:30:00', 'Atelier Les Coulisses du Chef', '00:40:00'),
+       -- (45, '12:30:00', 'Buffet à Volonté', '02:00:00'),
+       -- (45, '12:30:00', 'Atelier Lecture', '00:40:00');
 
 
 
 INSERT INTO Concert(id_date_evenement, heure_concert, artiste_concert, duree_concert) VALUES		
-       (22, '10:30:00', 'Initiation à la Couture', '00:40:00'),		
-       (24, '10:30:00', 'Maroon Five', '00:40:00'),
-       (28, '18:30:00', 'Mika', '00:40:00'),
-       (29, '18:30:00', 'The Avener', '00:40:00'),
-       (29, '19:30:00', 'Madeon', '00:40:00'),		
-       (29, '21:30:00', 'Clean Bandit', '00:40:00'),
-       (30, '18:30:00', 'Xavier Rudd', '00:40:00'),
-       (30, '20:30:00', 'Tairo', '00:40:00'),
-       (31, '18:30:00', 'Mademoiselle K', '00:55:00'),
-       (31, '19:30:00', 'Moriarty', '00:55:00'),
-       (31, '20:30:00', 'Lilly Wood And The Prick', '00:55:00');
+       (24, '2015-01-12 10:30:00', 'Maroon Five', '00:40:00');
+       -- (28, '18:30:00', 'Mika', '00:40:00'),
+       -- (29, '18:30:00', 'The Avener', '00:40:00'),
+       -- (29, '19:30:00', 'Madeon', '00:40:00'),		
+       -- (29, '21:30:00', 'Clean Bandit', '00:40:00'),
+       -- (30, '18:30:00', 'Xavier Rudd', '00:40:00'),
+       -- (30, '20:30:00', 'Tairo', '00:40:00'),
+       -- (31, '18:30:00', 'Mademoiselle K', '00:55:00'),
+       -- (31, '19:30:00', 'Moriarty', '00:55:00'),
+       -- (31, '20:30:00', 'Lilly Wood And The Prick', '00:55:00');
 
      
 
