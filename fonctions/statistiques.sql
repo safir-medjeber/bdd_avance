@@ -38,7 +38,9 @@ $$ LANGUAGE plpgsql;
 
 
 
-
+--------------------------------------------------------------------------------
+-- Determine le ratio homme, femme d'une représentation d'un evenement 
+--------------------------------------------------------------------------------
 CREATE OR REPLACE function ratio_homme_femme_event(idDateEvent INTEGER) RETURNS text as $$
 DECLARE
 	femme INTEGER := 0;
@@ -64,6 +66,10 @@ $$ LANGUAGE plpgsql;
 
 
 
+
+--------------------------------------------------------------------------------
+-- Determine le ratio homme femme de chaque representation de tous les evenements
+--------------------------------------------------------------------------------
 CREATE OR REPLACE function ratio_homme_femme_par_evenement() RETURNS text as $$
 DECLARE
 	idEvent record;
@@ -81,6 +87,7 @@ $$ LANGUAGE plpgsql;
 
 
 
+
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage d'un evenement pour une representation
 --------------------------------------------------------------------------------
@@ -90,7 +97,6 @@ DECLARE
 	nbParticipant  INTEGER := 0;
 	pourcentage  FLOAT := 0;
 	reponse text := '';
-
 	name_event text :='';
 	date_event TIMESTAMP;
 BEGIN
@@ -109,14 +115,8 @@ $$ LANGUAGE plpgsql;
 
 
 
-
-
-
-
-
-
 --------------------------------------------------------------------------------
--- Determine le taux de remplissage de chaque date de representation d'un evenement
+-- Determine le taux de remplissage de chaque representation de tous les evenements
 --------------------------------------------------------------------------------
 CREATE OR REPLACE function taux_de_remplissage() RETURNS text as $$
 DECLARE

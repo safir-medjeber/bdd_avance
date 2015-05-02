@@ -1,7 +1,11 @@
-CREATE OR REPLACE  FUNCTION searchEvent(event_theatre boolean, event_exposition boolean,  event_festival boolean, date_debut date, date_fin date, prix_min INTEGER, prix_max INTEGER, type_evenement TEXT)
-RETURNS TABLE(nom_evenement varchar, date_evenement TIMESTAMP, 	prix_date_evenement INTEGER) as $$
+--------------------------------------------------------------------------------
+-- Fonction qui fourni une table contenant les evenements correspondant aux criteres passes en argument
+--------------------------------------------------------------------------------
+
+CREATE OR REPLACE  FUNCTION searchEvent_aux(event_theatre boolean, event_exposition boolean,  event_festival boolean, date_debut date, date_fin date, prix_min INTEGER, prix_max INTEGER, type_evenement TEXT)
+RETURNS TABLE(id_date_evenement INTEGER, nom_evenement varchar, date_evenement TIMESTAMP, 	prix_date_evenement INTEGER) as $$
 DECLARE
-       requete text := 'select nom_evenement, date_evenement,	prix_date_evenement from evenement_culturel ';
+       requete text := 'select id_date_evenement, nom_evenement, date_evenement, prix_date_evenement from evenement_culturel ';
 BEGIN
 
 
@@ -102,6 +106,82 @@ BEGIN
 END;
 
 $$ language plpgsql;
+
+
+--------------------------------------------------------------------------------
+-- Fonction qui fourni des informations utiles d'un evenement a partir de son nom ou une partie
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function info_about_event(name_event TEXT) returns text as $$
+DECLARE
+	info_event TEXT:='';
+	argv TEXT :='%'||name_event||'%';
+	tmp RECORD;
+BEGIN
+	FOR tmp IN
+	    select Date_Evenement.prix_date_evenement, Date_Evenement.id_date_evenement, Evenement_Culturel.nom_evenement, Lieu.nom_lieu, Date_evenement.date_evenement
+	    from Date_Evenement
+	    natural join Evenement_Culturel natural join Lieu
+	    where Evenement_Culturel.nom_evenement like  argv
+	LOOP
+	info_event:= info_event ||'Nom   : '|| tmp.nom_evenement  || chr(10)||'Lieu  : '||  tmp.nom_lieu ||chr(10);
+	info_event:= info_event	||'Date  : '|| tmp.date_evenement || chr(10)||'Prix  : '|| tmp.prix_date_evenement||'€'||chr(10);
+	info_event:= info_event	||'Place : '|| date_evenement_nbPlacesRestantes(tmp.id_date_evenement)|| ' Disponible(s)' ||chr(10);
+	info_event:= info_event||'-------------------------------------------------------------------------------------'||chr(10);
+	END LOOP;
+	
+return info_event;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--------------------------------------------------------------------------------
+-- Fonction qui fourni des informations utiles d'un evenement a partir d'un id_date_event
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function info_about_event_integer(idEvent INTEGER) returns text as $$
+DECLARE
+	info_event TEXT:='';
+	tmp RECORD;
+BEGIN
+	FOR tmp IN
+	    select Date_Evenement.prix_date_evenement, Date_Evenement.id_date_evenement, Evenement_Culturel.nom_evenement, Lieu.nom_lieu, Date_evenement.date_evenement
+	    from Date_Evenement
+	    natural join Evenement_Culturel natural join Lieu
+	    where Date_Evenement.id_date_Evenement=idEvent
+	LOOP
+	info_event:= info_event ||'Nom   : '|| tmp.nom_evenement  || chr(10)||'Lieu  : '||  tmp.nom_lieu ||chr(10);
+	info_event:= info_event	||'Date  : '|| tmp.date_evenement || chr(10)||'Prix  : '|| tmp.prix_date_evenement||'€'||chr(10);
+	info_event:= info_event	||'Place : '|| date_evenement_nbPlacesRestantes(tmp.id_date_evenement)|| ' Disponible(s)' ||chr(10);
+	info_event:= info_event||'-------------------------------------------------------------------------------------'||chr(10);
+	END LOOP;
+	
+return info_event;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+
+--------------------------------------------------------------------------------
+-- Fonction qui affiche les evenements correspondants aux criteres fournis ainsi que leurs nombre de place disponible
+--------------------------------------------------------------------------------
+CREATE OR REPLACE  FUNCTION searchEvent(event_theatre boolean, event_exposition boolean,  event_festival boolean, date_debut date, date_fin date, prix_min INTEGER, prix_max INTEGER, type_evenement TEXT)
+returns text as $$
+DECLARE
+	info_event TEXT:='';
+	tmp RECORD;
+BEGIN
+
+	FOR tmp IN
+	    select id_date_evenement from searchEvent_aux($1, $2, $3, $4, $5, $6, $7, $8)
+	LOOP
+		info_event:=info_event || info_about_event_integer(tmp.id_date_evenement); 
+	END LOOP;
+	
+return info_event;
+END;
+$$ LANGUAGE plpgsql;
+
 
 ---SELECT searchEvent(false, false, true, null, null, 0, 80, 'cin');
 
