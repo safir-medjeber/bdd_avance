@@ -135,3 +135,75 @@ $$ LANGUAGE plpgsql;
 
 --select taux_de_remplissage();
 
+
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le revenu total d'un organisateur a partir de son identifiant
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function event_organise_by(idMembre INTEGER) RETURNS text as $$
+DECLARE
+	idEvent record;
+	prixPlace record;
+	reponse text := '';
+	nom text := '';
+	events text := 'Ses évènements : '|| chr(10);
+	prenom text := '';
+	revenu INTEGER :=0;
+BEGIN
+	SELECT nom_membre, prenom_membre from membre where id_membre=idMembre INTO  nom, prenom;
+
+	FOR idEvent in
+   	    select id_evenement,  nom_evenement , date_evenement from evenement_culturel natural join organise natural join date_evenement where id_membre=idMembre
+    	LOOP
+	events:= events ||chr(9)||'-> '''|| idEvent.nom_evenement||''' le '|| idEvent.date_evenement||chr(10);		
+	    FOR prixPlace in
+	    	select prix_date_evenement  from reservation  natural join date_Evenement where id_evenement=idEvent.id_evenement
+	    LOOP
+		revenu:=revenu+prixPlace.prix_date_evenement;
+	    END LOOP;
+     	END LOOP;
+	reponse:= 'Organisateur : ' ||nom||' '||prenom||chr(10);
+	reponse:= reponse ||'Revenu : ' || revenu || '€'||chr(10);
+	reponse:= reponse ||events;
+	reponse:= reponse || '-------------------------------------------------------------------------------------'||chr(10);
+RETURN reponse ;
+END
+$$ LANGUAGE plpgsql;
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le revenu total de chacun des organisateurs
+------------------------------------------------------------------------------
+CREATE OR REPLACE function revenu_organisateur() RETURNS text as $$
+DECLARE
+	idMembre record;
+	prixPlace record;
+	reponse text := '';
+	nom text := '';
+	events text := 'Ses évènements : '|| chr(10);
+	prenom text := '';
+	revenu INTEGER :=0;
+BEGIN
+	
+	FOR idMembre in
+   	   SELECT DISTINCT id_membre FROM membre NATURAL JOIN organise
+    	LOOP
+		reponse:= reponse || event_organise_by(idMembre.id_membre);
+     	END LOOP;
+RETURN reponse ;
+END
+$$ LANGUAGE plpgsql;
+
+
+
+
+
+
+
+
+
+
+
