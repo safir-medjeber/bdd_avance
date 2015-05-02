@@ -32,7 +32,7 @@ BEGIN
 	IF (capacite - nb_resa) <= 0 THEN
 		RETURN 0;
 	ELSE
-		RETURN capacite - nb_resta;
+		RETURN capacite - nb_resa;
 	END IF;
 END $$ LANGUAGE plpgsql;
 

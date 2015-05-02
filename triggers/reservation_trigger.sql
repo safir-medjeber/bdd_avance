@@ -21,7 +21,7 @@ BEGIN
 
 	-- On refuse si l'evenement est complet
 	IF nbReservation >= capacite THEN
-		Raise 'L evenement est complet !';
+		Raise 'L evenement à la date % est complet !',dateEvent;
 		RETURN NULL;
 	END IF;
 
