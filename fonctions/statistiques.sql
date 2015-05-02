@@ -1,4 +1,20 @@
 --------------------------------------------------------------------------------
+-- Retourne le nom et la date d'un evenement a partir de son id_date
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function get_info_event(idDateEvent INTEGER) RETURNS TABLE(nom_evenement varchar, date_evenement TIMESTAMP)as $$
+DECLARE
+	name_event TEXT:='';
+	date_event TIMESTAMP;
+	reponse text := '';
+BEGIN
+	RETURN QUERY EXECUTE 'select nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_date_evenement='||idDateEvent;
+END
+$$ LANGUAGE plpgsql;
+
+
+
+
+--------------------------------------------------------------------------------
 -- Determine le ratio homme, femme sur la plateforme
 --------------------------------------------------------------------------------
 CREATE OR REPLACE function ratio_homme_femme_sur_plateforme() RETURNS text as $$
@@ -13,7 +29,7 @@ BEGIN
     	SELECT count(*)  INTO total FROM membre;	
     	pourcentageF:= (femme*100)/total;
     	pourcentageH := 100 - pourcentageF ;
-    	reponse := 'pourcentage d''homme: ' || pourcentageH || chr(10) || 'pourcentage de femme: ' || pourcentageF;
+    	reponse := 'pourcentage d''homme: ' || pourcentageH || chr(10) || 'pourcentage de femme: ' || pourcentageF  ;
 	RETURN reponse;
 END
 $$ LANGUAGE plpgsql;
@@ -22,18 +38,47 @@ $$ LANGUAGE plpgsql;
 
 
 
---------------------------------------------------------------------------------
--- Retourne le nom et la date d'un evenement a partir de son id_date
---------------------------------------------------------------------------------
-CREATE OR REPLACE function get_info_event(idDateEvent INTEGER) RETURNS TABLE(nom_evenement varchar, date_evenement TIMESTAMP)as $$
+
+CREATE OR REPLACE function ratio_homme_femme_event(idDateEvent INTEGER) RETURNS text as $$
 DECLARE
-	name_event TEXT:='';
-	date_event TIMESTAMP;
+	femme INTEGER := 0;
+	total INTEGER := 0;
+	pourcentageH  INTEGER :=0;
+	pourcentageF  INTEGER :=0;
 	reponse text := '';
+	name_event text :='';
+	date_event TIMESTAMP;
 BEGIN
-	RETURN QUERY EXECUTE 'select nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_date_evenement='||idDateEvent;
+
+	SELECT count(*) from reservation  natural join membre where id_date_evenement=idDateEvent and sexe_membre='F' into femme;
+    	SELECT count(*) from reservation  natural join membre where id_date_evenement=idDateEvent into total;	
+    	pourcentageF:= (femme*100)/total;
+    	pourcentageH := 100 - pourcentageF ;
+	select * from get_info_event(idDateEvent) into name_event, date_event;
+	reponse := 'homme: ' || pourcentageH ||'% '|| chr(9) || 'femme: ' || pourcentageF || '%'||chr(9)||' pour ' || name_event ||' le '||date_event;
+	
+	RETURN reponse;
 END
 $$ LANGUAGE plpgsql;
+--select ratio_homme_femme_par_evenement();
+
+
+
+CREATE OR REPLACE function ratio_homme_femme_par_evenement() RETURNS text as $$
+DECLARE
+	idEvent record;
+	reponse text:= '';
+BEGIN
+	FOR idEvent in
+   	    select id_date_evenement from date_evenement
+    	LOOP
+	    reponse := reponse || ratio_homme_femme_event(idEvent.id_date_evenement) || chr(10);
+     	END LOOP;
+
+RETURN reponse ;
+END
+$$ LANGUAGE plpgsql;
+
 
 
 --------------------------------------------------------------------------------
@@ -61,6 +106,15 @@ END
 $$ LANGUAGE plpgsql;
 
 
+
+
+
+
+
+
+
+
+
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage de chaque date de representation d'un evenement
 --------------------------------------------------------------------------------
@@ -81,13 +135,3 @@ $$ LANGUAGE plpgsql;
 
 --select taux_de_remplissage();
 
-
-
-
-
-
-
-
---select  nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_date_evenement=21;
-
---Nombre de participant à un événement + Stat liés aux nombre moyen de participant par événement
