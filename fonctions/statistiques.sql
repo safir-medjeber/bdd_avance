@@ -1,4 +1,4 @@
-\i date_evenement_fonctions.sql
+--\i date_evenement_fonctions.sql
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme sur la plateforme
 --------------------------------------------------------------------------------
@@ -35,13 +35,37 @@ BEGIN
 	SELECT count(*) from reservation where id_date_evenement = idDateEvent INTO nbParticipant;
 	capacite := date_evenement_capaciteTotale(idDateEvent);
 	pourcentage := (nbParticipant*100)/capacite;
-    	reponse := 'Taux de remplissage ' || pourcentage || '%'; --    ok  ' || capacite || '  ok ' || nbParticipant;
+    	reponse := 'Taux de remplissage ' || pourcentage || '%       '; --    ok  ' || capacite || '  ok ' || nbParticipant;
 
 	RETURN reponse;
 END
 $$ LANGUAGE plpgsql;
 
-select taux_de_remplissage(20);
+
+
+CREATE OR REPLACE function all_taux_de_remplissage() RETURNS text as $$
+DECLARE
+	idEvent record;
+	s text:= '';
+BEGIN
+	FOR idEvent in
+   	    select id_date_evenement from date_evenement
+    	LOOP
+	    s := s || taux_de_remplissage(idEvent.id_date_evenement) || chr(10);
+     	END LOOP;
+
+RETURN s ;
+END
+$$ LANGUAGE plpgsql;
+
+--select taux_de_remplissage(20);
+
+
+
+
+
+
+
 
 --select  nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_date_evenement=21;
 

@@ -16,28 +16,28 @@ INSERT INTO Ville (code_postal_ville, nom_ville) VALUES
 
 -- Lieu
 INSERT INTO Lieu (nom_lieu, adresse_lieu, code_postal_ville, capacite_lieu) VALUES
-       ('Musée Dapper', '35 bis rue Paul-Valéry', 75000, 100),
-       ('Musée du Petit Palais', '15 avenue Winston Churchill',13000, 150),
-       ('Musee Orsay', '1 rue de la Légion Honneur ', 75000, 500),
-       ('Musee du Louvre', '10 Boulevard du Louvre', 75000, 800),
-       ('Musee du Quaie Branly','37 Quai Branly', 75000, 400),
-       ('Paris Expo', 'Porte de Versailles', 75000, 5000),
+       ('Musée Dapper', '35 bis rue Paul-Valéry', 75000, 30),
+       ('Musée du Petit Palais', '15 avenue Winston Churchill',13000, 40),
+       ('Musee Orsay', '1 rue de la Légion Honneur ', 75000, 20),
+       ('Musee du Louvre', '10 Boulevard du Louvre', 75000, 50),
+       ('Musee du Quaie Branly','37 Quai Branly', 75000, 40),
+       ('Paris Expo', 'Porte de Versailles', 75000, 100),
 
        ('La Comédie de Lille', '204 rue de Solférino', 59000, 80),
-       ('Comédie-Française', 'Place Colette', 69000, 100),
-       ('Théâtre National de Chaillot', '10 rue Duval', 31000, 200),
-       ('Théâtre National de la Colline', '15 rue Malte Brun', 13000, 120),
-       ('Théâtre National de Odéon', '2 rue Corneille', 75000, 320),	
-       ('Théâtre National de Strasbourg', '1 Avenue de la Marseillaise', 67000, 100),
+       ('Comédie-Française', 'Place Colette', 69000, 50),
+       ('Théâtre National de Chaillot', '10 rue Duval', 31000, 100),
+       ('Théâtre National de la Colline', '15 rue Malte Brun', 13000, 40),
+       ('Théâtre National de Odéon', '2 rue Corneille', 75000, 40),	
+       ('Théâtre National de Strasbourg', '1 Avenue de la Marseillaise', 67000, 35),
 
-       ('Le palais des Festivals', 'Boulevard de la Croisette', 06000, 1000),
-       ('Le palais des Congres', 'Boulevard de Bercy', 75000, 500),
-       ('Hippodrome de Longchamp', '5 avenue de la Republic', 75000, 7000),
-       ('Hippodrome de Vincennes', '54 rue des chevaux', 75000, 3000),
-       ('Hippodrome du Bouscat', '4 rue de la Tour', 59000, 1000),
-       ('Parc de la Citadelle', '10 Avenue Mathias Delobel', 13000 ,2000),
-       ('Parc Orangerie', '12 Avenue Citron', 67000, 3000),
-       ('Prairie des Filtres', '34 rue Toulouse centre', 31000, 25000);
+       ('Le palais des Festivals', 'Boulevard de la Croisette', 06000, 100),
+       ('Le palais des Congres', 'Boulevard de Bercy', 75000, 300),
+       ('Hippodrome de Longchamp', '5 avenue de la Republic', 75000, 180),
+       ('Hippodrome de Vincennes', '54 rue des chevaux', 75000, 100),
+       ('Hippodrome du Bouscat', '4 rue de la Tour', 59000, 100),
+       ('Parc de la Citadelle', '10 Avenue Mathias Delobel', 13000 ,90),
+       ('Parc Orangerie', '12 Avenue Citron', 67000, 60),
+       ('Prairie des Filtres', '34 rue Toulouse centre', 31000, 20);
 
 
 
