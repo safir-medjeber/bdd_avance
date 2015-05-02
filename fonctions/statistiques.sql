@@ -1,4 +1,3 @@
---\i date_evenement_fonctions.sql
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme sur la plateforme
 --------------------------------------------------------------------------------
@@ -22,43 +21,65 @@ $$ LANGUAGE plpgsql;
 
 
 
+
+--------------------------------------------------------------------------------
+-- Retourne le nom et la date d'un evenement a partir de son id_date
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function get_info_event(idDateEvent INTEGER) RETURNS TABLE(nom_evenement varchar, date_evenement TIMESTAMP)as $$
+DECLARE
+	name_event TEXT:='';
+	date_event TIMESTAMP;
+	reponse text := '';
+BEGIN
+	RETURN QUERY EXECUTE 'select nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_date_evenement='||idDateEvent;
+END
+$$ LANGUAGE plpgsql;
+
+
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage d'un evenement pour une representation
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function taux_de_remplissage(idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function taux_de_remplissage_event(idDateEvent INTEGER) RETURNS text as $$
 DECLARE
 	capacite INTEGER := 0;
 	nbParticipant  INTEGER := 0;
 	pourcentage  FLOAT := 0;
 	reponse text := '';
+
+	name_event text :='';
+	date_event TIMESTAMP;
 BEGIN
 	SELECT count(*) from reservation where id_date_evenement = idDateEvent INTO nbParticipant;
 	capacite := date_evenement_capaciteTotale(idDateEvent);
+
+	select * from get_info_event(idDateEvent) into name_event, date_event;
 	pourcentage := (nbParticipant*100)/capacite;
-    	reponse := 'Taux de remplissage ' || pourcentage || '%       '; --    ok  ' || capacite || '  ok ' || nbParticipant;
+    	reponse := 'Taux de remplissage de '|| pourcentage || '%'|| chr(9) ||' pour ' || name_event ||' le '||date_event ; 
 
 	RETURN reponse;
 END
 $$ LANGUAGE plpgsql;
 
 
-
-CREATE OR REPLACE function all_taux_de_remplissage() RETURNS text as $$
+--------------------------------------------------------------------------------
+-- Determine le taux de remplissage de chaque date de representation d'un evenement
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function taux_de_remplissage() RETURNS text as $$
 DECLARE
 	idEvent record;
-	s text:= '';
+	reponse text:= '';
 BEGIN
 	FOR idEvent in
    	    select id_date_evenement from date_evenement
     	LOOP
-	    s := s || taux_de_remplissage(idEvent.id_date_evenement) || chr(10);
+	    reponse := reponse || taux_de_remplissage_event(idEvent.id_date_evenement) || chr(10);
      	END LOOP;
 
-RETURN s ;
+RETURN reponse ;
 END
 $$ LANGUAGE plpgsql;
 
---select taux_de_remplissage(20);
+--select taux_de_remplissage();
 
 
 
