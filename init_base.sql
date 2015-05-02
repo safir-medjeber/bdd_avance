@@ -48,10 +48,11 @@ CREATE TABLE Reception_Message (
 CREATE TABLE Evenement_Culturel (
 	id_evenement		SERIAL PRIMARY KEY,
 	nom_evenement		VARCHAR NOT NULL,
-
 	id_lieu				INTEGER REFERENCES Lieu
 		ON UPDATE CASCADE,
-	duree_evenement		TIME
+	duree_evenement		TIME,
+	pourcentage_reduction_evenement INTEGER 
+		CHECK (pourcentage_reduction_evenement >= 0 AND pourcentage_reduction_evenement <= 100)
 );
 
 CREATE TABLE Piece_Theatre (

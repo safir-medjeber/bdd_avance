@@ -35,3 +35,28 @@ BEGIN
 		RETURN capacite - nb_resta;
 	END IF;
 END $$ LANGUAGE plpgsql;
+
+---------------------------------------------------------
+-- Renvoie le prix d'une date d'evenement en tenant compte
+-- des reductions 
+---------------------------------------------------------
+CREATE OR REPLACE FUNCTION date_evenement_prix(idDateEvent INTEGER)
+RETURNS INTEGER AS $$
+DECLARE
+	pourcent INTEGER;
+	dateEvent TIMESTAMP; -- La difference entre today et la date event
+	prix_base INTEGER;
+BEGIN
+	-- On rempli les champs
+	SELECT date_evenement, pourcentage_reduction_evenement, prix_date_evenement
+	INTO dateEvent, pourcent, prix_base
+	FROM Evenement_culturel NATURAL JOIN Date_Evenement
+	WHERE id_date_evenement = idDateEvent;
+
+	IF dateEvent - TODAY() <= '5 days' AND pourcent IS NOT NULL THEN
+		return prix_base - (pourcent::FLOAT/100)*prix_base;
+	ELSE
+		return prix_base;
+	END IF;
+
+END $$ LANGUAGE plpgsql;
