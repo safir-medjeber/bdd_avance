@@ -12,6 +12,20 @@ END
 $$ LANGUAGE plpgsql;
 
 
+--------------------------------------------------------------------------------
+-- Retourne le nom  d'un evenement a partir de son identifiant
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function get_name_event(idEvent INTEGER) RETURNS TEXT as $$
+DECLARE
+
+	reponse text := '';
+BEGIN
+	select nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_evenement= idEvent into reponse;
+	return reponse;
+END;
+$$ LANGUAGE plpgsql;
+
+
 
 
 --------------------------------------------------------------------------------
@@ -33,7 +47,6 @@ BEGIN
 	RETURN reponse;
 END
 $$ LANGUAGE plpgsql;
---select ratio_homme_femme_sur_plateforme();
 
 
 
@@ -41,7 +54,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme d'une représentation d'un evenement 
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_event(idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_sur_plateforme(idDateEvent INTEGER) RETURNS text as $$
 DECLARE
 	femme INTEGER := 0;
 	total INTEGER := 0;
@@ -62,7 +75,6 @@ BEGIN
 	RETURN reponse;
 END
 $$ LANGUAGE plpgsql;
---select ratio_homme_femme_par_evenement();
 
 
 
@@ -91,7 +103,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage d'un evenement pour une representation
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function taux_de_remplissage_event(idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function taux_de_remplissage_par_evenement(idDateEvent INTEGER) RETURNS text as $$
 DECLARE
 	capacite INTEGER := 0;
 	nbParticipant  INTEGER := 0;
@@ -113,8 +125,6 @@ $$ LANGUAGE plpgsql;
 
 
 
-
-
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage de chaque representation de tous les evenements
 --------------------------------------------------------------------------------
@@ -126,23 +136,71 @@ BEGIN
 	FOR idEvent in
    	    select id_date_evenement from date_evenement
     	LOOP
-	    reponse := reponse || taux_de_remplissage_event(idEvent.id_date_evenement) || chr(10);
+	    reponse := reponse || taux_de_remplissage_par_evenement(idEvent.id_date_evenement) || chr(10);
      	END LOOP;
 
 RETURN reponse ;
 END
 $$ LANGUAGE plpgsql;
 
---select taux_de_remplissage();
 
 
+
+--------------------------------------------------------------------------------
+-- Determine le taux de remplissage moyen d'un evenement à partir de son idenfiant
+-----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen_par_evenement(idEvent INTEGER) RETURNS TEXT as $$
+DECLARE
+	capacite INTEGER := 0;
+	nbParticipantTotal  INTEGER := 0;
+	nbParticipant  INTEGER := 0;
+	pourcentage  FLOAT := 0;
+	reponse TEXT := '';
+	name_event TEXT :='';
+	date_event TIMESTAMP;
+	it RECORD;
+BEGIN
+
+	FOR it IN
+	    SELECT id_date_evenement FROM Date_evenement WHERE id_evenement = idEvent
+	LOOP
+		SELECT count(*) FROM reservation WHERE id_date_evenement = it.id_date_evenement INTO nbParticipant;
+		capacite := capacite + date_evenement_capaciteTotale(it.id_date_evenement );
+		nbParticipantTotal := nbParticipantTotal + nbParticipant;
+     	END LOOP;
+		name_event := get_name_event(idEvent);
+		pourcentage := (nbParticipantTotal*100)/capacite;
+    		reponse := 'Taux de remplissage moyen de '|| pourcentage || '%'|| chr(9) ||' pour ' || name_event  ; 
+	
+	RETURN reponse;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--------------------------------------------------------------------------------
+-- Determine le taux de remplissage moyen de tous les évènements
+-----------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen() RETURNS TEXT as $$
+DECLARE
+	idEvent record;
+	reponse text:= '';
+BEGIN
+	FOR idEvent IN
+   	    SELECT DISTINCT id_evenement FROM date_evenement
+    	LOOP
+	    reponse := reponse || taux_de_remplissage_moyen_par_evenement(idEvent.id_evenement) || chr(10);
+     	END LOOP;
+
+RETURN reponse ;
+END;
+$$ LANGUAGE plpgsql;
 
 
 
 --------------------------------------------------------------------------------
 -- Determine le revenu total d'un organisateur a partir de son identifiant
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function event_organise_by(idMembre INTEGER) RETURNS text as $$
+CREATE OR REPLACE function revenu_par_organisateur(idMembre INTEGER) RETURNS text as $$
 DECLARE
 	idEvent record;
 	prixPlace record;
@@ -154,12 +212,12 @@ DECLARE
 BEGIN
 	SELECT nom_membre, prenom_membre from membre where id_membre=idMembre INTO  nom, prenom;
 
-	FOR idEvent in
-   	    select id_evenement,  nom_evenement , date_evenement from evenement_culturel natural join organise natural join date_evenement where id_membre=idMembre
+	FOR idEvent IN
+   	    SELECT id_evenement,  nom_evenement , date_evenement FROM evenement_culturel NATURAL JOIN organise NATURAL JOIN date_evenement WHERE id_membre=idMembre
     	LOOP
 	events:= events ||chr(9)||'-> '''|| idEvent.nom_evenement||''' le '|| idEvent.date_evenement||chr(10);		
-	    FOR prixPlace in
-	    	select prix_date_evenement  from reservation  natural join date_Evenement where id_evenement=idEvent.id_evenement
+	    FOR prixPlace IN
+	    	SELECT prix_date_evenement FROM reservation NATURAL JOIN date_Evenement WHERE id_evenement=idEvent.id_evenement
 	    LOOP
 		revenu:=revenu+prixPlace.prix_date_evenement;
 	    END LOOP;
@@ -169,7 +227,7 @@ BEGIN
 	reponse:= reponse ||events;
 	reponse:= reponse || '-------------------------------------------------------------------------------------'||chr(10);
 RETURN reponse ;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 
@@ -177,24 +235,21 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le revenu total de chacun des organisateurs
 ------------------------------------------------------------------------------
-CREATE OR REPLACE function revenu_organisateur() RETURNS text as $$
+CREATE OR REPLACE FUNCTION revenu_organisateurs() RETURNS TEXT AS $$
 DECLARE
 	idMembre record;
-	prixPlace record;
 	reponse text := '';
 	nom text := '';
 	events text := 'Ses évènements : '|| chr(10);
-	prenom text := '';
 	revenu INTEGER :=0;
 BEGIN
-	
 	FOR idMembre in
    	   SELECT DISTINCT id_membre FROM membre NATURAL JOIN organise
     	LOOP
-		reponse:= reponse || event_organise_by(idMembre.id_membre);
+	   reponse:= reponse || revenu_par_organisateur(idMembre.id_membre);
      	END LOOP;
 RETURN reponse ;
-END
+END;
 $$ LANGUAGE plpgsql;
 
 
