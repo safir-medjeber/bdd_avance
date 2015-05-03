@@ -8,15 +8,11 @@ DECLARE
 	idMembre INTEGER;
 BEGIN
 	idMembre := membre_getID($1);
+	RAISE NOTICE '%', idMembre;
 	RETURN QUERY
 		SELECT Message.date_message, Message.objet_message, Message.contenu_message
-		FROM 
-		(
-			SELECT date_message, objet_message, contenu_message
-			FROM Reception_message 
-			WHERE id_membre = idMembre
-		) as s
-		NATURAL JOIN Message
+		FROM Reception_Message NATURAL JOIN Message
+		WHERE id_membre = idMembre
 	;
 END;
 $$ LANGUAGE plpgsql;
@@ -36,11 +32,12 @@ END $$ LANGUAGE plpgsql;
 -------------------------------------------------------
 -- Creation du mail (sans envoie) et renvoie l'id du mail
 -------------------------------------------------------
-CREATE OR REPLACE FUNCTION creation_message(objet_message VARCHAR, texte_message VARCHAR)
+CREATE OR REPLACE FUNCTION creation_message(objet_message VARCHAR, contenu_message VARCHAR)
 RETURNS INTEGER AS $$ 
 DECLARE
 	idMessage INTEGER;
 BEGIN
+	--RAISE NOTICE 'Creation_message Contenu Message %', contenu_message;
 	INSERT INTO Message (objet_message, date_message, contenu_message)
 	VALUES ($1, (SELECT TODAY()), $2)
 	RETURNING id_message INTO idMessage;
@@ -80,7 +77,7 @@ $$ LANGUAGE plpgsql;
 -------------------------------------------------------
 -- Envoi d'un mail au membre inscrit à un evenement
 -------------------------------------------------------
-CREATE OR REPLACE FUNCTION envoyer_message_groupe(idEvenement INTEGER, objet_message VARCHAR, contenu_message VARCHAR)
+CREATE OR REPLACE FUNCTION envoyer_message_groupe(idDateEvent INTEGER, objet_message VARCHAR, contenu_message VARCHAR)
 RETURNS VOID AS $$
 
 DECLARE
@@ -91,7 +88,7 @@ BEGIN
 	idMessage := creation_message(objet_message, contenu_message);
 
 	-- Liaison du message
-	FOR r IN (SELECT id_membre FROM Reservation WHERE id_evenement = $1) LOOP
+	FOR r IN (SELECT id_membre FROM Reservation NATURAL JOIN Date_Evenement WHERE id_date_evenement = $1) LOOP
 		INSERT INTO Reception_message (id_membre, id_message) VALUES (r.id_membre, idMessage);
 	END LOOP;
 END

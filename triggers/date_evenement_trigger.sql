@@ -53,21 +53,25 @@ CREATE OR REPLACE FUNCTION trigger_date_evenement_delete()
 RETURNS TRIGGER AS $$
 DECLARE
 	it RECORD;
+	contenuMessage VARCHAR;
+	nomEvent VARCHAR;
 BEGIN
-	-- On envoie un avoir et on notifie par mp tous les acheteurs
-	FOR it IN
-		SELECT id_membre 
-		FROM Reservation NATURAL JOIN Date_Evenement NATURAL JOIN Evenement_Culturel 
-		WHERE id_date_evenement = OLD.id_date_evenement
-	LOOP
-		PERFORM envoyer_message(it.id_membre, 
-			'Annulation d un evenement',
-			'Nous avons le regret de vous informer que l evenement '||it.nom_evenement
-			||' prevu le '||it.date_evenement::VARCHAR||' a ete annulé, un avoir vous 
-			a été attribué.'
-		);
-		PERFORM avoir_creer(it.id_membre, OLD.id_date_evenement);
-	END LOOP;
+	RAISE NOTICE 'Suppression de la date d evenement numero %, creation d un e mail groupé d annulation.', OLD.id_date_evenement;
+
+	-- Envoi du mail groupé d annulation
+	SELECT nom_evenement INTO nomEvent
+	FROM Date_Evenement NATURAL JOIN Evenement_Culturel 
+	WHERE id_date_evenement = OLD.id_date_evenement
+	;
+	contenuMessage := 'Nous avons le regret de vous informer que l evenement '||nomEvent
+			||' prevu le '||OLD.date_evenement::VARCHAR||' a ete annulé, un avoir vous 
+			a été attribué.';
+	PERFORM envoyer_message_groupe(OLD.id_date_evenement, 'Annulation d un evenement', contenuMessage);
+
+	-- Suppression des reservation
+	DELETE FROM Reservation WHERE id_date_evenement = OLD.id_date_evenement;
+
+	RETURN OLD;
 END
 $$ LANGUAGE plpgsql;
 

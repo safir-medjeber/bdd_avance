@@ -22,6 +22,8 @@ BEGIN
 			DELETE FROM Evenement_Culturel WHERE id_evenement = it.id_evenement;
 		END IF;
 	END LOOP;
+
+	RETURN NEW;
 END $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER membre_trigger_before_delete
