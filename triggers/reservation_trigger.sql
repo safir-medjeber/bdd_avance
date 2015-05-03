@@ -68,28 +68,28 @@ AFTER INSERT OR UPDATE ON Reservation FOR EACH ROW
 -- AFTER DELETE
 -- On envoie un mail et un avoir au membre
 ---------------------------------------------------------
-CREATE OR REPLACE FUNCTION reservartion_trigger_after_delete()
+CREATE OR REPLACE FUNCTION reservartion_trigger_before_delete()
 RETURNS TRIGGER AS $$
 DECLARE
 	nomEvent VARCHAR;
 	dateEvent TIMESTAMP;
 	prixEvent INTEGER;
+	contenu_msg VARCHAR;
 BEGIN
 	-- On recupere le nom, la date et le prix de l'event
 	SELECT nom_evenement, date_evenement, prix_date_evenement
 	INTO nomEvent, dateEvent, prixEvent
 	FROM date_evenement NATURAL JOIN evenement_culturel
-	WHERE id_date_evenement = OLD.id_date_evenement;
-
-	PERFORM envoyer_message(OLD.id_membre, 
-		'Demande d annulation prise en compte',
-		'Bonjour, nous vous confirmons bien l annulation reservation a l evenement '||nomEvent||' le '||dateEvent||'.'
-	);
+	WHERE id_date_evenement=OLD.id_date_evenement;
+	
+	-- Envoi du mail
+	contenu_msg := 'Bonjour, nous vous confirmons le remboursement de la reservation a l evenement '||nomEvent||' le '||dateEvent::VARCHAR||'. Un avoir a été crédité dans votre compte.';
+	PERFORM envoyer_message(OLD.id_membre, 'Annulation d un evenement', contenu_msg);
 	PERFORM avoir_creer(OLD.id_membre, OLD.id_date_evenement);
 
-	RETURN NEW;
+	RETURN OLD;
 END $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER reservartion_trigger_after_delete
-AFTER DELETE ON Reservation FOR EACH ROW
-	EXECUTE PROCEDURE reservartion_trigger_after_delete();
+CREATE TRIGGER reservartion_trigger_before_delete
+BEFORE DELETE ON Reservation FOR EACH ROW
+	EXECUTE PROCEDURE reservartion_trigger_before_delete();
