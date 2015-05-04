@@ -125,6 +125,7 @@ BEGIN
 	    nombre_femmes := r.nombre_femmes;
 	    nombre_total := r.nombre_total;
 
+	    -- Ajout de la ligne
 	    RETURN NEXT;
     END LOOP;
 
@@ -138,28 +139,39 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage d'un evenement pour une representation
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function taux_de_remplissage_par_evenement(idAppelant INTEGER, idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function taux_de_remplissage_par_evenement(idAppelant INTEGER, idDateEvent INTEGER)
+RETURNS TABLE(nom_evenement VARCHAR, date_evenement TIMESTAMP, taux_remplissage FLOAT,
+			nb_inscrit INTEGER, nb_place_total INTEGER)
+AS $$
 DECLARE
 	capacite INTEGER := 0;
 	nbParticipant  INTEGER := 0;
-	pourcentage  FLOAT := 0;
-	reponse text := '';
-	name_event text :='';
+	pourcentage  FLOAT;
+	reponse VARCHAR;
+	name_event VARCHAR;
 	date_event TIMESTAMP;
 BEGIN
 	IF NOT est_administrateur(idAppelant) THEN
 	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   RETURN;
 	END IF;
 
-	SELECT count(*) from reservation where id_date_evenement = idDateEvent INTO nbParticipant;
+	SELECT count(*)  
+	INTO nbParticipant
+	FROM reservation 
+	WHERE id_date_evenement = idDateEvent;
+
 	capacite := date_evenement_capaciteTotale(idDateEvent);
 
-	select * from get_info_event(idDateEvent) into name_event, date_event;
-	pourcentage := (nbParticipant*100)/capacite;
-    	reponse := 'Taux de remplissage de '|| pourcentage || '%'|| chr(9) ||' pour ' || name_event ||' le '||date_event ; 
+	SELECT evenement_culturel.nom_evenement, date_evenement.date_evenement
+	INTO name_event, date_event
+	FROM evenement_culturel NATURAL JOIN date_evenement
+	WHERE id_date_evenement = idDateEvent;	
 
-	RETURN reponse;
+	pourcentage := (nbParticipant::FLOAT*100)/capacite;
+
+	RETURN QUERY
+		SELECT name_event, date_event, pourcentage::FLOAT, nbParticipant, capacite;
 END
 $$ LANGUAGE plpgsql;
 
