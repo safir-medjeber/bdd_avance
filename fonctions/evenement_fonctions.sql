@@ -135,7 +135,7 @@ BEGIN
 			RETURN;
 		END IF;
 
-	INSERT INTO Organise (id_membre, id_evenement) VALUES (idEvent, id_membre);
+	INSERT INTO Organise (id_membre, id_evenement) VALUES (idEvent, idMembre);
 END $$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------------------------
