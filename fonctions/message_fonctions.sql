@@ -57,7 +57,9 @@ BEGIN
 	idMessage := creation_message(objet_message, contenu_message);
 
 	-- Liaison du message
-	INSERT INTO Reception_message (id_membre, id_message) VALUES (idMembre, idMessage);
+	IF idMembre IN (SELECT id_membre FROM Membre) THEN
+		INSERT INTO Reception_message (id_membre, id_message) VALUES (idMembre, idMessage);
+	END IF;
 END
 $$ LANGUAGE plpgsql;
 

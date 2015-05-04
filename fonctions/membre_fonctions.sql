@@ -38,15 +38,17 @@ $$ LANGUAGE plpgsql;
 -------------------------------------------------------
 DROP FUNCTION IF EXISTS membre_supprimer(VARCHAR, INTEGER);
 CREATE OR REPLACE FUNCTION membre_supprimer(login VARCHAR, idAppelant INTEGER)
-RETURNS VOID AS $$
+RETURNS BOOLEAN AS $$
 DECLARE
 	idMembre INTEGER := membre_getID(login);
 BEGIN
 	IF NOT (idMembre = idAppelant OR est_administrateur(idAppelant)) THEN
 		RAISE 'Le membre % appelant cette fonction n est ni un administrateur ni le membre à supprimer', login;
-		RETURN;
+		RETURN FALSE;
 	END IF;
 
 	DELETE FROM Membre WHERE id_membre = idMembre;
+
+	RETURN TRUE;
 END
 $$ LANGUAGE plpgsql;
