@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+-- Retourne le nom et la date d'un evenement a partir de son id_date
+--------------------------------------------------------------------------------
+function get_info_event(idDateEvent INTEGER)
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le ratio homme, femme des membres présent sur la plateformsur la plateforme
+--------------------------------------------------------------------------------
+function ratio_homme_femme_sur_plateforme()
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le ratio homme, femme parmi les participants d'une représentation d'un evenement 
+--------------------------------------------------------------------------------
+function ratio_homme_femme_event(idDateEvent INTEGER)
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le ratio homme femme de chaque representation de tous les evenements
+--------------------------------------------------------------------------------
+function ratio_homme_femme_par_evenement() 
+
+
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le taux de remplissage d'un evenement pour une representation
+----------------------------------------------------------------------function taux_de_remplissage_event(idDateEvent INTEGER)
+;
+
+
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le taux de remplissage de chaque representation de tous les evenements
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function taux_de_remplissage() RETURNS text as $$
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le revenu total d'un organisateur a partir de son identifiant
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function event_organise_by(idMembre INTEGER) RETURNS text as $$
+DECLARE
+	idEvent record;
+	prixPlace record;
+	reponse text := '';
+	nom text := '';
+	events text := 'Ses évènements : '|| chr(10);
+	prenom text := '';
+	revenu INTEGER :=0;
+BEGIN
+	SELECT nom_membre, prenom_membre from membre where id_membre=idMembre INTO  nom, prenom;
+
+	FOR idEvent in
+   	    select id_evenement,  nom_evenement , date_evenement from evenement_culturel natural join organise natural join date_evenement where id_membre=idMembre
+    	LOOP
+	events:= events ||chr(9)||'-> '''|| idEvent.nom_evenement||''' le '|| idEvent.date_evenement||chr(10);		
+	    FOR prixPlace in
+	    	select prix_date_evenement  from reservation  natural join date_Evenement where id_evenement=idEvent.id_evenement
+	    LOOP
+		revenu:=revenu+prixPlace.prix_date_evenement;
+	    END LOOP;
+     	END LOOP;
+	reponse:= 'Organisateur : ' ||nom||' '||prenom||chr(10);
+	reponse:= reponse ||'Revenu : ' || revenu || '€'||chr(10);
+	reponse:= reponse ||events;
+	reponse:= reponse || '-------------------------------------------------------------------------------------'||chr(10);
+RETURN reponse ;
+END
+$$ LANGUAGE plpgsql;
+
+
+
+--------------------------------------------------------------------------------
+-- Determine le revenu total de chacun des organisateurs
+------------------------------------------------------------------------------
+CREATE OR REPLACE function revenu_organisateur() RETURNS text as $$
+
+
+
+
+
+
+
+
+
+
+
+
