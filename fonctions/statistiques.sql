@@ -180,23 +180,36 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage de chaque representation de tous les evenements
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function taux_de_remplissage(idAppelant INTEGER) RETURNS text as $$
+CREATE OR REPLACE function taux_de_remplissage(idAppelant INTEGER)
+RETURNS TABLE(nom_evenement VARCHAR, date_evenement TIMESTAMP, taux_remplissage FLOAT,
+			nb_inscrit INTEGER, nb_place_total INTEGER)
+AS $$
 DECLARE
-	idEvent record;
-	reponse text:= '';
+	it RECORD;
+	r RECORD;
 BEGIN
 	IF NOT est_administrateur(idAppelant) THEN
-	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   Raise 'Il faut être administrateur pour utiliser cette fonction';
+	   RETURN;
 	END IF;
 	
-	FOR idEvent in
-   	    select id_date_evenement from date_evenement
-    	LOOP
-	    reponse := reponse || taux_de_remplissage_par_evenement(idAppelant, idEvent.id_date_evenement) || chr(10);
-     	END LOOP;
+	-- Derouler tous les id_date_evenement
+	FOR it IN
+   	    SELECT id_date_evenement FROM date_evenement
+    LOOP
+	    r := taux_de_remplissage_par_evenement(idAppelant, it.id_date_evenement);
 
-RETURN reponse ;
+	    nom_evenement := r.nom_evenement;
+	    date_evenement := r.date_evenement;
+	    taux_remplissage := r.taux_remplissage;
+	    nb_inscrit := r.nb_inscrit;
+	    nb_place_total := r.nb_place_total;
+
+	    -- Ajout de la ligne
+	    RETURN NEXT;
+    END LOOP;
+
+	RETURN;
 END
 $$ LANGUAGE plpgsql;
 

@@ -14,3 +14,13 @@ select * from ratio_homme_femme_par_evenement(1,1);
 \echo
 \echo Ratio homme/femme des reservants de toutes les dates d evenement :
 select * from ratio_homme_femme_evenements(1);
+
+\echo -------------------------------------------
+\echo
+\echo Taux de remplissage d un evenement :
+select * from taux_de_remplissage_par_evenement(1,1);
+
+\echo -------------------------------------------
+\echo
+\echo Taux de remplissage de tous les evenements :
+select * from taux_de_remplissage(1);
