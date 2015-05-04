@@ -24,3 +24,8 @@ select * from taux_de_remplissage_par_evenement(1,1);
 \echo
 \echo Taux de remplissage de tous les evenements :
 select * from taux_de_remplissage(1);
+
+\echo -------------------------------------------
+\echo
+\echo Taux de remplissage moyen des dates d un même evenement :
+select * from taux_de_remplissage_moyen_par_evenement(1,1);

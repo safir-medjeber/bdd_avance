@@ -217,36 +217,50 @@ $$ LANGUAGE plpgsql;
 
 
 --------------------------------------------------------------------------------
--- Determine le taux de remplissage moyen d'un evenement à partir de son idenfiant
+-- Determine le taux de remplissage moyen d'un evenement sur toutes ses dates
 -----------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen_par_evenement(idAppelant INTEGER, idEvent INTEGER) RETURNS TEXT as $$
+CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen_par_evenement(idAppelant INTEGER, idEvent INTEGER) 
+RETURNS TABLE(nom_evenement VARCHAR, taux_de_remplissage_moyen VARCHAR)
+AS $$
 DECLARE
 	capacite INTEGER := 0;
 	nbParticipantTotal  INTEGER := 0;
 	nbParticipant  INTEGER := 0;
-	pourcentage  FLOAT := 0;
+	pourcentage  FLOAT;
 	reponse TEXT := '';
-	name_event TEXT :='';
+	name_event VARCHAR;
 	date_event TIMESTAMP;
 	it RECORD;
+	test VARCHAR DEFAULT 'a';
 BEGIN
 	IF NOT est_administrateur(idAppelant) THEN
 	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   RETURN;
 	END IF;
 	
 	FOR it IN
 	    SELECT id_date_evenement FROM Date_evenement WHERE id_evenement = idEvent
 	LOOP
-		SELECT count(*) FROM reservation WHERE id_date_evenement = it.id_date_evenement INTO nbParticipant;
-		capacite := capacite + date_evenement_capaciteTotale(it.id_date_evenement );
+		SELECT count(*) 
+		INTO nbParticipant
+		FROM reservation 
+		WHERE id_date_evenement = it.id_date_evenement;
+
+		capacite := capacite + date_evenement_capaciteTotale(it.id_date_evenement);
 		nbParticipantTotal := nbParticipantTotal + nbParticipant;
-     	END LOOP;
-		name_event := get_name_event(idEvent);
-		pourcentage := (nbParticipantTotal*100)/capacite;
-    		reponse := 'Taux de remplissage moyen de '|| pourcentage || '%'|| chr(9) ||' pour ' || name_event  ; 
+	END LOOP;
+
+	SELECT Evenement_culturel.nom_evenement 
+	INTO name_event 
+	FROM evenement_culturel 
+	WHERE id_evenement = idEvent;
+
+	pourcentage := (nbParticipantTotal*100)/capacite;
 	
-	RETURN reponse;
+	RETURN QUERY
+		SELECT name_event AS nom_evenement, 
+		(pourcentage::VARCHAR||'%')::VARCHAR AS taux_de_remplissage_moyen
+		;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -254,23 +268,33 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage moyen de tous les évènements
 -----------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen(idAppelant INTEGER) RETURNS TEXT as $$
+CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen(idAppelant INTEGER)
+RETURNS TABLE(nom_evenement VARCHAR, taux_de_remplissage_moyen VARCHAR)
+AS $$
 DECLARE
-	idEvent record;
-	reponse text:= '';
+	it RECORD;
+	r RECORD;
 BEGIN
 	IF NOT est_administrateur(idAppelant) THEN
-	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   Raise 'Il faut être administrateur pour utiliser cette fonction';
+	   RETURN;
 	END IF;
-	FOR idEvent IN
-   	    SELECT DISTINCT id_evenement FROM date_evenement
-    	LOOP
-	    reponse := reponse || taux_de_remplissage_moyen_par_evenement(idAppelant, idEvent.id_evenement) || chr(10);
-     	END LOOP;
+	
+	-- Derouler tous les id_date_evenement
+	FOR it IN
+   	    SELECT id_evenement FROM evenement_culturel
+    LOOP
+	    r := taux_de_remplissage_moyen_par_evenement(idAppelant, it.id_evenement);
 
-RETURN reponse ;
-END;
+	    nom_evenement := r.nom_evenement;
+	    taux_de_remplissage_moyen := r.taux_de_remplissage_moyen;
+
+	    -- Ajout de la ligne
+	    RETURN NEXT;
+    END LOOP;
+
+	RETURN;
+END
 $$ LANGUAGE plpgsql;
 
 
@@ -278,7 +302,9 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le revenu total d'un organisateur a partir de son identifiant
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function revenu_par_organisateur(idAppelant INTEGER, idMembre INTEGER) RETURNS text as $$
+CREATE OR REPLACE function revenu_par_organisateur(idAppelant INTEGER, idMembre INTEGER)
+RETURNS text 
+AS $$
 DECLARE
 	idEvent record;
 	prixPlace record;
