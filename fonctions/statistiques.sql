@@ -37,7 +37,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme d'une représentation d'un evenement 
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_par_evenement(idAppelant INTEGER, idDateEvent INTEGER)
+CREATE OR REPLACE FUNCTION ratio_homme_femme_par_evenement(idAppelant INTEGER, idDateEvent INTEGER)
 RETURNS TABLE(nom_evenement VARCHAR, date_evenement TIMESTAMP,
 		ratio_homme FLOAT, ratio_femme FLOAT, 
 		nombre_hommes INTEGER, nombre_femmes INTEGER, nombre_total INTEGER)
@@ -97,23 +97,38 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le ratio homme femme de chaque representation de tous les evenements
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_evenements(idAppelant INTEGER) RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_evenements(idAppelant INTEGER) 
+RETURNS TABLE(nom_evenement VARCHAR, date_evenement TIMESTAMP,
+		ratio_homme FLOAT, ratio_femme FLOAT, 
+		nombre_hommes INTEGER, nombre_femmes INTEGER, nombre_total INTEGER)
+AS $$
 DECLARE
-	idEvent record;
-	reponse text:= '';
+	it RECORD;
+	r RECORD;
 BEGIN
 	IF NOT est_administrateur(idAppelant) THEN
-	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   Raise 'Il faut être administrateur pour utiliser cette fonction';
+	   RETURN;
 	END IF;
 	
-	FOR idEvent in
-   	    select id_date_evenement from date_evenement
-    	LOOP
-	    reponse := reponse || ratio_homme_femme_par_evenement(idAppelant, idEvent.id_date_evenement) || chr(10);
-     	END LOOP;
+	-- Derouler tous les id_date_evenement
+	FOR it IN
+   	    SELECT id_date_evenement FROM date_evenement
+    LOOP
+	    r := ratio_homme_femme_par_evenement(idAppelant, it.id_date_evenement);
 
-RETURN reponse ;
+	    nom_evenement := r.nom_evenement;
+	    date_evenement := r.date_evenement;
+	    ratio_homme := r.ratio_homme;
+	    ratio_femme := r.ratio_femme;
+	    nombre_hommes := r.nombre_hommes;
+	    nombre_femmes := r.nombre_femmes;
+	    nombre_total := r.nombre_total;
+
+	    RETURN NEXT;
+    END LOOP;
+
+	RETURN;
 END
 $$ LANGUAGE plpgsql;
 
