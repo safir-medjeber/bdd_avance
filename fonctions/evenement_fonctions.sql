@@ -132,3 +132,34 @@ BEGIN
 
 	INSERT INTO Organise (id_membre, id_evenement) VALUES (idEvent, id_membre);
 END $$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------
+-- Retourne le nom et la date d'un evenement a partir de son id_date
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function get_info_event(idDateEvent INTEGER)
+RETURNS TABLE(nom_evenement varchar, date_evenement TIMESTAMP) AS $$
+BEGIN
+	RETURN QUERY 
+	SELECT nom_evenement, date_evenement 
+	FROM date_evenement NATURAL JOIN evenement_culturel 
+	WHERE id_date_evenement=idDateEvent;
+END
+$$ LANGUAGE plpgsql;
+
+
+--------------------------------------------------------------------------------
+-- Retourne le nom  d'un evenement a partir de son identifiant
+--------------------------------------------------------------------------------
+CREATE OR REPLACE function get_name_event(idEvent INTEGER)
+RETURNS TEXT as $$
+DECLARE
+	reponse TEXT;
+BEGIN
+	SELECT nom_evenement INTO reponse
+	FROM date_evenement 
+	NATURAL JOIN evenement_culturel 
+	WHERE id_evenement=idEvent
+	;
+	return reponse;
+END;
+$$ LANGUAGE plpgsql;
