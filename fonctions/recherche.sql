@@ -123,6 +123,7 @@ BEGIN
 	    natural join Evenement_Culturel natural join Lieu
 	    where Evenement_Culturel.nom_evenement like  argv
 	LOOP
+	info_event:= info_event ||'ID    : '|| tmp.id_date_evenement ||chr(10);
 	info_event:= info_event ||'Nom   : '|| tmp.nom_evenement  || chr(10)||'Lieu  : '||  tmp.nom_lieu ||chr(10);
 	info_event:= info_event	||'Date  : '|| tmp.date_evenement || chr(10)||'Prix  : '|| tmp.prix_date_evenement||'€'||chr(10);
 	info_event:= info_event	||'Place : '|| date_evenement_nbPlacesRestantes(tmp.id_date_evenement)|| ' Disponible(s)' ||chr(10);
@@ -148,6 +149,7 @@ BEGIN
 	    natural join Evenement_Culturel natural join Lieu
 	    where Date_Evenement.id_date_Evenement=idEvent
 	LOOP
+	info_event:= info_event ||'ID    : '|| tmp.id_date_evenement ||chr(10);
 	info_event:= info_event ||'Nom   : '|| tmp.nom_evenement  || chr(10)||'Lieu  : '||  tmp.nom_lieu ||chr(10);
 	info_event:= info_event	||'Date  : '|| tmp.date_evenement || chr(10)||'Prix  : '|| tmp.prix_date_evenement||'€'||chr(10);
 	info_event:= info_event	||'Place : '|| date_evenement_nbPlacesRestantes(tmp.id_date_evenement)|| ' Disponible(s)' ||chr(10);
@@ -182,9 +184,5 @@ return info_event;
 END;
 $$ LANGUAGE plpgsql;
 
-
----SELECT searchEvent(false, false, true, null, null, 0, 80, 'cin');
-
-
---SELECT searchEvent(true, true, false, '2015-01-02', '2016-12-02', 0, 80, 'Comique');
+--SELECT searchEvent(true, false, false, '2015-01-02', '2016-12-02', 50, 80, 'Tragedie');
 

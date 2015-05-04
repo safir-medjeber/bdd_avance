@@ -26,7 +26,7 @@ INSERT INTO Lieu (nom_lieu, adresse_lieu, code_postal_ville, capacite_lieu) VALU
        ('La Comédie de Lille', '204 rue de Solférino', 59000, 80),
        ('Comédie-Française', 'Place Colette', 69000, 50),
        ('Théâtre National de Chaillot', '10 rue Duval', 31000, 100),
-       ('Théâtre National de la Colline', '15 rue Malte Brun', 13000, 40),
+       ('Théâtre National de la Colline', '15 rue Malte Brun', 13000, 35),
        ('Théâtre National de Odéon', '2 rue Corneille', 75000, 40),	
        ('Théâtre National de Strasbourg', '1 Avenue de la Marseillaise', 67000, 35),
 
@@ -67,7 +67,9 @@ INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_m
        ('Gould','Rachida', 'F', 'Goul_Rachida', 'Gould.Rachida@gmail.com', '23 rue Aristid Brillant', 67000),
        ('Mcdonald','Dominic', 'H', 'Mcdonal_Dominic', 'Mcdonald.Dominic@gmail.com', '90 boulevard Rouget de Lisle', 75000),
        ('Walter','Baxter', 'H', 'Walte_Baxter', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
-       ('Osborne','Paula', 'F', 'Osborn_Paula', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
+       ('Osborne','Paula', 'F', 'Osborn_Paula', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000),
+       ('Smith','Paul', 'H', 'Smith_Paul', 'Smith_Paul@gmail.com', '6 avenue Saint Martin', 75000);
+
 
 --Administrateur
 INSERT INTO Administrateur(id_membre) VALUES
@@ -399,8 +401,9 @@ INSERT INTO Reservation(id_membre, id_date_evenement) VALUES
 	(8,38),(7,19),(5,16),(9,9),(2,40),(26,53),(8,58),(8,41),(3,11),(16,2),
 	(7,25),(25,38),(23,37),(24,50),(11,17),(15,46),(12,43),(2,30),(20,19),(7,10),
 	(9,29),(16,29),(19,35),(7,56),(18,16),(6,38),(12,40),(15,33),(21,20),(26,28),
-	(11,30),(14,41),(5,16),(12,6),(1,39),(22,3),(1,34),(6,31),(16,6),(13,42);
-
+	(11,30),(14,41),(5,16),(12,6),(1,39),(22,3),(1,34),(6,31),(16,6),(13,42),
+	(3,9),(1,9),(3,9),(13,9),(5,9),(7,9),(19,9),(10,9),(11,9),(12,9),
+	(16,9),(15,9);
 
 
 

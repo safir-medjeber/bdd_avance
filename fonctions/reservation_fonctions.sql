@@ -9,7 +9,7 @@ DECLARE
 BEGIN
 	-- Insertion de la requete qui appellera les triggers appropriés
 	INSERT INTO Reservation (id_membre, id_date_evenement)
-	VALUES (login, id_date_evenement);
+	VALUES (idMembre, id_date_evenement);
 END;
 $$ LANGUAGE plpgsql;
 
@@ -26,6 +26,7 @@ DECLARE
 	estLeMembre BOOLEAN;
 BEGIN
 	-- On check si l'appellant est le membre qui a la reservation
+
 	SELECT (Reservation.id_membre = idMembre) INTO estLeMembre 
 	FROM Reservation
 	WHERE Reservation.id_membre = idMembre
