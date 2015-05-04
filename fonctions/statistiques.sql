@@ -303,8 +303,7 @@ $$ LANGUAGE plpgsql;
 -- Determine le revenu total d'un organisateur a partir de son identifiant
 --------------------------------------------------------------------------------
 CREATE OR REPLACE function revenu_par_organisateur(idAppelant INTEGER, idMembre INTEGER)
-RETURNS text 
-AS $$
+RETURNS text AS $$
 DECLARE
 	idEvent record;
 	prixPlace record;
