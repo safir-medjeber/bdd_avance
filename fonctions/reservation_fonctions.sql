@@ -25,16 +25,8 @@ DECLARE
 	idMembre INTEGER := membre_getID(loginAAnnuler);
 	estLeMembre BOOLEAN;
 BEGIN
-	-- On check si l'appellant est le membre qui a la reservation
-
-	SELECT (Reservation.id_membre = idMembre) INTO estLeMembre 
-	FROM Reservation
-	WHERE Reservation.id_membre = idMembre
-	AND id_date_evenement = id_dateEvent;
-
-
 	-- On verifie que l'appelant est soit un administrateur soit le membre concerné
-	IF NOT (est_administrateur(id_appelant) OR estLeMembre) THEN
+	IF NOT (est_administrateur(id_appelant) OR id_appelant = idMembre) THEN
 		Raise 'L appelant de l annulation de reservation n est ni un administrateur ni le membre concerné';
 		RETURN FALSE;
 	END IF;
