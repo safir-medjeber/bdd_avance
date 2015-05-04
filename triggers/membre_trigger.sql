@@ -19,11 +19,11 @@ BEGIN
 	LOOP
 		IF ( evenement_nbOrganisateur(it.id_evenement) <= 1 ) THEN
 			RAISE NOTICE 'Le membre a supprimer est le seul organisateur de l evenement %, suppression de l evenement', it.id_evenement;
-			DELETE FROM Evenement_Culturel WHERE id_evenement = it.id_evenement;
+			PERFORM evenement_supprimer(it.id_evenement, OLD.id_membre);
 		END IF;
 	END LOOP;
 
-	RETURN NEW;
+	RETURN OLD;
 END $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER membre_trigger_before_delete

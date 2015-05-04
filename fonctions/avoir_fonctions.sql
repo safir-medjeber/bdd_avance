@@ -12,8 +12,10 @@ BEGIN
 	FROM Date_Evenement WHERE id_date_evenement = $2;
 
 	-- On crée l'avoir
-	INSERT INTO Avoir (id_membre, montant_avoir)
-	VALUES (idMembre, prixEvent);
+	IF idMembre IN (SELECT id_membre FROM Membre) THEN
+		INSERT INTO Avoir (id_membre, montant_avoir)
+		VALUES (idMembre, prixEvent);
+	END IF;
 END $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION avoir_creer(login VARCHAR, idDateEvent INTEGER)

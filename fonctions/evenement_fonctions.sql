@@ -119,10 +119,8 @@ END $$ LANGUAGE plpgsql;
 -- Ajoute un membre en tant qu'organisateur de l'evenement
 -- L'appelant doit être un administrateur ou un organisateur de l'evenement
 ---------------------------------------------------------
-CREATE OR REPLACE FUNCTION evenement_ajouterOrganisateur(idEvent INTEGER, id_appelant INTEGER, login VARCHAR)
+CREATE OR REPLACE FUNCTION evenement_ajouterOrganisateur(idEvent INTEGER, id_appelant INTEGER, idMembre INTEGER)
 RETURNS void AS $$
-DECLARE
-	idMembre INTEGER = membre_getID(login);
 BEGIN
 	IF NOT 
 		(
@@ -136,6 +134,14 @@ BEGIN
 		END IF;
 
 	INSERT INTO Organise (id_membre, id_evenement) VALUES (idEvent, idMembre);
+END $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION evenement_ajouterOrganisateur(idEvent INTEGER, id_appelant INTEGER, login VARCHAR)
+RETURNS void AS $$
+DECLARE
+	idMembre INTEGER = membre_getID(login);
+BEGIN
+	PERFORM evenement_ajouterOrganisateur(idEvent, id_appelant, idMembre);
 END $$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------------------------
