@@ -77,17 +77,17 @@ INSERT INTO Administrateur(id_membre) VALUES
        (2);
 
 -- Festival
-perform create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no', 1);
-perform create_festival('Festival des outremers', 14, '10:00:00','culturel', 'no', 1);
-perform create_festival('Festival Du Nouveau Cinéma Italien', 13, '10:00:00','cinema' , 'no', 2);
-perform create_festival('Festival Paris Tout Court', 16, '10:00:00', 'culturel','yes',2);
-perform create_festival('Festival des Chemins de Traverse', 13, '10:00:00', 'culturel', 'no', 2);
-perform create_festival('Festival de la Rue', 18, '10:00:00', 'culturel', 'yes', 2);
-perform create_festival('Festival de Cannes', 14, '10:00:00', 'cinema' ,'no', 3);
-perform create_festival('Festival Solidays', 15, '10:00:00', 'musique', 'yes', 3);
-perform create_festival('Festival Rock en Scène', 17, '10:00:00', 'musique', 'yes', 3);
-perform create_festival('Festival Rock in Opposition', 18, '10:00:00', 'musique', 'yes', 3);
-perform create_festival('Festival International de bande dessinee', 16, '10:00:00', 'musique', 'yes', 3);
+perform create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no', 1, 10);
+perform create_festival('Festival des outremers', 14, '10:00:00','culturel', 'no', 1, 32);
+perform create_festival('Festival Du Nouveau Cinéma Italien', 13, '10:00:00','cinema' , 'no', 2, 10);
+perform create_festival('Festival Paris Tout Court', 16, '10:00:00', 'culturel','yes',2, 34);
+perform create_festival('Festival des Chemins de Traverse', 13, '10:00:00', 'culturel', 'no', 2, 34);
+perform create_festival('Festival de la Rue', 18, '10:00:00', 'culturel', 'yes', 2, 54);
+perform create_festival('Festival de Cannes', 14, '10:00:00', 'cinema' ,'no', 3, 54);
+perform create_festival('Festival Solidays', 15, '10:00:00', 'musique', 'yes', 3, 30);
+perform create_festival('Festival Rock en Scène', 17, '10:00:00', 'musique', 'yes', 3, 32);
+perform create_festival('Festival Rock in Opposition', 18, '10:00:00', 'musique', 'yes', 3, 30);
+perform create_festival('Festival International de bande dessinee', 16, '10:00:00', 'musique', 'yes', 3,43);
 
 
 
@@ -97,27 +97,27 @@ perform create_festival('Festival International de bande dessinee', 16, '10:00:0
 
 
 -- Piece de Theatre
-perform create_piece_theatre('Le bal des Vampire', 7, '00:40:00', 'Comedie Musical', 'Fabien Pascal', 5);
-perform create_piece_theatre('Aristo du Coeur', 12, '00:40:00', 'Bulresque', 'Facco Charlotte', 5);
-perform create_piece_theatre('Entre pere et fils', 11, '00:40:00', 'Comique', 'Sabourin François', 5);
-perform create_piece_theatre('La femme de mouss est partie', 9, '00:40:00', 'Comique', 'Segui Elodie', 5);
-perform create_piece_theatre('Tailleur pour Dame', 8, '00:40:00', 'Bulresque', 'Calvo Ernesto', 5);
-perform create_piece_theatre('La Bonne Moitié', 10, '00:40:00', 'Comique', 'Pepi Guillaume', 6);
-perform create_piece_theatre('La Bonne Planque', 11, '00:40:00', 'Comique', 'Cacheux Fred',6);
-perform create_piece_theatre('La Bonne Soupe', 9, '00:40:00', 'Tragedie', 'Lecono Pierre', 6);
-perform create_piece_theatre('Britannicus (Racine)', 12, '00:40:00', 'Tragedie', 'Rians Johan', 1);
-perform create_piece_theatre('La Brouette du vinaigrier', 8, '00:40:00', 'Bulresque', 'Pellerin Gille', 1);
-perform create_piece_theatre('La Brune que voilà', 10, '00:40:00', 'Comedie Romantique', 'Lannister Anne', 1);
-perform create_piece_theatre('Le Dédale', 11, '00:40:00', 'Tragedie', 'Stark Daniel', 1);
-perform create_piece_theatre('Délire à deux', 12, '00:40:00', 'Vaudeville', 'Salvador Gabriel', 1);
-perform create_piece_theatre('Démocrite amoureux', 9, '00:40:00', 'Vaudeville', 'Hanouno Camille', 1);
-perform create_piece_theatre('Démocrite prétendu fou', 7, '00:40:00', 'Bulresque', 'Camus Emmanuel', 1);
-perform create_piece_theatre('Le Dénouement imprévu', 8, '00:40:00', 'Tragedie', 'Bourdieu Paul', 1);
-perform create_piece_theatre('Le Dépit amoureux', 10, '00:40:00', 'Comedie Romantique', 'Callier Lydie', 4);
-perform create_piece_theatre('La Dernière Nuit pour Marie Stuart', 11, '00:40:00', 'Comedie Musical', 'Dove attia', 4);
-perform create_piece_theatre('Des boulons dans mon yaourt', 8, '00:40:00', 'Comique', 'Gilbert Damien', 4);
-perform create_piece_theatre('Des journées entières dans les arbres', 10, '00:40:00', 'Comedie', 'Lecomte  Lucille', 4);
-perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Carlos', 5);
+perform create_piece_theatre('Le bal des Vampires', 7, '00:40:00', 'Comedie Musical', 'Fabien Pascal', 5, 40);
+perform create_piece_theatre('Aristo du Coeur', 12, '00:40:00', 'Bulresque', 'Facco Charlotte', 5, 50);
+perform create_piece_theatre('Entre pere et fils', 11, '00:40:00', 'Comique', 'Sabourin François', 5, 30);
+perform create_piece_theatre('La femme de mouss est partie', 9, '00:40:00', 'Comique', 'Segui Elodie', 5, 30);
+perform create_piece_theatre('Tailleur pour Dame', 8, '00:40:00', 'Bulresque', 'Calvo Ernesto', 5, 30);
+perform create_piece_theatre('La Bonne Moitié', 10, '00:40:00', 'Comique', 'Pepi Guillaume', 6, 40) ;
+perform create_piece_theatre('La Bonne Planque', 11, '00:40:00', 'Comique', 'Cacheux Fred', 6, 30 );
+perform create_piece_theatre('La Bonne Soupe', 9, '00:40:00', 'Tragedie', 'Lecono Pierre', 6, 20);
+perform create_piece_theatre('Britannicus (Racine)', 12, '00:40:00', 'Tragedie', 'Rians Johan', 1, 10);
+perform create_piece_theatre('La Brouette du vinaigrier', 8, '00:40:00', 'Bulresque', 'Pellerin Gille', 1, 50);
+perform create_piece_theatre('La Brune que voilà', 10, '00:40:00', 'Comedie Romantique', 'Lannister Anne', 1, 40);
+perform create_piece_theatre('Le Dédale', 11, '00:40:00', 'Tragedie', 'Stark Daniel', 1, 10);
+perform create_piece_theatre('Délire à deux', 12, '00:40:00', 'Vaudeville', 'Salvador Gabriel', 1, 30);
+perform create_piece_theatre('Démocrite amoureux', 9, '00:40:00', 'Vaudeville', 'Hanouno Camille', 1, 45);
+perform create_piece_theatre('Démocrite prétendu fou', 7, '00:40:00', 'Bulresque', 'Camus Emmanuel', 1, 40);
+perform create_piece_theatre('Le Dénouement imprévu', 8, '00:40:00', 'Tragedie', 'Bourdieu Paul', 1, 30);
+perform create_piece_theatre('Le Dépit amoureux', 10, '00:40:00', 'Comedie Romantique', 'Callier Lydie', 4, 30);
+perform create_piece_theatre('La Dernière Nuit pour Marie Stuart', 11, '00:40:00', 'Comedie Musical', 'Dove attia', 4, 45);
+perform create_piece_theatre('Des boulons dans mon yaourt', 8, '00:40:00', 'Comique', 'Gilbert Damien', 4, 45);
+perform create_piece_theatre('Des journées entières dans les arbres', 10, '00:40:00', 'Comedie', 'Lecomte  Lucille', 4 , 50);
+perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Carlos', 5, 50);
 
 
 
@@ -126,17 +126,17 @@ perform create_piece_theatre('Le Déserteur ', 9, '00:40:00', 'Opéra', 'Moya Ca
 
 
 -- Info Exposition
-perform create_exposition('Paris Games Week', 6, '24:00:00', 'Jeux', 5);
-perform create_exposition('Japan Expo', 6, '10:00:00', 'Culture Japonaise', 5);
-perform create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 1, '10:00:00', 'Mode',5);
-perform create_exposition('Exposition oracles du design', 2, '10:00:00', 'Design', 6);
-perform create_exposition('Le bord des mondes', 3, '10:00:00', 'Peinture', 6);
-perform create_exposition('Exposition Felice Varini', 4, '10:00:00', 'Peinture', 6);
-perform create_exposition('Exposition Velazquez', 2, '10:00:00', 'Peinture', 6);
-perform create_exposition('Exposition Jeff Koons', 3, '10:00:00', 'Musique', 6);
-perform create_exposition('Exposition Cuisine du monde ', 1, '10:00:00', 'Cuisine', 6);
-perform create_exposition('Exposition De Carmen à mélisande', 5, '10:00:00', 'Architecture', 6);
-perform create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Peinture', 6);
+perform create_exposition('Paris Games Week', 6, '24:00:00', 'Jeux', 5, 30);
+perform create_exposition('Japan Expo', 6, '10:00:00', 'Culture Japonaise', 5, 45);
+perform create_exposition('Expo jean paul gaultier : de la rue aux étoiles', 1, '10:00:00', 'Mode', 5, 40);
+perform create_exposition('Exposition oracles du design', 2, '10:00:00', 'Design', 6, 35);
+perform create_exposition('Le bord des mondes', 3, '10:00:00', 'Peinture', 6, 45);
+perform create_exposition('Exposition Felice Varini', 4, '10:00:00', 'Peinture', 6,45);
+perform create_exposition('Exposition Velazquez', 2, '10:00:00', 'Peinture', 6, 45);
+perform create_exposition('Exposition Jeff Koons', 3, '10:00:00', 'Musique', 6, 45);
+perform create_exposition('Exposition Cuisine du monde ', 1, '10:00:00', 'Cuisine', 6, 45);
+perform create_exposition('Exposition De Carmen à mélisande', 5, '10:00:00', 'Architecture', 6, 45);
+perform create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Peinture', 6, 45);
 
 
 
