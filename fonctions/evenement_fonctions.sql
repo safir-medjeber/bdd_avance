@@ -95,6 +95,8 @@ $$ LANGUAGE plpgsql;
 ---------------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION evenement_supprimer(idEvent INTEGER, id_appelant INTEGER)
 RETURNS void AS $$
+DECLARE
+	it RECORD;
 BEGIN
 	IF NOT 
 		(
@@ -106,6 +108,9 @@ BEGIN
 			RAISE 'L appelant a la fonction de suppression n est ni un administrateur ni un organisateur de l evenement';
 			RETURN;
 		END IF;
+
+		-- Suppression de toutes les dates d'evenement
+		DELETE FROM date_evenement WHERE id_evenement = idEvent;
 
 		DELETE FROM Evenement_culturel WHERE id_evenement = idEvent;
 END $$ LANGUAGE plpgsql;
