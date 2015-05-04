@@ -23,45 +23,71 @@ BEGIN
 
 	-- Renvoie des resultats
 	RETURN QUERY 
-	SELECT 
-		nbHomme::FLOAT/nbTotal*100 AS ratio_homme,
-		nbFemme::FLOAT/nbTotal*100 AS ratio_femme,
-		nbHomme AS nombre_hommes,
-		nbFemme AS nombre_femmes,
-		nbTotal AS nombre_total
+		SELECT 
+			nbHomme::FLOAT/nbTotal*100 AS ratio_homme,
+			nbFemme::FLOAT/nbTotal*100 AS ratio_femme,
+			nbHomme AS nombre_hommes,
+			nbFemme AS nombre_femmes,
+			nbTotal AS nombre_total
 	;
 END
 $$ LANGUAGE plpgsql;
 
 
-
-
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme d'une représentation d'un evenement 
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_par_evenement(idAppelant INTEGER, idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_par_evenement(idAppelant INTEGER, idDateEvent INTEGER)
+RETURNS TABLE(nom_evenement VARCHAR, date_evenement TIMESTAMP,
+		ratio_homme FLOAT, ratio_femme FLOAT, 
+		nombre_hommes INTEGER, nombre_femmes INTEGER, nombre_total INTEGER)
+AS $$
 DECLARE
-	femme INTEGER := 0;
-	total INTEGER := 0;
-	pourcentageH  INTEGER :=0;
-	pourcentageF  INTEGER :=0;
-	reponse text := '';
-	name_event text :='';
-	date_event TIMESTAMP;
+	nomEvent VARCHAR;
+	dateEvent TIMESTAMP;
+	nbTotal INTEGER;
+	nbFemme INTEGER;
+	nbHomme INTEGER;
 BEGIN
+	-- Verification des droits
 	IF NOT est_administrateur(idAppelant) THEN
-	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   Raise 'Il faut être administrateur pour utiliser cette fonction';
+	   RETURN;
 	END IF;
 
-	SELECT count(*) from reservation  natural join membre where id_date_evenement=idDateEvent and sexe_membre='F' into femme;
-    	SELECT count(*) from reservation  natural join membre where id_date_evenement=idDateEvent into total;	
-    	pourcentageF:= (femme*100)/total;
-    	pourcentageH := 100 - pourcentageF ;
-	select * from get_info_event(idDateEvent) into name_event, date_event;
-	reponse := 'homme: ' || pourcentageH ||'% '|| chr(9) || 'femme: ' || pourcentageF || '%'||chr(9)||' pour ' || name_event ||' le '||date_event;
-	
-	RETURN reponse;
+	-- Récolte des informations
+	-- Nom/Date evenement
+	SELECT evenement_culturel.nom_evenement, date_Evenement.date_Evenement
+	INTO nomEvent, dateEvent
+	FROM evenement_culturel NATURAL JOIN date_Evenement
+	WHERE id_date_evenement = idDateEvent;
+
+	-- Nombre total de reservant
+	SELECT count(*) INTO nbTotal
+	FROM Reservation
+	WHERE id_date_evenement = idDateEvent;
+
+	-- Nombre de femme
+	SELECT count(*) INTO nbFemme
+	FROM Reservation NATURAL JOIN Membre
+	WHERE 
+		id_date_evenement = idDateEvent
+		AND sexe_membre = 'F';
+
+	-- Nombre d'homme
+	nbHomme := nbTotal - nbFemme;
+
+	-- Renvoie des resultats
+	RETURN QUERY 
+		SELECT
+			nomEvent,
+			dateEvent,
+			nbHomme::FLOAT/nbTotal*100 AS ratio_homme,
+			nbFemme::FLOAT/nbTotal*100 AS ratio_femme,
+			nbHomme AS nombre_hommes,
+			nbFemme AS nombre_femmes,
+			nbTotal AS nombre_total
+	;
 END
 $$ LANGUAGE plpgsql;
 

@@ -151,7 +151,7 @@ $$ LANGUAGE plpgsql;
 -- Retourne le nom  d'un evenement a partir de son identifiant
 --------------------------------------------------------------------------------
 CREATE OR REPLACE function get_name_event(idEvent INTEGER)
-RETURNS TEXT as $$
+RETURNS VARCHAR as $$
 DECLARE
 	reponse TEXT;
 BEGIN
