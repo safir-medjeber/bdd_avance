@@ -1,29 +1,3 @@
---------------------------------------------------------------------------------
--- Retourne le nom et la date d'un evenement a partir de son id_date
---------------------------------------------------------------------------------
-CREATE OR REPLACE function get_info_event(idDateEvent INTEGER) RETURNS TABLE(nom_evenement varchar, date_evenement TIMESTAMP)as $$
-DECLARE
-	name_event TEXT:='';
-	date_event TIMESTAMP;
-	reponse text := '';
-BEGIN
-	RETURN QUERY EXECUTE 'select nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_date_evenement='||idDateEvent;
-END
-$$ LANGUAGE plpgsql;
-
-
---------------------------------------------------------------------------------
--- Retourne le nom  d'un evenement a partir de son identifiant
---------------------------------------------------------------------------------
-CREATE OR REPLACE function get_name_event(idEvent INTEGER) RETURNS TEXT as $$
-DECLARE
-
-	reponse text := '';
-BEGIN
-	select nom_evenement, date_evenement from date_evenement natural join evenement_culturel where id_evenement= idEvent into reponse;
-	return reponse;
-END;
-$$ LANGUAGE plpgsql;
 
 
 
