@@ -69,7 +69,10 @@ INSERT INTO Membre (nom_membre, prenom_membre, sexe_membre, login_membre, mail_m
        ('Walter','Baxter', 'H', 'Walte_Baxter', 'Walter.Baxter@gmail.com', '10 rue du Président Wilson', 06000),
        ('Osborne','Paula', 'F', 'Osborn_Paula', 'Osborne.Paula@gmail.com', '56 avenue Saint Martin', 75000);
 
-
+--Administrateur
+INSERT INTO Administrateur(id_membre) VALUES
+       (1),
+       (2);
 
 -- Festival
 perform create_festival('Festival cinémarges', 13, '10:00:00', 'cinema', 'no', 1);

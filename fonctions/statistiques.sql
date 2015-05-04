@@ -31,7 +31,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme sur la plateforme
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_sur_plateforme() RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_sur_plateforme(idAppelant INTEGER) RETURNS text as $$
 DECLARE
 	femme INTEGER := 0;
 	total INTEGER := 0;
@@ -39,6 +39,11 @@ DECLARE
 	pourcentageF  INTEGER :=0;
 	reponse text := '';
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+
 	SELECT count(*)  INTO femme FROM membre WHERE sexe_membre='F';
     	SELECT count(*)  INTO total FROM membre;	
     	pourcentageF:= (femme*100)/total;
@@ -54,7 +59,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme d'une représentation d'un evenement 
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_sur_plateforme(idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_par_evenement(idAppelant INTEGER, idDateEvent INTEGER) RETURNS text as $$
 DECLARE
 	femme INTEGER := 0;
 	total INTEGER := 0;
@@ -64,6 +69,10 @@ DECLARE
 	name_event text :='';
 	date_event TIMESTAMP;
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
 
 	SELECT count(*) from reservation  natural join membre where id_date_evenement=idDateEvent and sexe_membre='F' into femme;
     	SELECT count(*) from reservation  natural join membre where id_date_evenement=idDateEvent into total;	
@@ -82,15 +91,20 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le ratio homme femme de chaque representation de tous les evenements
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_par_evenement() RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_evenements(idAppelant INTEGER) RETURNS text as $$
 DECLARE
 	idEvent record;
 	reponse text:= '';
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+	
 	FOR idEvent in
    	    select id_date_evenement from date_evenement
     	LOOP
-	    reponse := reponse || ratio_homme_femme_event(idEvent.id_date_evenement) || chr(10);
+	    reponse := reponse || ratio_homme_femme_par_evenement(idAppelant, idEvent.id_date_evenement) || chr(10);
      	END LOOP;
 
 RETURN reponse ;
@@ -103,7 +117,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage d'un evenement pour une representation
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function taux_de_remplissage_par_evenement(idDateEvent INTEGER) RETURNS text as $$
+CREATE OR REPLACE function taux_de_remplissage_par_evenement(idAppelant INTEGER, idDateEvent INTEGER) RETURNS text as $$
 DECLARE
 	capacite INTEGER := 0;
 	nbParticipant  INTEGER := 0;
@@ -112,6 +126,11 @@ DECLARE
 	name_event text :='';
 	date_event TIMESTAMP;
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+
 	SELECT count(*) from reservation where id_date_evenement = idDateEvent INTO nbParticipant;
 	capacite := date_evenement_capaciteTotale(idDateEvent);
 
@@ -128,15 +147,20 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage de chaque representation de tous les evenements
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function taux_de_remplissage() RETURNS text as $$
+CREATE OR REPLACE function taux_de_remplissage(idAppelant INTEGER) RETURNS text as $$
 DECLARE
 	idEvent record;
 	reponse text:= '';
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+	
 	FOR idEvent in
    	    select id_date_evenement from date_evenement
     	LOOP
-	    reponse := reponse || taux_de_remplissage_par_evenement(idEvent.id_date_evenement) || chr(10);
+	    reponse := reponse || taux_de_remplissage_par_evenement(idAppelant, idEvent.id_date_evenement) || chr(10);
      	END LOOP;
 
 RETURN reponse ;
@@ -149,7 +173,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage moyen d'un evenement à partir de son idenfiant
 -----------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen_par_evenement(idEvent INTEGER) RETURNS TEXT as $$
+CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen_par_evenement(idAppelant INTEGER, idEvent INTEGER) RETURNS TEXT as $$
 DECLARE
 	capacite INTEGER := 0;
 	nbParticipantTotal  INTEGER := 0;
@@ -160,7 +184,11 @@ DECLARE
 	date_event TIMESTAMP;
 	it RECORD;
 BEGIN
-
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+	
 	FOR it IN
 	    SELECT id_date_evenement FROM Date_evenement WHERE id_evenement = idEvent
 	LOOP
@@ -180,15 +208,19 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le taux de remplissage moyen de tous les évènements
 -----------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen() RETURNS TEXT as $$
+CREATE OR REPLACE FUNCTION taux_de_remplissage_moyen(idAppelant INTEGER) RETURNS TEXT as $$
 DECLARE
 	idEvent record;
 	reponse text:= '';
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
 	FOR idEvent IN
    	    SELECT DISTINCT id_evenement FROM date_evenement
     	LOOP
-	    reponse := reponse || taux_de_remplissage_moyen_par_evenement(idEvent.id_evenement) || chr(10);
+	    reponse := reponse || taux_de_remplissage_moyen_par_evenement(idAppelant, idEvent.id_evenement) || chr(10);
      	END LOOP;
 
 RETURN reponse ;
@@ -200,7 +232,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le revenu total d'un organisateur a partir de son identifiant
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function revenu_par_organisateur(idMembre INTEGER) RETURNS text as $$
+CREATE OR REPLACE function revenu_par_organisateur(idAppelant INTEGER, idMembre INTEGER) RETURNS text as $$
 DECLARE
 	idEvent record;
 	prixPlace record;
@@ -210,6 +242,11 @@ DECLARE
 	prenom text := '';
 	revenu INTEGER :=0;
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+	
 	SELECT nom_membre, prenom_membre from membre where id_membre=idMembre INTO  nom, prenom;
 
 	FOR idEvent IN
@@ -235,7 +272,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Determine le revenu total de chacun des organisateurs
 ------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION revenu_organisateurs() RETURNS TEXT AS $$
+CREATE OR REPLACE FUNCTION revenu_organisateurs(idAppelant INTEGER) RETURNS TEXT AS $$
 DECLARE
 	idMembre record;
 	reponse text := '';
@@ -243,10 +280,15 @@ DECLARE
 	events text := 'Ses évènements : '|| chr(10);
 	revenu INTEGER :=0;
 BEGIN
+	IF NOT est_administrateur(idAppelant) THEN
+	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
+	   RETURN NULL;
+	END IF;
+	
 	FOR idMembre in
    	   SELECT DISTINCT id_membre FROM membre NATURAL JOIN organise
     	LOOP
-	   reponse:= reponse || revenu_par_organisateur(idMembre.id_membre);
+	   reponse:= reponse || revenu_par_organisateur(idAppelant, idMembre.id_membre);
      	END LOOP;
 RETURN reponse ;
 END;
