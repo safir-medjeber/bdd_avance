@@ -134,7 +134,7 @@ BEGIN
 			RETURN;
 		END IF;
 
-	INSERT INTO Organise (id_membre, id_evenement) VALUES (idEvent, idMembre);
+	INSERT INTO Organise (id_membre, id_evenement) VALUES (idMembre, idEvent);
 END $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION evenement_ajouterOrganisateur(idEvent INTEGER, id_appelant INTEGER, login VARCHAR)
