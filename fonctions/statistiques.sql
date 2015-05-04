@@ -1,29 +1,35 @@
-
-
-
-
 --------------------------------------------------------------------------------
 -- Determine le ratio homme, femme sur la plateforme
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function ratio_homme_femme_sur_plateforme(idAppelant INTEGER) RETURNS text as $$
+CREATE OR REPLACE function ratio_homme_femme_sur_plateforme(idAppelant INTEGER) 
+RETURNS TABLE(ratio_homme FLOAT, ratio_femme FLOAT, 
+		nombre_hommes INTEGER, nombre_femmes INTEGER, nombre_total INTEGER)
+AS $$
 DECLARE
-	femme INTEGER := 0;
-	total INTEGER := 0;
-	pourcentageH  INTEGER :=0;
-	pourcentageF  INTEGER :=0;
-	reponse text := '';
+	nbTotal INTEGER;
+	nbFemme INTEGER;
+	nbHomme INTEGER;
 BEGIN
+	-- Verification des droits
 	IF NOT est_administrateur(idAppelant) THEN
-	   Raise 'Il faut être administrateur pour utiliser cette fonctionnalité';
-	   RETURN NULL;
+	   Raise 'Il faut être administrateur pour utiliser cette fonction';
+	   RETURN;
 	END IF;
 
-	SELECT count(*)  INTO femme FROM membre WHERE sexe_membre='F';
-    	SELECT count(*)  INTO total FROM membre;	
-    	pourcentageF:= (femme*100)/total;
-    	pourcentageH := 100 - pourcentageF ;
-    	reponse := 'pourcentage d''homme: ' || pourcentageH || chr(10) || 'pourcentage de femme: ' || pourcentageF  ;
-	RETURN reponse;
+	-- Récolte des informations
+	SELECT count(*) INTO nbTotal FROM Membre;
+	SELECT count(*) INTO nbFemme FROM Membre WHERE sexe_membre='F';
+	nbHomme := nbTotal - nbFemme;
+
+	-- Renvoie des resultats
+	RETURN QUERY 
+	SELECT 
+		nbHomme::FLOAT/nbTotal*100 AS ratio_homme,
+		nbFemme::FLOAT/nbTotal*100 AS ratio_femme,
+		nbHomme AS nombre_hommes,
+		nbFemme AS nombre_femmes,
+		nbTotal AS nombre_total
+	;
 END
 $$ LANGUAGE plpgsql;
 

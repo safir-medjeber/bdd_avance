@@ -163,3 +163,6 @@ $$ LANGUAGE plpgsql;
 -- Remplissage de la base
 \i base/fill_base.sql
 
+-- Fonction de stat
+\i fonctions/statistiques.sql
+
