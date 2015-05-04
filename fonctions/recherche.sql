@@ -138,7 +138,7 @@ $$ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 -- Fonction qui fourni des informations utiles d'un evenement a partir d'un id_date_event
 --------------------------------------------------------------------------------
-CREATE OR REPLACE function info_about_event_integer(idEvent INTEGER) returns text as $$
+CREATE OR REPLACE function info_about_event2(idEvent INTEGER) returns text as $$
 DECLARE
 	info_event TEXT:='';
 	tmp RECORD;
@@ -151,7 +151,7 @@ BEGIN
 	LOOP
 	info_event:= info_event ||'ID    : '|| tmp.id_date_evenement ||chr(10);
 	info_event:= info_event ||'Nom   : '|| tmp.nom_evenement  || chr(10)||'Lieu  : '||  tmp.nom_lieu ||chr(10);
-	info_event:= info_event	||'Date  : '|| tmp.date_evenement || chr(10)||'Prix  : '|| tmp.prix_date_evenement||'€'||chr(10);
+	info_event:= info_event	||'Date  : '|| tmp.date_evenement || chr(10)||'Prix  : '||  date_evenement_prix(tmp.id_date_evenement)||'€'||chr(10);
 	info_event:= info_event	||'Place : '|| date_evenement_nbPlacesRestantes(tmp.id_date_evenement)|| ' Disponible(s)' ||chr(10);
 	info_event:= info_event||'-------------------------------------------------------------------------------------'||chr(10);
 	END LOOP;
@@ -177,7 +177,7 @@ BEGIN
 	FOR tmp IN
 	    select id_date_evenement from searchEvent_aux($1, $2, $3, $4, $5, $6, $7, $8)
 	LOOP
-		info_event:=info_event || info_about_event_integer(tmp.id_date_evenement); 
+		info_event:=info_event || info_about_event2(tmp.id_date_evenement); 
 	END LOOP;
 	
 return info_event;
