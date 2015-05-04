@@ -31,6 +31,17 @@ BEGIN
 		RETURN FALSE;
 	END IF;
 
+	-- On verifie que la reservation existe
+	PERFORM *
+	FROM Reservation
+	WHERE id_membre = idMembre AND id_date_evenement = id_dateEvent;
+	IF NOT FOUND THEN
+		RAISE 'Le membre spécifié n a aucune reservation a la date d evenement donnée';
+		RETURN FALSE;
+	END IF;
+
+	
+	-- Annulation de la reservation
 	DELETE FROM Reservation 
 	WHERE id_membre = idMembre AND id_date_evenement = id_dateEvent;
 
