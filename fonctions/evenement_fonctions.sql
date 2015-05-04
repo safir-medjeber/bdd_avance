@@ -134,9 +134,6 @@ BEGIN
 			RETURN;
 		END IF;
 
-<<<<<<< HEAD
-	INSERT INTO Organise (id_membre, id_evenement) VALUES (id_membre, idEvent);
-=======
 	INSERT INTO Organise (id_membre, id_evenement) VALUES (idEvent, idMembre);
 END $$ LANGUAGE plpgsql;
 
@@ -146,7 +143,6 @@ DECLARE
 	idMembre INTEGER = membre_getID(login);
 BEGIN
 	PERFORM evenement_ajouterOrganisateur(idEvent, id_appelant, idMembre);
->>>>>>> f0a46610c76ce0f5e83670797a5f14e103075203
 END $$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------------------------
