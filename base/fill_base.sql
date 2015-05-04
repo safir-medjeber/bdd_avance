@@ -142,7 +142,7 @@ perform create_exposition('Exposition les cahiers dessinés', 1, '10:00:00', 'Pe
 
 --Date Evenement
 INSERT INTO Date_Evenement(id_evenement, date_evenement, prix_date_evenement) VALUES
-       (12, '2015-01-12 20:30:00', 20),
+       (12, '2015-01-02 20:30:00', 100),
        (13, '2015-01-12 20:30:00', 22),
        (14, '2015-06-12 20:30:00', 32),
        (15, '2015-01-12 20:30:00', 34),
