@@ -3,9 +3,9 @@
 --------------------------------------------------------------------------------
 
 CREATE OR REPLACE  FUNCTION searchEvent(event_theatre boolean, event_exposition boolean,  event_festival boolean, date_debut date, date_fin date, prix_min INTEGER, prix_max INTEGER, type_evenement TEXT)
-RETURNS TABLE(id_date_evenement INTEGER, nom_evenement varchar, date_evenement TIMESTAMP, 	prix_date_evenement INTEGER) as $$
+RETURNS TABLE(id_date_evenement INTEGER, nom_evenement varchar, date_evenement TIMESTAMP, prix_date_evenement INTEGER) as $$
 DECLARE
-       requete text := 'select id_date_evenement, nom_evenement, date_evenement, prix_date_evenement from evenement_culturel ';
+       requete text := 'select id_date_evenement, nom_evenement, date_evenement, date_evenement_prix(id_date_evenement) as prix_date_evenement from evenement_culturel ';
 BEGIN
 
 

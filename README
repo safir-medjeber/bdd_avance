@@ -1,0 +1,11 @@
+Lancer PSQL puis :
+	-> \i init_base.sql
+ 	-> la base de donnees est alors remplie et les fonctions importées
+
+Le dossier "base" contient les fichiers de remplissage et vidage
+Les fonctions pour utiliser la BDD se trouvent dans le dossier "fonctions"
+et les triggers sont presents dans le dossier "triggers".
+
+Les fonctions comme les triggers ont été réparties pas tables dans des fichiers
+differents.
+	
